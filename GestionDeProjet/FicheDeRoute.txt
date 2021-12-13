@@ -1,0 +1,40 @@
+I-   Faire un diagramme de classe
+
+II-  Faire base de données coté serveur et faire le lien avec les modèles
+    1- Schéma relationnel
+    2- mettre en place le serveur
+    3- Ecrire le code SQL (Modèle)
+
+III- Faire les modèles (Back) et mettre en places les interfaces (Front)
+    1- Créer les classes (vides)
+    2- Ecrire les fichiers FXML
+        a- (Les fichiers à créer avec une description)
+    3- Compléter les classes au fur et à mesure (à developper)
+
+IV-  Créer un système de création d'utilisateur
+V-   Créer un système de rendez-vous
+VI-  Créer Un système de planning
+
+
+Fonctionnalités : (Back et Front)
+	1- la création d’une demande de rendez-vous
+	2- l’ajout de différentes informations à un rendez-vous
+	3- la validation d’une demande de rendez-vous.
+	4- l’annulation ou la modification d’un rendez-vous.
+	5- la création/suppression/modification d’enseignants
+	6- la visualisation des demandes de rendez-vous par un enseignant / par un élève
+	7- la visualisation des rendez-vous par un enseignant / par un élève.
+	8- la gestion de la persistance des données.
+	9- la définition par un enseignant de ses disponibilités/indisponibilités habituelles
+	10- l’ajout par l’enseignant de disponibilités/indisponibilités exceptionnelles
+
+Extensions : 
+	11- ajouter des catégories sur les rendez-vous.
+	12- pouvoir visualiser les rendez-vous sous forme d’un planning
+	13- pouvoir visualiser un planning “anonymisé” d’un enseignant
+	14- pouvoir réaliser des rendez-vous impliquant plusieurs enseignants.
+	15- exporter les rendez-vous au format ICAL pour pouvoir les importer dans son calendrier personnel
+	16- gérer des rendez-vous dont la durée est variable
+	17- ajouter un système de notification (par email ou par messagerie instantanée
+	18- réaliser une version client/serveur où plusieurs instances de votre application JavaFX partagent/échangent des
+	données à travers un serveur.
