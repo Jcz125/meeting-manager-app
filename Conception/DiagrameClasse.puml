@@ -1,0 +1,95 @@
+@startuml Diagramme de classe
+
+abstract class Utilisateur {
+    - String nom
+    - String prenom
+    - String email
+    - String telephone
+    - boolean notification
+    
+    + void Utilisateur(String nom, String prenom, String email)
+    + void notifier(RDV rdv)
+    + void ajouterRDV(RDV rdv)
+    + void annulerRDV(RDV rdv)
+}
+
+class Prof {
+    + Prof(String nom, String prenom, String email)
+    + boolean prendreRDV(Eleve e, Datetime d)
+}
+
+class Eleve {
+    + Eleve(String nom, String prenom, String email)
+    + void prendreRDV(Eleve e, Datetime date)
+    + void prendreRDV(List<Eleve> eleves, Datetime date)
+    + void prendreRDV(List<Prof> profs, List<Eleve> eleves, Datetime date)
+}
+
+class Disponibilite {
+    - Datetime debut
+    - Datetime fin
+
+    + Disponibilite(Datetime debut, Datetime fin)
+}
+
+class RDV {
+    - String titre
+    - String description
+    - Datetime horaire
+    + RDV(Datetime horaire, List<Utilisateur> utilisateurs, String description)
+}
+
+Interface EtatRDV {
+    + confirmePour(Utilisateur utilisateur)
+    + annule()
+}
+
+class Demande {
+}
+
+class Confirme {
+}
+
+class Realise {
+}
+
+class Annule {
+}
+
+
+class Ecole {
+    - String nom
+    + Ecole(String nom)
+}
+
+class Salle {
+    - int numero
+    - int etage
+    - String aile
+
+    + Salle(int numero)
+    + int getNumero()
+    + int getEtage()
+    + String getAile()
+}
+
+
+Utilisateur "*" --- "*" RDV
+Ecole "1" --- "*" Utilisateur
+Ecole "1" --- "*" Salle
+
+
+EtatRDV <|.. Confirme
+EtatRDV <|.. Annule
+EtatRDV <|.. Realise
+EtatRDV <|.. Demande
+
+RDV "1" --- EtatRDV
+RDV "1" --- Salle
+Prof "1" --- Salle
+
+Utilisateur  <|--  Prof
+Utilisateur  <|--  Eleve
+Prof --- "*" Disponibilite
+
+@enduml
