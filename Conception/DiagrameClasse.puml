@@ -76,9 +76,6 @@ class Salle {
     - String aile
 
     + Salle(int numero)
-    + int getNumero()
-    + int getEtage()
-    + String getAile()
 }
 
 
