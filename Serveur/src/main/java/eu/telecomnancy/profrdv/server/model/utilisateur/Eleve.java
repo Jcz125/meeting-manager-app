@@ -1,6 +1,5 @@
 package eu.telecomnancy.profrdv.server.model.utilisateur;
 
-import eu.telecomnancy.profrdv.server.model.Disponibilite;
 import eu.telecomnancy.profrdv.server.model.RendezVous;
 
 public class Eleve extends Utilisateur {

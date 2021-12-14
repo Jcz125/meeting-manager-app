@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.server.model.utilisateur;
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
+import eu.telecomnancy.profrdv.server.model.Salle;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
