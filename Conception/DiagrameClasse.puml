@@ -8,7 +8,7 @@ abstract class Utilisateur {
     - boolean notification
     
     + void Utilisateur(String nom, String prenom, String email)
-    + boolean notifier(RDV rdv)
+    + void notifier(RDV rdv)
     + boolean ajouterRDV(RDV rdv)
     + boolean annulerRDV(RDV rdv)
     + boolean prendreRDV(List<Professeur>, List<Eleve>, LocalDateTime d, String titre, String description)
