@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv;
 
 import eu.telecomnancy.profrdv.controllers.MainController;
+import eu.telecomnancy.profrdv.controllers.MenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ public class Main extends Application {
 
         FXMLLoader loader1 = new FXMLLoader();
         loader1.setLocation(getClass().getResource("MenuEleve.fxml"));
-        loader1.setControllerFactory(iC->new MainController());
+        loader1.setControllerFactory(iC->new MenuController());
         panneau.setTop(loader1.load());
 
         FXMLLoader loader2 = new FXMLLoader();
