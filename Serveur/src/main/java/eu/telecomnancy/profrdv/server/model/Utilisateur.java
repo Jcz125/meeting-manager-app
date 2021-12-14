@@ -1,4 +1,4 @@
-package eu.telecomnancy.profrdv.model;
+package eu.telecomnancy.profrdv.server.model;
 
 import java.util.ArrayList;
 
