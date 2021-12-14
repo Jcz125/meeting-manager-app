@@ -2,6 +2,7 @@ package eu.telecomnancy.profrdv.server.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class Utilisateur {
@@ -11,13 +12,14 @@ public abstract class Utilisateur {
     private String telephone;
     private boolean notification;
 
-    private ArrayList<RendezVous> RDVs;
+    private final HashMap<LocalDateTime, RendezVous> RDVs;
 
 
     public Utilisateur(String nom, String prenom, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+        this.RDVs = new HashMap<>();
     }
 
 
@@ -28,25 +30,45 @@ public abstract class Utilisateur {
     }
 
 
-    public boolean ajouterRDV(RendezVous rendezVous) {
-        if (!this.RDVs.contains(rendezVous)) {
-            this.RDVs.add(rendezVous);
-            return true;
+    public void ajouterRDV(RendezVous rendezVous) {
+        if (!this.RDVs.containsKey(rendezVous.getHoraire())) {
+            this.RDVs.put(rendezVous.getHoraire(), rendezVous);
         }
-        return false;
     }
 
 
     public boolean annulerRDV(RendezVous rendezVous) {
-        if (this.RDVs.contains(rendezVous)) {
+        if (this.RDVs.containsKey(rendezVous.getHoraire())) {
             rendezVous.annuler();
             return true;
         }
         return false;
     }
 
+
+    public abstract boolean estDisponible(RendezVous rendezVous);
+
+
     public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, LocalDateTime date, String titre, String description) {
-        return false;
+        ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+        utilisateurs.addAll(profs);
+        utilisateurs.addAll(eleves);
+        RendezVous rendezVous = new RendezVous(date, utilisateurs, titre, description);
+
+        for (Professeur professeur : profs) {
+            if (!professeur.estDisponible(rendezVous))
+                return false;
+        }
+
+        for (Eleve eleve : eleves) {
+            if (!eleve.estDisponible(rendezVous))
+                return false;
+        }
+
+        for (Utilisateur utilisateur : utilisateurs)
+            utilisateur.ajouterRDV(rendezVous);
+
+        return true;
     }
 
 

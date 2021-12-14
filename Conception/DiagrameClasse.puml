@@ -9,8 +9,8 @@ abstract class Utilisateur {
     
     + void Utilisateur(String nom, String prenom, String email)
     + void notifier(RDV rdv)
-    + boolean ajouterRDV(RDV rdv)
-    + boolean annulerRDV(RDV rdv)
+    + void ajouterRDV(RDV rdv)
+    + void annulerRDV(RDV rdv)
     + boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, LocalDateTime date, String titre, String description)
 }
 
@@ -29,13 +29,13 @@ class Disponibilite {
     + Disponibilite(LocalDateTime debut, LocalDateTime fin)
 }
 
-class RDV {
+class RendezVous {
     - String titre
     - String description
     - LocalDateTime horaire
     
     + RDV(LocalDateTime horaire, List<Utilisateur> utilisateurs, String description)
-    + void setState(EtatRendezVous etatRendezVous)
+    + void setState(EtatRendezVous etat)
     + void notifier()
     + void annule()
     + void confirmer()
@@ -43,8 +43,8 @@ class RDV {
     + void demande()
 }
 
-abstract class EtatRDV {
-    - RendezVous rdv
+abstract class EtatRendezVous {
+    - RendezVous rendezVous
     + confirmePour(Utilisateur utilisateur)
     + void annule()
     + void confirmer()
@@ -76,13 +76,10 @@ class Salle {
     - String aile
 
     + Salle(int numero)
-    + int getNumero()
-    + int getEtage()
-    + String getAile()
 }
 
 
-Utilisateur "*" --- "*" RDV
+Utilisateur "*" --- "*" RendezVous
 Ecole "1" --- "*" Utilisateur
 Ecole "1" --- "*" Salle
 
@@ -92,7 +89,7 @@ EtatRDV <|.. Annule
 EtatRDV <|.. Realise
 EtatRDV <|.. Demande
 
-RDV "1" --- "1" EtatRDV
+RDV "1" --- "1" EtatRendezVous
 RDV "1" --- Salle
 Professeur "1" --- Salle
 
