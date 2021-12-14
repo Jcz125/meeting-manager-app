@@ -1,13 +1,16 @@
 package eu.telecomnancy.profrdv.model;
 
 import eu.telecomnancy.profrdv.model.states.EtatRendezVous;
+import eu.telecomnancy.profrdv.model.states.Realise;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class RendezVous {
-    private LocalDateTime localDateTime;
-    private ArrayList<Utilisateur> utilisateurs;
+    private final LocalDateTime localDateTime;
+    private final HashMap<Utilisateur, Boolean> utilisateurHashmap; // on donne une pair pour attribuer une confirmation à tout le monde
     private String description;
     private String titre;
 
@@ -16,9 +19,29 @@ public class RendezVous {
 
     public RendezVous(LocalDateTime localDateTime, ArrayList<Utilisateur> utilisateurs, String titre, String description) {
         this.localDateTime = localDateTime;
-        this.utilisateurs = utilisateurs;
+        this.utilisateurHashmap = new HashMap<>();
+
+        for (Utilisateur utilisateur : utilisateurs) {
+            this.utilisateurHashmap.put(utilisateur, false);
+        }
+
         this.description = description;
         this.titre = titre;
+    }
+
+
+    public void notifier() {
+        // on notifie tous les utilisateurs d'un changement d'état sauf quand il a été réalisé
+        if (!(etatRendezVous instanceof Realise)) {
+            for (Utilisateur utilisateur : utilisateurHashmap.keySet()) {
+                utilisateur.notifier(this);
+            }
+        }
+    }
+
+
+    public void ajoutConfirmation(Utilisateur CurrentUtilisateur) {
+        utilisateurHashmap.put(CurrentUtilisateur, true);
     }
 
 
@@ -50,28 +73,28 @@ public class RendezVous {
 
 
     //region assesseurs
-    public ArrayList<Utilisateur> getUtilisateurs() {
-        return utilisateurs;
+    public Set<Utilisateur> getUtilisateurs() {
+        return this.utilisateurHashmap.keySet();
     }
 
 
     public EtatRendezVous getEtatRendezVous() {
-        return etatRendezVous;
+        return this.etatRendezVous;
     }
 
 
     public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+        return this.localDateTime;
     }
 
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
 
     public String getTitre() {
-        return titre;
+        return this.titre;
     }
 
 
