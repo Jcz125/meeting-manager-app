@@ -1,6 +1,8 @@
 package eu.telecomnancy.profrdv.server.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Utilisateur {
     private String nom;
@@ -22,20 +24,29 @@ public abstract class Utilisateur {
     public void notifier(RendezVous rendezVous) {
         // fonction pour notifier l'utilisateur d'un changement d'état d'un rendez-vous auquel il participe
         if (notification) {
-
         }
     }
 
 
-    public void ajouterRDV(RendezVous rendezVous) {
+    public boolean ajouterRDV(RendezVous rendezVous) {
         if (!this.RDVs.contains(rendezVous)) {
             this.RDVs.add(rendezVous);
+            return true;
         }
+        return false;
     }
 
 
-    public void annulerRDV(RendezVous rendezVous) {
-        rendezVous.annuler();
+    public boolean annulerRDV(RendezVous rendezVous) {
+        if (this.RDVs.contains(rendezVous)) {
+            rendezVous.annuler();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, LocalDateTime date, String titre, String description) {
+        return false;
     }
 
 
