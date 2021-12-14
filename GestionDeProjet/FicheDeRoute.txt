@@ -9,6 +9,17 @@ III- Faire les modèles (Back) et mettre en places les interfaces (Front)
     1- Créer les classes (vides)
     2- Ecrire les fichiers FXML
         a- (Les fichiers à créer avec une description)
+
+	- Interface pour titre/ description RDV	
+	- Interface pour espace personnel 
+	- Interface Acceuil
+	- Interface identification
+	- Interface de création
+	- Interface modifier les coordonnées personnels
+	- Interface administateur pour gérer suppression eleves / profs
+	- Interface de définition de disponibilité 
+	- Interface Planning 
+
     3- Compléter les classes au fur et à mesure (à developper)
 
 IV-  Créer un système de création d'utilisateur
