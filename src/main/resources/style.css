@@ -1,0 +1,12 @@
+.button {
+    -fx-font: 16px "Calibri";
+    -fx-background-color: #FFD39D;
+}
+
+/*:hover,*/
+/*:focused,*/
+/*:focused {*/
+/*     -fx-text-fill: btn-default-color;*/
+/*     -fx-fill: btn-default-color;*/
+/* // text-decoration: none;*/
+/* }*/
