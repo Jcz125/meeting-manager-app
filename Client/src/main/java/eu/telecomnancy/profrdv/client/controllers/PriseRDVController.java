@@ -1,4 +1,37 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
-public class PriseRDVController {
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+
+public class PriseRDVController implements Observateur{
+
+    @FXML TextField researchBar ;
+    @FXML Label lundi ;
+    @FXML Label mardi ;
+    @FXML Label mercredi ;
+    @FXML Label jeudi ;
+    @FXML Label vendredi ;
+    @FXML Label samedi ;
+    @FXML Label dimanche ;
+    @FXML ListView listViewLundi ;
+    @FXML ListView listViewMardi ;
+    @FXML ListView listViewMercredi ;
+    @FXML ListView listViewJeudi ;
+    @FXML ListView listViewVendredi ;
+    @FXML ListView listViewSamedi ;
+    @FXML ListView listViewDimanche ;
+    @FXML ListView listViewProfs ;
+
+
+
+    public PriseRDVController(){
+
+    }
+
+    @Override
+    public void update() {
+
+    }
 }
