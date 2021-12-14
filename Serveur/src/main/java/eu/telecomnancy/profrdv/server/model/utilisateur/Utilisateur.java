@@ -1,4 +1,7 @@
-package eu.telecomnancy.profrdv.server.model;
+package eu.telecomnancy.profrdv.server.model.utilisateur;
+
+import eu.telecomnancy.profrdv.server.model.RendezVous;
+import eu.telecomnancy.profrdv.server.model.Salle;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ public abstract class Utilisateur {
     private String telephone;
     private boolean notification;
 
-    private final HashMap<LocalDateTime, RendezVous> RDVs;
+    protected final HashMap<LocalDateTime, RendezVous> RDVs;
 
 
     public Utilisateur(String nom, String prenom, String email) {
@@ -49,11 +52,11 @@ public abstract class Utilisateur {
     public abstract boolean estDisponible(RendezVous rendezVous);
 
 
-    public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, LocalDateTime date, String titre, String description) {
+    public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, Salle salle, LocalDateTime date, String titre, String description) {
         ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
         utilisateurs.addAll(profs);
         utilisateurs.addAll(eleves);
-        RendezVous rendezVous = new RendezVous(date, utilisateurs, titre, description);
+        RendezVous rendezVous = new RendezVous(date, utilisateurs, salle, titre, description);
 
         for (Professeur professeur : profs) {
             if (!professeur.estDisponible(rendezVous))
@@ -64,6 +67,9 @@ public abstract class Utilisateur {
             if (!eleve.estDisponible(rendezVous))
                 return false;
         }
+
+        if (!salle.estDisponible(date))
+            return false;
 
         for (Utilisateur utilisateur : utilisateurs)
             utilisateur.ajouterRDV(rendezVous);

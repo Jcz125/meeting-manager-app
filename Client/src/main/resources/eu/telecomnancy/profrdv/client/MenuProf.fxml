@@ -21,22 +21,22 @@
                      <Insets bottom="20.0" left="100.0" right="100.0" top="20.0" />
                   </HBox.margin>
                </ImageView>
-               <Button mnemonicParsing="false" styleClass="btn-outline-secondary" text="Accueil">
+               <Button fx:id="accueilButton" onAction="#handleAccueilButton" mnemonicParsing="false" styleClass="btn-outline-secondary" text="Accueil">
                   <HBox.margin>
                      <Insets left="50.0" right="100.0" top="30.0" />
                   </HBox.margin>
                </Button>
-               <Button mnemonicParsing="false" text="Planning">
+               <Button fx:id="planningButton" onAction="#handlePlanningButton" mnemonicParsing="false" text="Planning">
                   <HBox.margin>
                      <Insets right="100.0" top="30.0" />
                   </HBox.margin>
                </Button>
-               <Button mnemonicParsing="false" text="Espace personnel">
+               <Button fx:id="personalButton" onAction="#handlePersonalButton" mnemonicParsing="false" text="Espace personnel">
                   <HBox.margin>
                      <Insets right="100.0" top="30.0" />
                   </HBox.margin>
                </Button>
-               <Button mnemonicParsing="false" text="Identification">
+               <Button fx:id="idButton" onAction="#handleIdButton" mnemonicParsing="false" text="Identification">
                   <HBox.margin>
                      <Insets top="30.0" />
                   </HBox.margin>
