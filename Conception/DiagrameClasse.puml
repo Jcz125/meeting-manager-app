@@ -29,13 +29,13 @@ class Disponibilite {
     + Disponibilite(LocalDateTime debut, LocalDateTime fin)
 }
 
-class RDV {
+class RendezDVous {
     - String titre
     - String description
     - LocalDateTime horaire
     
     + RDV(LocalDateTime horaire, List<Utilisateur> utilisateurs, String description)
-    + void setState(EtatRendezVous etatRendezVous)
+    + void setState(EtatRendezVous etat)
     + void notifier()
     + void annule()
     + void confirmer()
@@ -43,8 +43,8 @@ class RDV {
     + void demande()
 }
 
-abstract class EtatRDV {
-    - RendezVous rdv
+abstract class EtatRendezVous {
+    - RendezVous rendezVous
     + confirmePour(Utilisateur utilisateur)
     + void annule()
     + void confirmer()
@@ -82,7 +82,7 @@ class Salle {
 }
 
 
-Utilisateur "*" --- "*" RDV
+Utilisateur "*" --- "*" RendezVous
 Ecole "1" --- "*" Utilisateur
 Ecole "1" --- "*" Salle
 
@@ -92,7 +92,7 @@ EtatRDV <|.. Annule
 EtatRDV <|.. Realise
 EtatRDV <|.. Demande
 
-RDV "1" --- "1" EtatRDV
+RDV "1" --- "1" EtatRendezVous
 RDV "1" --- Salle
 Professeur "1" --- Salle
 
