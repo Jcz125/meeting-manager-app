@@ -1,4 +1,6 @@
-package eu.telecomnancy.profrdv.server.model;
+package eu.telecomnancy.profrdv.server.model.utilisateur;
+
+import eu.telecomnancy.profrdv.server.model.RendezVous;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ public abstract class Utilisateur {
     private String telephone;
     private boolean notification;
 
-    private final HashMap<LocalDateTime, RendezVous> RDVs;
+    protected final HashMap<LocalDateTime, RendezVous> RDVs;
 
 
     public Utilisateur(String nom, String prenom, String email) {

@@ -2,6 +2,7 @@ package eu.telecomnancy.profrdv.server.model;
 
 import eu.telecomnancy.profrdv.server.model.states.EtatRendezVous;
 import eu.telecomnancy.profrdv.server.model.states.Realise;
+import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
