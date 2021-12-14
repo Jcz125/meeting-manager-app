@@ -36,12 +36,22 @@ class RDV {
     - String titre
     - String description
     - Datetime horaire
+    
     + RDV(Datetime horaire, List<Utilisateur> utilisateurs, String description)
+    + void setState(EtatRendezVous etatRendezVous)
+    + void annule()
+    + void confirmer()
+    + void realiser()
+    + void demande()
 }
 
-Interface EtatRDV {
+abstract class EtatRDV {
+    - RendezVous rdv
     + confirmePour(Utilisateur utilisateur)
-    + annule()
+    + void annule()
+    + void confirmer()
+    + void realiser()
+    + void demande()
 }
 
 class Demande {
@@ -84,7 +94,7 @@ EtatRDV <|.. Annule
 EtatRDV <|.. Realise
 EtatRDV <|.. Demande
 
-RDV "1" --- EtatRDV
+RDV "1" --- "1" EtatRDV
 RDV "1" --- Salle
 Prof "1" --- Salle
 
