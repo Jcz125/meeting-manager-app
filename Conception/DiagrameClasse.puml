@@ -11,7 +11,7 @@ abstract class Utilisateur {
     + void notifier(RDV rdv)
     + boolean ajouterRDV(RDV rdv)
     + boolean annulerRDV(RDV rdv)
-    + boolean prendreRDV(List<Professeur>, List<Eleve>, LocalDateTime d, String titre, String description)
+    + boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, LocalDateTime date, String titre, String description)
 }
 
 class Professeur {
