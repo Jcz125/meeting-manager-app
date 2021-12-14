@@ -1,9 +1,10 @@
 plugins {
     id 'java'
-    id 'application'
+    id 'org.springframework.boot' version '2.6.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
-group 'eu.telecomnancy'
+group 'eu.telecomnancy.profrdv.server'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -21,21 +22,12 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-application {
-    mainModule = 'eu.telecomnancy.profrdv'
-    mainClass = 'eu.telecomnancy.profrdv.MainController'
-}
-
-//javafx {
-//    version = '18-ea+8'
-//    modules = ['javafx.controls', 'javafx.fxml']
-//}
-
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    implementation('org.json:json:20211205')
-
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
@@ -44,6 +36,6 @@ test {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'eu.telecomnancy.profrdv.MainController'
+        attributes 'Main-Class': 'eu.telecomnancy.profrdv.server.MainController'
     }
 }

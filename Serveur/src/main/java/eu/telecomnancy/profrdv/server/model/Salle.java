@@ -1,4 +1,4 @@
-package eu.telecomnancy.profrdv.model;
+package eu.telecomnancy.profrdv.server.model;
 
 public class Salle {
     private int numero;

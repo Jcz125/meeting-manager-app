@@ -1,6 +1,6 @@
-package eu.telecomnancy.profrdv.model.states;
+package eu.telecomnancy.profrdv.server.model.states;
 
-import eu.telecomnancy.profrdv.model.RendezVous;
+import eu.telecomnancy.profrdv.server.model.RendezVous;
 
 public abstract class EtatRendezVous {
     protected final RendezVous rendezVous;
