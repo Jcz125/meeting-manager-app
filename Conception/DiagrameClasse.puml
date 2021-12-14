@@ -29,7 +29,7 @@ class Disponibilite {
     + Disponibilite(LocalDateTime debut, LocalDateTime fin)
 }
 
-class RendezDVous {
+class RendezVous {
     - String titre
     - String description
     - LocalDateTime horaire
