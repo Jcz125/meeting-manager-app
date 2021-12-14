@@ -13,8 +13,8 @@ abstract class Utilisateur {
     + void annulerRDV(RDV rdv)
 }
 
-class Prof {
-    + Prof(String nom, String prenom, String email)
+class Professeur {
+    + Professeur(String nom, String prenom, String email)
     + boolean prendreRDV(Eleve e, Datetime d)
 }
 
@@ -22,7 +22,7 @@ class Eleve {
     + Eleve(String nom, String prenom, String email)
     + void prendreRDV(Eleve e, Datetime date)
     + void prendreRDV(List<Eleve> eleves, Datetime date)
-    + void prendreRDV(List<Prof> profs, List<Eleve> eleves, Datetime date)
+    + void prendreRDV(List<Professeur> profs, List<Eleve> eleves, Datetime date)
 }
 
 class Disponibilite {
@@ -96,10 +96,10 @@ EtatRDV <|.. Demande
 
 RDV "1" --- "1" EtatRDV
 RDV "1" --- Salle
-Prof "1" --- Salle
+Professeur "1" --- Salle
 
-Utilisateur  <|--  Prof
+Utilisateur  <|--  Professeur
 Utilisateur  <|--  Eleve
-Prof --- "*" Disponibilite
+Professeur --- "*" Disponibilite
 
 @enduml
