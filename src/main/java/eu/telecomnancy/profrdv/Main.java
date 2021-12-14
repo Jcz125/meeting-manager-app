@@ -21,7 +21,7 @@ public class Main extends Application {
         panneau.setTop(loader1.load());
 
         FXMLLoader loader2 = new FXMLLoader();
-        loader2.setLocation(getClass().getResource("Eleve.fxml"));
+        loader2.setLocation(getClass().getResource("PriseRDV.fxml"));
         loader2.setControllerFactory(iC->new MainController());
         panneau.setBottom(loader2.load());
 
