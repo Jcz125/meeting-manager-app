@@ -46,6 +46,9 @@ public abstract class Utilisateur {
     }
 
 
+    public abstract boolean estDisponible(RendezVous rendezVous);
+
+
     public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, LocalDateTime date, String titre, String description) {
         ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
         utilisateurs.addAll(profs);
