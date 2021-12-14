@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class RendezVous {
     private final LocalDateTime localDateTime;
-    private final HashMap<Utilisateur, Boolean> utilisateurHashmap; // on donne une pair pour attribuer une confirmation à tout le monde
+    private final HashMap<Utilisateur, Boolean> utilisateurHashmap; // on donne une paire pour attribuer une confirmation à tout le monde
     private String description;
     private String titre;
 
