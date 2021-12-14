@@ -26,10 +26,10 @@ application {
     mainClass = 'eu.telecomnancy.profrdv.MainController'
 }
 
-javafx {
-    version = '18-ea+8'
-    modules = ['javafx.controls', 'javafx.fxml']
-}
+//javafx {
+//    version = '18-ea+8'
+//    modules = ['javafx.controls', 'javafx.fxml']
+//}
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
