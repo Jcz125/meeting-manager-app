@@ -1,4 +1,4 @@
-package eu.telecomnancy.profrdv.Model;
+package eu.telecomnancy.profrdv.model;
 
 public class Eleve extends Utilisateur {
     public Eleve(String nom, String prenom, String email) {

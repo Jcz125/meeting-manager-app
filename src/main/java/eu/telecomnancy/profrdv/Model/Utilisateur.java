@@ -1,4 +1,4 @@
-package eu.telecomnancy.profrdv.Model;
+package eu.telecomnancy.profrdv.model;
 
 public abstract class Utilisateur {
     private String nom;
