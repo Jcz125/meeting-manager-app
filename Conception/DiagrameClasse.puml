@@ -36,6 +36,7 @@ class RDV {
     
     + RDV(LocalDateTime horaire, List<Utilisateur> utilisateurs, String description)
     + void setState(EtatRendezVous etatRendezVous)
+    + void notifier()
     + void annule()
     + void confirmer()
     + void realiser()
