@@ -51,11 +51,11 @@ public abstract class Utilisateur {
     public abstract boolean estDisponible(RendezVous rendezVous);
 
 
-    public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, LocalDateTime date, String titre, String description) {
+    public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, Salle salle, LocalDateTime date, String titre, String description) {
         ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
         utilisateurs.addAll(profs);
         utilisateurs.addAll(eleves);
-        RendezVous rendezVous = new RendezVous(date, utilisateurs, titre, description);
+        RendezVous rendezVous = new RendezVous(date, utilisateurs, salle, titre, description);
 
         for (Professeur professeur : profs) {
             if (!professeur.estDisponible(rendezVous))
@@ -66,6 +66,9 @@ public abstract class Utilisateur {
             if (!eleve.estDisponible(rendezVous))
                 return false;
         }
+
+        if (!salle.estDisponible(date))
+            return false;
 
         for (Utilisateur utilisateur : utilisateurs)
             utilisateur.ajouterRDV(rendezVous);
