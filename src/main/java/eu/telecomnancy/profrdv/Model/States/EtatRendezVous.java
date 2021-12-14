@@ -1,6 +1,21 @@
-package eu.telecomnancy.profrdv.Model.States;
+package eu.telecomnancy.profrdv.model.states;
 
-public interface EtatRendezVous {
-    void confirmerRDV();
-    void annule();
+import eu.telecomnancy.profrdv.model.RendezVous;
+
+public abstract class EtatRendezVous {
+    protected final RendezVous rendezVous;
+
+
+    public EtatRendezVous(RendezVous rendezVous) {
+        this.rendezVous = rendezVous;
+    }
+
+
+    public abstract void confirmer();
+
+    public abstract void demande();
+
+    public abstract void annuler();
+
+    public abstract void realiser();
 }

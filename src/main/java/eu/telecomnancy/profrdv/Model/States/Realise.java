@@ -1,14 +1,33 @@
-package eu.telecomnancy.profrdv.Model.States;
+package eu.telecomnancy.profrdv.model.states;
 
-public class Realise implements EtatRendezVous {
-    @Override
-    public void confirmerRDV() {
+import eu.telecomnancy.profrdv.model.RendezVous;
 
+public class Realise extends EtatRendezVous {
+    public Realise(RendezVous rendezVous) {
+        super(rendezVous);
     }
 
 
     @Override
-    public void annule() {
+    public void confirmer() {
+        // il est déjà réalisé on ne fait rien de plus
+    }
 
+
+    @Override
+    public void demande() {
+        // il est déjà réalisé on ne fait rien de plus
+    }
+
+
+    @Override
+    public void annuler() {
+        // il est déjà réalisé on ne fait rien de plus
+    }
+
+
+    @Override
+    public void realiser() {
+        // il est déjà réalisé on ne fait rien de plus
     }
 }
