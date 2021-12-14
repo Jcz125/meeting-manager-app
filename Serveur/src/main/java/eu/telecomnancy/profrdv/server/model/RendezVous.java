@@ -15,6 +15,7 @@ public class RendezVous {
 
     private String description;
     private String titre;
+    private Salle salle;
 
     private EtatRendezVous etatRendezVous;
 
