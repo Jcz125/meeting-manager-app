@@ -15,12 +15,12 @@ public class RendezVous {
 
     private String description;
     private String titre;
-    private Salle salle;
+    private final Salle salle;
 
     private EtatRendezVous etatRendezVous;
 
 
-    public RendezVous(LocalDateTime horaire, ArrayList<Utilisateur> utilisateurs, String titre, String description) {
+    public RendezVous(LocalDateTime horaire, ArrayList<Utilisateur> utilisateurs, Salle salle, String titre, String description) {
         this.horaire = horaire;
         this.utilisateurs = new HashMap<>();
 
@@ -30,6 +30,7 @@ public class RendezVous {
 
         this.description = description;
         this.titre = titre;
+        this.salle = salle;
     }
 
 
@@ -109,5 +110,11 @@ public class RendezVous {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+    public Salle getSalle() {
+        return salle;
+    }
+
     //endregion
 }
