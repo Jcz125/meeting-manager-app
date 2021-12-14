@@ -1,8 +1,10 @@
 package eu.telecomnancy.profrdv;
 
+import eu.telecomnancy.profrdv.controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -10,10 +12,23 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        BorderPane panneau = new BorderPane() ;
+
+        FXMLLoader loader1 = new FXMLLoader();
+        loader1.setLocation(getClass().getResource("MenuEleve.fxml"));
+        loader1.setControllerFactory(iC->new MainController());
+        panneau.setTop(loader1.load());
+
+        FXMLLoader loader2 = new FXMLLoader();
+        loader2.setLocation(getClass().getResource("Eleve.fxml"));
+        loader2.setControllerFactory(iC->new MainController());
+        panneau.setBottom(loader2.load());
+
+        Scene scene = new Scene(panneau, 1400, 750);
+        scene.getStylesheets().add("bootstrap.min.css");
+        stage.setTitle("Album Photo");
         stage.setScene(scene);
+
         stage.show();
     }
 
