@@ -26,8 +26,7 @@ public class Main extends Application {
         panneau.setBottom(loader2.load());
 
         Scene scene = new Scene(panneau, 1400, 750);
-        scene.getStylesheets().add("bootstrap.min.css");
-        stage.setTitle("Album Photo");
+        stage.setTitle("ProfRDV");
         stage.setScene(scene);
 
         stage.show();
