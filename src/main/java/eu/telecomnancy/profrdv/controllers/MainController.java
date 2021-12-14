@@ -1,4 +1,4 @@
-package eu.telecomnancy.profrdv;
+package eu.telecomnancy.profrdv.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
