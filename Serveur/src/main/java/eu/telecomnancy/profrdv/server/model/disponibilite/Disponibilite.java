@@ -1,14 +1,23 @@
 package eu.telecomnancy.profrdv.server.model.disponibilite;
 
 import eu.telecomnancy.profrdv.server.model.data.DisponibiliteData;
+import eu.telecomnancy.profrdv.server.model.data.DisponibiliteFixeData;
+import eu.telecomnancy.profrdv.server.model.data.ModificateurDisponibiliteData;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+@Entity
 public class Disponibilite {
-    private int id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
     private ArrayList<DisponibiliteFixe> dispoFixe = null;
     private ArrayList<ModificateurDisponibilite> modifsDispo = null;
 
@@ -54,7 +63,15 @@ public class Disponibilite {
 
 
     public DisponibiliteData getData() {
-        Pair pair = new Pair(dispoFixe.size(), modifsDispo.size());
-        return new DisponibiliteData(id, pair.getDisponibiliteFixeData(), pair.getModificateurDisponibiliteData());
+        DisponibiliteFixeData[] disponibiliteFixeData = new DisponibiliteFixeData[dispoFixe == null ? 0 : dispoFixe.size()];
+        ModificateurDisponibiliteData[] modificateurDisponibiliteData = new ModificateurDisponibiliteData[modifsDispo == null ? 0 : modifsDispo.size()];
+        for (int i = 0; i < disponibiliteFixeData.length; i++) {
+            disponibiliteFixeData[i] = dispoFixe.get(i).getData();
+        }
+
+        for (int i = 0; i < modificateurDisponibiliteData.length; i++) {
+            modificateurDisponibiliteData[i] = modifsDispo.get(i).getData();
+        }
+        return new DisponibiliteData(disponibiliteFixeData, modificateurDisponibiliteData);
     }
 }

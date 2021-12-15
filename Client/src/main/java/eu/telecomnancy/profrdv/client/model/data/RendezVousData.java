@@ -1,10 +1,10 @@
 package eu.telecomnancy.profrdv.client.model.data;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RendezVousData {

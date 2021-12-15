@@ -2,10 +2,17 @@ package eu.telecomnancy.profrdv.server.model.disponibilite;
 
 import eu.telecomnancy.profrdv.server.model.data.ModificateurDisponibiliteData;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+@Entity
 public class ModificateurDisponibilite {
-    private int id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
     private final boolean inclut;
     private final LocalDateTime debut;
     private final LocalDateTime fin;

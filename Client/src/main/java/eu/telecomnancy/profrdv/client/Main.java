@@ -23,7 +23,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Ecole ecole = new Ecole();
+        /*Ecole ecole = new Ecole();
         List<Utilisateur> utilisateurs = ecole.getUtilisateurs();
         for (Utilisateur u: utilisateurs) {
             System.out.println(u.getNom() +  " " + u.getPrenom());
@@ -36,7 +36,7 @@ public class Main extends Application {
 //                }
 //
 //            }
-        }
+        }*/
 
         BorderPane panneau = new BorderPane() ;
 

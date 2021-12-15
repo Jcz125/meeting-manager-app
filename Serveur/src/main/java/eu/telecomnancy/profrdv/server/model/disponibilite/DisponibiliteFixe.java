@@ -2,12 +2,19 @@ package eu.telecomnancy.profrdv.server.model.disponibilite;
 
 import eu.telecomnancy.profrdv.server.model.data.DisponibiliteFixeData;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@Entity
 public class DisponibiliteFixe {
-    private int id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
     private final DayOfWeek jour;
     private final LocalTime debut;
     private final LocalTime fin;

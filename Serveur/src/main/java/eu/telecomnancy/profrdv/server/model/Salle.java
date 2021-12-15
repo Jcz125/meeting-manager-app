@@ -1,14 +1,24 @@
 package eu.telecomnancy.profrdv.server.model;
 
+import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Salle {
-    private final ArrayList<LocalDateTime> occupation;
+    private ArrayList<LocalDateTime> occupation;
+    @Id
     private int numero;
     private int etage;
     private String aile;
 
+    @OneToMany(targetEntity=Utilisateur.class, cascade=CascadeType.ALL)
+    private List<Utilisateur> utilisateurs;
+
+    public Salle() {}
 
     public Salle(int numero, int etage, String aile) {
         this.numero = numero;

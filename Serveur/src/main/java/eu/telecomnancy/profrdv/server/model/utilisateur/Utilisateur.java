@@ -2,26 +2,42 @@ package eu.telecomnancy.profrdv.server.model.utilisateur;
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.Salle;
+import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+import static javax.persistence.DiscriminatorType.INTEGER;
+import static javax.persistence.InheritanceType.SINGLE_TABLE;
+
+@Entity
+@Inheritance(strategy=SINGLE_TABLE)
+@DiscriminatorColumn(name="utilisateur_type", discriminatorType=INTEGER)
 public abstract class Utilisateur {
-    protected final HashMap<LocalDateTime, RendezVous> RDVs;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
+
+    @ManyToMany(targetEntity=RendezVous.class, cascade=CascadeType.ALL)
+    protected List<RendezVous> RDVs;
+    @Column(nullable = false)
     private String nom;
+    @Column(nullable = false)
     private String prenom;
+    @Column(unique = true, nullable = false)
     private String email;
     private String telephone;
     private boolean notification;
 
 
+    public Utilisateur() {}
+
     public Utilisateur(String nom, String prenom, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.RDVs = new HashMap<>();
     }
 
 
@@ -33,16 +49,20 @@ public abstract class Utilisateur {
 
 
     public void ajouterRDV(RendezVous rendezVous) {
-        if (!this.RDVs.containsKey(rendezVous.getHoraire())) {
-            this.RDVs.put(rendezVous.getHoraire(), rendezVous);
+        for (RendezVous rdv: RDVs) {
+            if (rdv.getHoraire() == rendezVous.getHoraire())
+                return;
         }
+        this.RDVs.add(rendezVous);
     }
 
 
     public boolean annulerRDV(RendezVous rendezVous) {
-        if (this.RDVs.containsKey(rendezVous.getHoraire())) {
-            rendezVous.annuler();
-            return true;
+        for (RendezVous rdv: RDVs) {
+            if (rdv.getHoraire() == rendezVous.getHoraire()) {
+                rdv.annuler();
+                return true;
+            }
         }
         return false;
     }
@@ -69,6 +89,14 @@ public abstract class Utilisateur {
             utilisateur.ajouterRDV(rendezVous);
 
         return true;
+    }
+
+    public UtilisateurData getData() {
+        Integer[] RDVsIds = new Integer[RDVs.size()];
+        for (int i = 0; i < RDVs.size(); i++) {
+            RDVsIds[i] = RDVs.get(i).getId();
+        }
+        return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, this instanceof Professeur, null, null);
     }
 
 
@@ -115,6 +143,10 @@ public abstract class Utilisateur {
 
     public void setNotification(boolean notification) {
         this.notification = notification;
+    }
+
+    public Integer getId() {
+        return id;
     }
     //endregion
 }

@@ -13,7 +13,7 @@ public class DemandeTest {
 
     @Test
     public void testSuperTypes() {
-        Demande demande = new Demande(null);
+        Demande demande = new Demande();
         assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Demande", demande);
     }
 

@@ -1,8 +1,8 @@
 package eu.telecomnancy.profrdv.client.model.data;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DisponibiliteData {

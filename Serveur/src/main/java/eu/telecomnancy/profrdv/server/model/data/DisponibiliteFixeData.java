@@ -13,6 +13,7 @@ public class DisponibiliteFixeData {
     public LocalTime debut;
     public LocalTime fin;
 
+    public DisponibiliteFixeData() {}
 
     public DisponibiliteFixeData(int id, DayOfWeek jour, LocalTime debut, LocalTime fin) {
         this.id = id;

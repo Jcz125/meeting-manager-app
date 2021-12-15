@@ -13,7 +13,7 @@ public class UtilisateurData {
     public String telephone;
     public boolean notification;
     public boolean estProf;
-    public Integer RDVsIds;
+    public Integer[] RDVsIds;
     public DisponibiliteFixe[] disponibiliteFixes;
     public ModificateurDisponibilite[] modificateurDisponibilites;
 
@@ -22,8 +22,7 @@ public class UtilisateurData {
 
     }
 
-
-    public UtilisateurData(int id, String nom, String prenom, String email, String telephone, boolean notification, Integer RDVsIds, boolean estProf, DisponibiliteFixe[] disponibiliteFixes, ModificateurDisponibilite[] modificateurDisponibilites) {
+    public UtilisateurData(int id, String nom, String prenom, String email, String telephone, boolean notification, Integer[] RDVsIds, boolean estProf, DisponibiliteFixe[] disponibiliteFixes, ModificateurDisponibilite[] modificateurDisponibilites) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;

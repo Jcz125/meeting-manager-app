@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DisponibiliteData {
-    public int id;
     public DisponibiliteFixeData[] dispo;
     public ModificateurDisponibiliteData[] modifs;
 
+    public  DisponibiliteData() {}
 
-    public DisponibiliteData(int id, DisponibiliteFixeData[] dispo, ModificateurDisponibiliteData[] modifs) {
-        this.id = id;
+    public DisponibiliteData(DisponibiliteFixeData[] dispo, ModificateurDisponibiliteData[] modifs) {
         this.dispo = dispo;
         this.modifs = modifs;
     }
