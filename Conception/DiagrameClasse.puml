@@ -74,6 +74,7 @@ class Salle {
     - int numero
     - int etage
     - String aile
+    - List<LocalDateTime> occupation
 
     + Salle(int numero)
 }
@@ -84,14 +85,14 @@ Ecole "1" --- "*" Utilisateur
 Ecole "1" --- "*" Salle
 
 
-EtatRDV <|.. Confirme
-EtatRDV <|.. Annule
-EtatRDV <|.. Realise
-EtatRDV <|.. Demande
+EtatRendezVous <|.. Confirme
+EtatRendezVous <|.. Annule
+EtatRendezVous <|.. Realise
+EtatRendezVous <|.. Demande
 
-RDV "1" --- "1" EtatRendezVous
-RDV "1" --- Salle
-Professeur "1" --- Salle
+RendezVous "1" --- "1" EtatRendezVous
+RendezVous --- "1" Salle
+Professeur --- "1" Salle
 
 Utilisateur  <|--  Professeur
 Utilisateur  <|--  Eleve

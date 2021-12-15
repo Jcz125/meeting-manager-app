@@ -25,8 +25,12 @@ public class PriseRDVController implements Observateur{
     @FXML ListView listViewProfs ;
 
 
-
     public PriseRDVController(){
+
+    }
+
+    @FXML
+    private void handleResearchButton(){
 
     }
 
