@@ -1,7 +1,8 @@
-package eu.telecomnancy.profrdv.client.model.data;
+package eu.telecomnancy.profrdv.server.model.data;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EcoleData {
