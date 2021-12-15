@@ -53,6 +53,7 @@ public class RendezVous {
     }
 
     public String getEtatRendezVoustoString() { // utiliser instanceof
+        return "";
     }
 
 

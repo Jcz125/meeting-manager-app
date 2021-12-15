@@ -43,7 +43,7 @@ public class RDVInfoCellController implements Observateur {
 
     }
 
-    public setInfo(RendezVous rdv) {
+    public void setInfo(RendezVous rdv) {
         this.titreRDV.setText(rdv.getTitre());
         this.etatRDV.setText("");
         this.descriptionRDV.setText(rdv.getDescription());
