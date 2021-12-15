@@ -57,7 +57,7 @@
                               <Insets left="10.0" right="20.0" />
                            </VBox.margin>
                         </ListView>
-                        <Button fx:id="prendreRDV" mnemonicParsing="false" text="Prendre un RDV">
+                        <Button fx:id="prendreRDV" onAction="#handlePriseRDVButton" mnemonicParsing="false" text="Prendre un RDV">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>

@@ -1,110 +1,103 @@
 package eu.telecomnancy.profrdv.client.model;
 
-import eu.telecomnancy.profrdv.client.model.states.EtatRendezVous;
-import eu.telecomnancy.profrdv.client.model.states.Realise;
+
+import eu.telecomnancy.profrdv.client.model.data.EtatRendezVousData;
+import eu.telecomnancy.profrdv.client.model.data.RendezVousData;
+import eu.telecomnancy.profrdv.client.model.data.SalleData;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 public class RendezVous {
-    private final LocalDateTime localDateTime;
-    private final HashMap<Utilisateur, Boolean> utilisateurHashmap; // on donne une pair pour attribuer une confirmation à tout le monde
-    private String description;
-    private String titre;
+    private RendezVousData rendezVousREST;
 
-    private EtatRendezVous etatRendezVous;
-
-
-    public RendezVous(LocalDateTime localDateTime, ArrayList<Utilisateur> utilisateurs, String titre, String description) {
-        this.localDateTime = localDateTime;
-        this.utilisateurHashmap = new HashMap<>();
-
-        for (Utilisateur utilisateur : utilisateurs) {
-            this.utilisateurHashmap.put(utilisateur, false);
-        }
-
-        this.description = description;
-        this.titre = titre;
+    public RendezVous(RendezVousData rendezVousREST) {
+        this.rendezVousREST = rendezVousREST;
     }
 
+    /*public RendezVous(LocalDateTime horaire, ArrayList<Utilisateur> utilisateurs, String titre, String description) {
+        this.rendezVousREST = new RendezVousREST(horaire, utilisateurs, titre, description)
+    }*/
 
-    public void notifier() {
-        // on notifie tous les utilisateurs d'un changement d'état sauf quand il a été réalisé
-        if (!(etatRendezVous instanceof Realise)) {
-            for (Utilisateur utilisateur : utilisateurHashmap.keySet()) {
-                utilisateur.notifier(this);
-            }
-        }
-    }
-
-
-    public void ajoutConfirmation(Utilisateur CurrentUtilisateur) {
-        utilisateurHashmap.put(CurrentUtilisateur, true);
-    }
+    /*public void ajoutConfirmation(Utilisateur CurrentUtilisateur) {
+        utilisateurs.put(CurrentUtilisateur, true);
+    }*/
 
 
     //region état rendez-vous
-    public void setState(EtatRendezVous etatRendezVous) {
-        this.etatRendezVous = etatRendezVous;
-    }
-
-
     public void annuler() {
-        this.etatRendezVous.annuler();
+
     }
 
 
     public void confirmer() {
-        this.etatRendezVous.confirmer();
+
     }
 
 
     public void demande() {
-        this.etatRendezVous.demande();
+
     }
 
 
     public void realiser() {
-        this.etatRendezVous.realiser();
+
     }
     //endregion
 
 
+
+
     //region assesseurs
-    public Set<Utilisateur> getUtilisateurs() {
-        return this.utilisateurHashmap.keySet();
+    public EtatRendezVousData getEtatRendezVous() {
+        return rendezVousREST.etatRendezVous;
     }
 
 
-    public EtatRendezVous getEtatRendezVous() {
-        return this.etatRendezVous;
-    }
-
-
-    public LocalDateTime getLocalDateTime() {
-        return this.localDateTime;
+    public LocalDateTime getHoraire() {
+        return rendezVousREST.horaire;
     }
 
 
     public String getDescription() {
-        return this.description;
+        return rendezVousREST.description;
     }
 
 
     public String getTitre() {
-        return this.titre;
+        return rendezVousREST.titre;
     }
 
 
     public void setTitre(String titre) {
-        this.titre = titre;
+        rendezVousREST.titre = titre;
     }
 
 
     public void setDescription(String description) {
-        this.description = description;
+        rendezVousREST.description = description;
     }
+
+    public void setEtatRendezVous(EtatRendezVousData etatRendezVous) {
+        rendezVousREST.etatRendezVous = etatRendezVous;
+    }
+
+    public void setHoraire(LocalDateTime horaire) {
+        rendezVousREST.horaire = horaire;
+    }
+
+    public void setSalle(SalleData salle) {
+        rendezVousREST.salle = salle;
+    }
+
+    /*public void setUtilisateurs(HashMap<UtilisateurREST, Boolean> utilisateurs) {
+        rendezVousREST.utilisateurs = utilisateurs;
+    }
+
+    public SalleREST getSalle() {
+        return salle;
+    }
+    public void setState(EtatRendezVousREST etatRendezVous) {
+        this.etatRendezVous = etatRendezVous;
+    }*/
     //endregion
 }
