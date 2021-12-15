@@ -16,7 +16,7 @@ public class DisponibiliteTest {
     @Test
     public void testSuperTypes() {
         Disponibilite disponibilite = new Disponibilite();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.disponibilite.NouvelleDisponibilite", disponibilite);
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.disponibilite.Disponibilite", disponibilite);
     }
 
 
