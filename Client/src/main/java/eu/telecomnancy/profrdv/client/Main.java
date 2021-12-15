@@ -2,6 +2,7 @@ package eu.telecomnancy.profrdv.client;
 
 import eu.telecomnancy.profrdv.client.controllers.MainController;
 import eu.telecomnancy.profrdv.client.controllers.MenuController;
+import eu.telecomnancy.profrdv.client.controllers.PriseRDVController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,7 +23,7 @@ public class Main extends Application {
 
         FXMLLoader loader2 = new FXMLLoader();
         loader2.setLocation(getClass().getResource("PriseRDV.fxml"));
-        loader2.setControllerFactory(iC->new MainController());
+        loader2.setControllerFactory(iC->new PriseRDVController());
         panneau.setBottom(loader2.load());
 
         Scene scene = new Scene(panneau, 1400, 750);
