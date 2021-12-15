@@ -1,6 +1,7 @@
 module eu.telecomnancy.profrdv {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens eu.telecomnancy.profrdv.client to javafx.fxml;
