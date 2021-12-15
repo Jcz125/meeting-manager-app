@@ -18,11 +18,11 @@ import java.util.List;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-//        Ecole ecole = new Ecole();
-//        List<Utilisateur> utilisateurs = ecole.getUtilisateurs();
-//        for (Utilisateur u: utilisateurs) {
-//            System.out.println(u.getNom() +  " " + u.getPrenom());
-//        }
+        Ecole ecole = new Ecole();
+        List<Utilisateur> utilisateurs = ecole.getUtilisateurs();
+        for (Utilisateur u: utilisateurs) {
+            System.out.println(u.getNom() +  " " + u.getPrenom());
+        }
 
         BorderPane panneau = new BorderPane() ;
 
