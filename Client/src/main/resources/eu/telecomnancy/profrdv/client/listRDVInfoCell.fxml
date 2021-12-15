@@ -7,15 +7,6 @@
 <AnchorPane prefHeight="125.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.profrdv.client.ListRDVInfoCell">
    <children>
       <BorderPane layoutX="-1.0" layoutY="25.0" prefHeight="150.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <bottom>
-            <ButtonBar prefHeight="40.0" prefWidth="210.0" BorderPane.alignment="CENTER">
-              <buttons>
-                <Button mnemonicParsing="false" text="Confirmer" />
-                  <Button layoutX="135.0" layoutY="18.0" mnemonicParsing="false" text="Modifier" />
-                  <Button layoutX="114.0" layoutY="18.0" mnemonicParsing="false" text="Annuler" />
-              </buttons>
-            </ButtonBar>
-         </bottom>
          <top>
             <Label text="Titre" BorderPane.alignment="CENTER">
                <font>
@@ -24,36 +15,64 @@
             </Label>
          </top>
          <center>
-            <Label prefHeight="60.0" prefWidth="278.0" text="Description" BorderPane.alignment="CENTER" />
+            <Label prefHeight="60.0" prefWidth="232.0" text="Description" BorderPane.alignment="CENTER" />
          </center>
-         <left>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label text="Date">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="Heure">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="Lieu">
-                     <font>
-                        <Font name="System Italic" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-         </left>
          <right>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <ScrollPane prefHeight="61.0" prefWidth="180.0" BorderPane.alignment="TOP_RIGHT">
                <content>
-                  <VBox fx:id="listEleve" prefHeight="58.0" prefWidth="185.0" />
+                  <VBox fx:id="listEleve" prefHeight="58.0" prefWidth="175.0" />
                </content>
             </ScrollPane>
          </right>
+         <bottom>
+            <SplitPane dividerPositions="0.5" prefHeight="39.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <items>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="dateRDV" prefHeight="20.0" prefWidth="42.0" text="Date">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="heureRDV" prefHeight="20.0" prefWidth="46.0" text="Heure" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lieuRDV" prefHeight="20.0" prefWidth="33.0" text="Lieu" GridPane.columnIndex="2">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <HBox prefHeight="37.0" prefWidth="250.0">
+                     <children>
+                        <ButtonBar prefHeight="37.0" prefWidth="250.0">
+                          <buttons>
+                            <Button fx:id="confirmer" mnemonicParsing="false" text="Confirmer" />
+                              <Button fx:id="modifier" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" text="Modifier" />
+                              <Button fx:id="annuler" layoutX="114.0" layoutY="18.0" mnemonicParsing="false" text="Annuler" />
+                          </buttons>
+                        </ButtonBar>
+                     </children></HBox>
+               </items></SplitPane>
+         </bottom>
+         <left>
+            <ScrollPane prefHeight="61.0" prefWidth="180.0" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox fx:id="listProf" prefHeight="59.0" prefWidth="178.0" />
+               </content>
+            </ScrollPane>
+         </left>
       </BorderPane>
    </children>
 </AnchorPane>
