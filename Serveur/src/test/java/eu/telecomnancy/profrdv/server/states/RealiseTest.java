@@ -1,4 +1,4 @@
-package eu.telecomnancy.profrdv.server;
+package eu.telecomnancy.profrdv.server.states;
 
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;

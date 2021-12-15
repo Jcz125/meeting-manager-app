@@ -10,15 +10,17 @@ III- Faire les modèles (Back) et mettre en places les interfaces (Front)
     2- Ecrire les fichiers FXML
         a- (Les fichiers à créer avec une description)
 
-	- Interface pour titre/ description RDV	
-	- Interface pour espace personnel 
-	- Interface Acceuil
-	- Interface identification
-	- Interface de création
+	- Interface pour titre/ description RDV [OK 15/12]
+	- Interface pour prendre des RDV [OK 14/12]
+	- Interface pour espace personnel
+	- Interface Accueil
+	- Interface identification [OK 15/12]
+	- Interface de création [OK 15/12]
 	- Interface modifier les coordonnées personnels
 	- Interface administateur pour gérer suppression eleves / profs
-	- Interface de définition de disponibilité 
-	- Interface Planning 
+	- Interface de définition de disponibilité par le prof [OK 15/12]
+	- Interface Planning
+	- 
 
     3- Compléter les classes au fur et à mesure (à developper)
 

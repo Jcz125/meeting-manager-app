@@ -7,9 +7,7 @@ import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static javax.persistence.DiscriminatorType.INTEGER;
 import static javax.persistence.InheritanceType.SINGLE_TABLE;
@@ -75,6 +73,12 @@ public abstract class Utilisateur {
 
     public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, Salle salle, LocalDateTime date, String titre, String description) {
         ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+        utilisateurs.add(this);
+        //noinspection SuspiciousMethodCalls
+        profs.remove(this);
+        //noinspection SuspiciousMethodCalls
+        eleves.remove(this);
+
         utilisateurs.addAll(profs);
         utilisateurs.addAll(eleves);
         RendezVous rendezVous = new RendezVous(date, utilisateurs, salle, titre, description);
@@ -103,7 +107,7 @@ public abstract class Utilisateur {
         for (int i = 0; i < RDVs.size(); i++) {
             RDVsIds[i] = RDVs.get(i).getId();
         }
-        return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, this instanceof Professeur);
+        return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, this instanceof Professeur, null, null);
     }
 
 

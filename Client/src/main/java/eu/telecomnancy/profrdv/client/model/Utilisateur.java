@@ -110,5 +110,9 @@ public abstract class Utilisateur {
     public void setNotification(boolean notification) {
         utilisateurREST.notification = notification;
     }
+
+    public RendezVous[] getRDVs() {
+        return new RendezVous[0];
+    }
     //endregion
 }

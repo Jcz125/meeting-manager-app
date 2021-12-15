@@ -18,9 +18,9 @@ public class Ecole {
     @Column(unique = true, nullable = false)
     private String nom;
 
-    @OneToMany(targetEntity=Disponibilite.class, cascade=CascadeType.ALL)
+    @OneToMany(targetEntity=Salle.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "fk_ecole")
-    private List<Disponibilite> disponibilites;
+    private List<Salle> salles;
 
     @OneToMany(targetEntity=Utilisateur.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "fk_ecole")
@@ -39,15 +39,15 @@ public class Ecole {
     }
 
     public EcoleData getData() {
-        Integer[] disponibilitesIdsArray = new Integer[disponibilites == null ? 0 : disponibilites.size()];
+        Integer[] sallesIdsArray = new Integer[salles == null ? 0 : salles.size()];
         Integer[] utilisateursIdsArray = new Integer[utilisateurs == null ? 0 : utilisateurs.size()];
-        for (int i = 0; i < disponibilitesIdsArray.length; i++) {
-            disponibilitesIdsArray[i] = disponibilites.get(i).getId();
+        for (int i = 0; i < sallesIdsArray.length; i++) {
+            sallesIdsArray[i] = salles.get(i).getNumero();
         }
         for (int i = 0; i < utilisateursIdsArray.length; i++) {
             utilisateursIdsArray[i] = utilisateurs.get(i).getId();
         }
-        return new EcoleData(0, nom, disponibilitesIdsArray, utilisateursIdsArray);
+        return new EcoleData(0, nom, sallesIdsArray, utilisateursIdsArray);
     }
 
     public void addUtilisateur(Utilisateur utilisateur) {
