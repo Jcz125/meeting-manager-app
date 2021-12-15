@@ -2,18 +2,16 @@ package eu.telecomnancy.profrdv.server.model.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.time.LocalDateTime;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DisponibiliteData {
     public int id;
-    public LocalDateTime debut;
-    public LocalDateTime fin;
+    public DisponibiliteFixeData[] dispo;
+    public ModificateurDisponibiliteData[] modifs;
 
 
-    public DisponibiliteData(int id, LocalDateTime debut, LocalDateTime fin) {
+    public DisponibiliteData(int id, DisponibiliteFixeData[] dispo, ModificateurDisponibiliteData[] modifs) {
         this.id = id;
-        this.debut = debut;
-        this.fin = fin;
+        this.dispo = dispo;
+        this.modifs = modifs;
     }
 }

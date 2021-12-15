@@ -1,13 +1,16 @@
 package eu.telecomnancy.profrdv.server.model.disponibilite;
 
+import eu.telecomnancy.profrdv.server.model.data.DisponibiliteData;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Disponibilite {
-    private final ArrayList<DisponibiliteFixe> dispoFixe;
-    private final ArrayList<ModificateurDisponibilite> modifsDispo;
+    private int id;
+    private ArrayList<DisponibiliteFixe> dispoFixe = null;
+    private ArrayList<ModificateurDisponibilite> modifsDispo = null;
 
 
     public Disponibilite() {
@@ -47,5 +50,11 @@ public class Disponibilite {
         }
 
         return false;
+    }
+
+
+    public DisponibiliteData getData() {
+        Pair pair = new Pair(dispoFixe.size(), modifsDispo.size());
+        return new DisponibiliteData(id, pair.getDisponibiliteFixeData(), pair.getModificateurDisponibiliteData());
     }
 }

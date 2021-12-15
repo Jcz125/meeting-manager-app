@@ -1,8 +1,11 @@
 package eu.telecomnancy.profrdv.server.model.disponibilite;
 
+import eu.telecomnancy.profrdv.server.model.data.ModificateurDisponibiliteData;
+
 import java.time.LocalDateTime;
 
 public class ModificateurDisponibilite {
+    private int id;
     private final boolean inclut;
     private final LocalDateTime debut;
     private final LocalDateTime fin;
@@ -41,5 +44,10 @@ public class ModificateurDisponibilite {
 
     public boolean estInclut() {
         return inclut;
+    }
+
+
+    public ModificateurDisponibiliteData getData() {
+        return new ModificateurDisponibiliteData(id, inclut, debut, fin);
     }
 }

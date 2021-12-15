@@ -1,10 +1,13 @@
 package eu.telecomnancy.profrdv.server.model.disponibilite;
 
+import eu.telecomnancy.profrdv.server.model.data.DisponibiliteFixeData;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class DisponibiliteFixe {
+    private int id;
     private final DayOfWeek jour;
     private final LocalTime debut;
     private final LocalTime fin;
@@ -40,5 +43,10 @@ public class DisponibiliteFixe {
             return false;
 
         return !horaire.toLocalTime().equals(fin);
+    }
+
+
+    public DisponibiliteFixeData getData() {
+        return new DisponibiliteFixeData(id, jour, debut, fin);
     }
 }
