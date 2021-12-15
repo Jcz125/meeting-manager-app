@@ -1,6 +1,6 @@
 package eu.telecomnancy.profrdv.server.disponibilite;
 
-import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFlexible;
+import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -9,12 +9,12 @@ import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DisponibiliteFlexibleTest {
+public class ModificateurDisponibiliteTest {
 
     @Test
     public void testSuperTypes() {
-        DisponibiliteFlexible disponibiliteFlexible = new DisponibiliteFlexible(true, null, null);
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFlexible", disponibiliteFlexible);
+        ModificateurDisponibilite modificateurDisponibilite = new ModificateurDisponibilite(true, null, null);
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite", modificateurDisponibilite);
     }
 
 
@@ -23,28 +23,28 @@ public class DisponibiliteFlexibleTest {
         LocalDateTime horaire = LocalDateTime.of(2021, 12, 15, 15, 0);
         LocalDateTime debut = LocalDateTime.of(2021, 12, 15, 15, 0);
         LocalDateTime fin = LocalDateTime.of(2021, 12, 15, 16, 0);
-        DisponibiliteFlexible dispo = new DisponibiliteFlexible(true, debut, fin);
-        assertTrue(dispo.estDedans(horaire));
+        ModificateurDisponibilite dispo = new ModificateurDisponibilite(true, debut, fin);
+        assertTrue(dispo.estDansLeCreneau(horaire));
 
 
         horaire = LocalDateTime.of(2021, 12, 15, 14, 0);
         debut = LocalDateTime.of(2021, 12, 15, 15, 0);
         fin = LocalDateTime.of(2021, 12, 15, 16, 0);
-        dispo = new DisponibiliteFlexible(true, debut, fin);
-        assertFalse(dispo.estDedans(horaire));
+        dispo = new ModificateurDisponibilite(true, debut, fin);
+        assertFalse(dispo.estDansLeCreneau(horaire));
 
 
-        horaire = LocalDateTime.of(2021, 12, 15, 15, 0);
+        horaire = LocalDateTime.of(2021, 12, 15, 16, 0);
         debut = LocalDateTime.of(2021, 12, 15, 15, 0);
         fin = LocalDateTime.of(2021, 12, 15, 16, 0);
-        dispo = new DisponibiliteFlexible(false, debut, fin);
-        assertFalse(dispo.estDedans(horaire));
+        dispo = new ModificateurDisponibilite(true, debut, fin);
+        assertFalse(dispo.estDansLeCreneau(horaire));
 
 
-        horaire = LocalDateTime.of(2021, 12, 15, 14, 0);
+        horaire = LocalDateTime.of(2021, 12, 15, 17, 0);
         debut = LocalDateTime.of(2021, 12, 15, 15, 0);
         fin = LocalDateTime.of(2021, 12, 15, 16, 0);
-        dispo = new DisponibiliteFlexible(false, debut, fin);
-        assertFalse(dispo.estDedans(horaire));
+        dispo = new ModificateurDisponibilite(true, debut, fin);
+        assertFalse(dispo.estDansLeCreneau(horaire));
     }
 }

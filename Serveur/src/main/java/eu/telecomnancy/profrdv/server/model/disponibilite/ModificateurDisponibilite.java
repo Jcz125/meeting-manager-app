@@ -2,26 +2,29 @@ package eu.telecomnancy.profrdv.server.model.disponibilite;
 
 import java.time.LocalDateTime;
 
-public class DisponibiliteFlexible {
+public class ModificateurDisponibilite {
     private final boolean inclut;
     private final LocalDateTime debut;
     private final LocalDateTime fin;
 
 
-    public DisponibiliteFlexible(boolean inclusion, LocalDateTime debut, LocalDateTime fin) {
+    public ModificateurDisponibilite(boolean inclusion, LocalDateTime debut, LocalDateTime fin) {
         this.inclut = inclusion;
         this.debut = debut;
         this.fin = fin;
     }
 
 
-    public boolean estDedans(LocalDateTime horaire) {
-        if (debut.isEqual(horaire)) {
-            return inclut;
-        }
-        if (debut.isBefore(horaire) && fin.isAfter(horaire)) {
-            return inclut;
-        }
+    public boolean estDansLeCreneau(LocalDateTime horaire) {
+        if (debut.isEqual(horaire))
+            return true;
+
+        if (horaire.isAfter(debut) && horaire.isBefore(fin))
+            return true;
+
+        if (fin.isEqual(horaire))
+            return false;
+
         return false;
     }
 
@@ -36,7 +39,7 @@ public class DisponibiliteFlexible {
     }
 
 
-    public boolean getInclut() {
+    public boolean estInclut() {
         return inclut;
     }
 }
