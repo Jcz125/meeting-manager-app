@@ -52,6 +52,9 @@ public class RendezVous {
         return rendezVousREST.etatRendezVous;
     }
 
+    public String getEtatRendezVoustoString() { // utiliser instanceof
+    }
+
 
     public LocalDateTime getHoraire() {
         return rendezVousREST.horaire;
