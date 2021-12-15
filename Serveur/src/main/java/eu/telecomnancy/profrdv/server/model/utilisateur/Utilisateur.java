@@ -53,6 +53,12 @@ public abstract class Utilisateur {
 
     public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, Salle salle, LocalDateTime date, String titre, String description) {
         ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+        utilisateurs.add(this);
+        //noinspection SuspiciousMethodCalls
+        profs.remove(this);
+        //noinspection SuspiciousMethodCalls
+        eleves.remove(this);
+
         utilisateurs.addAll(profs);
         utilisateurs.addAll(eleves);
         RendezVous rendezVous = new RendezVous(date, utilisateurs, salle, titre, description);
