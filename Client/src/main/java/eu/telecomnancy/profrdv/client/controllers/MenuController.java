@@ -1,5 +1,6 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
+import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +12,10 @@ import java.awt.*;
 import java.io.IOException;
 
 public class MenuController implements Observateur{
-    MenuController mc;
+
+    private MenuController mc;
+    private Utilisateur utilisateur ;
+    private String idToConnect ;
 
     public MenuController(){
 
@@ -43,7 +47,12 @@ public class MenuController implements Observateur{
                 null);
 
         if (id != null) {
+            this.idToConnect = id ;
         }
+    }
+
+    public String getIdToConnect() {
+        return this.idToConnect;
     }
 
     @FXML

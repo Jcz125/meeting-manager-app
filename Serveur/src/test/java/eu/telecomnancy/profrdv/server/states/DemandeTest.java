@@ -1,20 +1,20 @@
-package eu.telecomnancy.profrdv.server;
+package eu.telecomnancy.profrdv.server.states;
 
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
-import eu.telecomnancy.profrdv.server.model.states.Confirme;
+import eu.telecomnancy.profrdv.server.model.states.Demande;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
 
-public class ConfirmeTest {
+public class DemandeTest {
 
     @Test
     public void testSuperTypes() {
-        Confirme confirme = new Confirme(null);
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Confirme", confirme);
+        Demande demande = new Demande(null);
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Demande", demande);
     }
 
 
@@ -37,17 +37,16 @@ public class ConfirmeTest {
     @Test
     public void testDemande() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
-        rdv.confirmer();
         rdv.demande();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Confirme", rdv.getEtatRendezVous());
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Demande", rdv.getEtatRendezVous());
     }
 
 
     @Test
     public void testRealise() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
-        rdv.confirmer();
         rdv.realiser();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Demande", rdv.getEtatRendezVous());
     }
+
 }
