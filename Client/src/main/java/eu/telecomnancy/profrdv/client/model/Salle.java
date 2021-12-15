@@ -1,37 +1,41 @@
 package eu.telecomnancy.profrdv.client.model;
 
+import eu.telecomnancy.profrdv.client.model.data.SalleData;
+
 public class Salle {
-    private int numero;
-    private int etage;
-    private String aile;
+    private SalleData salleREST;
+
+    public Salle (SalleData salleREST) {
+        this.salleREST = salleREST;
+    }
 
     public Salle (int numero, int etage, String aile) {
-        this.numero = numero;
-        this.etage =  etage;
-        this.aile = aile;
+        salleREST.numero = numero;
+        salleREST.etage =  etage;
+        salleREST.aile = aile;
     }
 
     public int getNumero() {
-        return numero;
+        return salleREST.numero;
     }
 
     public void setNumero(int numero) {
-        this.numero = numero;
+        salleREST.numero = numero;
     }
 
     public void setEtage(int etage) {
-        this.etage = etage;
+        salleREST.etage = etage;
     }
 
     public int getEtage() {
-        return etage;
+        return salleREST.etage;
     }
 
     public void setAile(String aile) {
-        this.aile = aile;
+        salleREST.aile = aile;
     }
 
     public String getAile() {
-        return aile;
+        return salleREST.aile;
     }
 }
