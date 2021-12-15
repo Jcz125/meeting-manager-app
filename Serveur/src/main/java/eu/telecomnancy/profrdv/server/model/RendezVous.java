@@ -1,5 +1,6 @@
 package eu.telecomnancy.profrdv.server.model;
 
+import eu.telecomnancy.profrdv.server.model.states.Demande;
 import eu.telecomnancy.profrdv.server.model.states.EtatRendezVous;
 import eu.telecomnancy.profrdv.server.model.states.Realise;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
@@ -32,6 +33,7 @@ public class RendezVous {
         this.description = description;
         this.titre = titre;
         this.salle = salle;
+        this.etatRendezVous = new Demande(this);
     }
 
 

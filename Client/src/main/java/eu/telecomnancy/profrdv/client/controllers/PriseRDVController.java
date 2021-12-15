@@ -1,9 +1,13 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
+import eu.telecomnancy.profrdv.client.model.RendezVous;
+import eu.telecomnancy.profrdv.client.model.states.Demande;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javax.swing.*;
+import java.awt.*;
 
 public class PriseRDVController implements Observateur{
 
@@ -23,6 +27,7 @@ public class PriseRDVController implements Observateur{
     @FXML ListView listViewSamedi ;
     @FXML ListView listViewDimanche ;
     @FXML ListView listViewProfs ;
+    RendezVous RDV ;
 
 
     public PriseRDVController(){
@@ -33,6 +38,38 @@ public class PriseRDVController implements Observateur{
     private void handleResearchButton(){
 
     }
+
+
+    @FXML
+    private void handlePriseRDVButton(){
+        String titre = (String) JOptionPane.showInputDialog(new Component(){},
+                "Titre",
+                "Titre du Rendez-vous",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                null);
+
+        String description = (String) JOptionPane.showInputDialog(new Component(){},
+                "Description",
+                "Description du rendez-vous",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (titre != null) {
+            this.RDV.setTitre(titre);
+        }
+
+        if (description != null) {
+            this.RDV.setDescription(description);
+        }
+
+        //Create RDV ;
+
+    }
+
 
     @Override
     public void update() {
