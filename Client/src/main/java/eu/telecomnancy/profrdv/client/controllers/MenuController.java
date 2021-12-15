@@ -3,6 +3,9 @@ package eu.telecomnancy.profrdv.client.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class MenuController implements Observateur{
 
     public MenuController(){
@@ -26,6 +29,20 @@ public class MenuController implements Observateur{
 
     @FXML
     private void handleIdButton (ActionEvent actionEvent) {
+        String id = (String) JOptionPane.showInputDialog(new Component(){},
+                "Identifiant",
+                "Identifiez-Vous",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                null);
+
+        if (id != null) {
+        }
+    }
+
+    @FXML
+    private void handleCreateButton (ActionEvent actionEvent) {
 
     }
 
