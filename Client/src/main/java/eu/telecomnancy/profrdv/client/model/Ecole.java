@@ -3,6 +3,7 @@ package eu.telecomnancy.profrdv.client.model;
 import eu.telecomnancy.profrdv.client.model.data.EcoleData;
 import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class Ecole {
         for (Integer i: ecoleREST.utilisateursIds) {
             UtilisateurData response =
                     restTemplate.getForObject(
-                            "http://127.0.0.1:8080/ecole/utilisateurs?id=" + i,
+                            "http://127.0.0.1:8080/utilisateur?id=" + i,
                             UtilisateurData.class);
             if (response.estProf)
                 utilisateurs.add(new Professeur(response));

@@ -3,6 +3,8 @@ package eu.telecomnancy.profrdv.client;
 import eu.telecomnancy.profrdv.client.controllers.MainController;
 import eu.telecomnancy.profrdv.client.controllers.MenuController;
 import eu.telecomnancy.profrdv.client.controllers.PriseRDVController;
+import eu.telecomnancy.profrdv.client.model.Ecole;
+import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,10 +12,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        Ecole ecole = new Ecole();
+        List<Utilisateur> utilisateurs = ecole.getUtilisateurs();
+        for (Utilisateur u: utilisateurs) {
+            System.out.println(u.getNom() +  " " + u.getPrenom());
+        }
+
         BorderPane panneau = new BorderPane() ;
 
         FXMLLoader loader1 = new FXMLLoader();
