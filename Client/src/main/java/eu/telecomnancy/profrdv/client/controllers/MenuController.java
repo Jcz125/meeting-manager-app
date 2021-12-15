@@ -11,7 +11,8 @@ import java.awt.*;
 import java.io.IOException;
 
 public class MenuController implements Observateur{
-    MenuController mc;
+
+    private MenuController mc;
 
     public MenuController(){
 

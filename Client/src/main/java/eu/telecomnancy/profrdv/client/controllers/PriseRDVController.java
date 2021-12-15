@@ -10,23 +10,23 @@ import java.awt.*;
 
 public class PriseRDVController implements Observateur{
 
-    @FXML TextField researchBar ;
-    @FXML Label lundi ;
-    @FXML Label mardi ;
-    @FXML Label mercredi ;
-    @FXML Label jeudi ;
-    @FXML Label vendredi ;
-    @FXML Label samedi ;
-    @FXML Label dimanche ;
-    @FXML ListView listViewLundi ;
-    @FXML ListView listViewMardi ;
-    @FXML ListView listViewMercredi ;
-    @FXML ListView listViewJeudi ;
-    @FXML ListView listViewVendredi ;
-    @FXML ListView listViewSamedi ;
-    @FXML ListView listViewDimanche ;
-    @FXML ListView listViewProfs ;
-    RendezVous RDV ;
+    @FXML private TextField researchBar ;
+    @FXML private Label lundi ;
+    @FXML private Label mardi ;
+    @FXML private Label mercredi ;
+    @FXML private Label jeudi ;
+    @FXML private Label vendredi ;
+    @FXML private Label samedi ;
+    @FXML private Label dimanche ;
+    @FXML private ListView listViewLundi ;
+    @FXML private ListView listViewMardi ;
+    @FXML private ListView listViewMercredi ;
+    @FXML private ListView listViewJeudi ;
+    @FXML private ListView listViewVendredi ;
+    @FXML private ListView listViewSamedi ;
+    @FXML private ListView listViewDimanche ;
+    @FXML private ListView listViewProfs ;
+    private RendezVous RDV ;
 
 
     public PriseRDVController(){
