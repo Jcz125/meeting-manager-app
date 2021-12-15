@@ -1,5 +1,6 @@
 package eu.telecomnancy.profrdv.server.utilisateur;
 
+import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.Salle;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
@@ -95,7 +96,19 @@ public class UtilisateurTest {
 
 
     @Test
-    public void testAjouterRDV() {
+    public void testAnnulerRDV() {
+        Eleve eleve = new Eleve("Dupont", "Jean", "jean.dupont@telecomnancy.net");
+        LocalDateTime date = LocalDateTime.of(2021, 12, 15, 15, 5);
+        RendezVous rendezVous = new RendezVous(date, new ArrayList<>(), null, null, null);
+        assertFalse(eleve.annulerRDV(rendezVous));
+
+        eleve.ajouterRDV(rendezVous);
+        assertTrue(eleve.annulerRDV(rendezVous));
+    }
+
+
+    @Test
+    public void testPrendreRDV() {
         Eleve jean = new Eleve("Dupont", "Jean", "jean.dupont@gmail.com");
         Eleve george = new Eleve("Bubois", "George", "george.dubois@outlook.com");
 
