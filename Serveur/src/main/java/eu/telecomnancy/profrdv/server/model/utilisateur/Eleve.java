@@ -7,6 +7,7 @@ public class Eleve extends Utilisateur {
         super(nom, prenom, email);
     }
 
+
     public boolean estDisponible(RendezVous rendezVous) {
         return !this.RDVs.containsKey(rendezVous.getHoraire());
     }
