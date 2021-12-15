@@ -1,28 +1,30 @@
-package eu.telecomnancy.profrdv.server;
+package eu.telecomnancy.profrdv.server.states;
 
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
-import eu.telecomnancy.profrdv.server.model.states.Demande;
+import eu.telecomnancy.profrdv.server.model.states.Realise;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
 
-public class DemandeTest {
+public class RealiseTest {
 
     @Test
     public void testSuperTypes() {
-        Demande demande = new Demande(null);
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Demande", demande);
+        Realise realise = new Realise(null);
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", realise);
     }
 
 
     @Test
     public void testAnnulation() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
+        rdv.confirmer();
+        rdv.realiser();
         rdv.annuler();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Annule", rdv.getEtatRendezVous());
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
     }
 
 
@@ -30,23 +32,28 @@ public class DemandeTest {
     public void testConfirmation() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.confirmer();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Confirme", rdv.getEtatRendezVous());
+        rdv.realiser();
+        rdv.realiser();
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
     }
 
 
     @Test
     public void testDemande() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
+        rdv.confirmer();
+        rdv.realiser();
         rdv.demande();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Demande", rdv.getEtatRendezVous());
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
     }
 
 
     @Test
     public void testRealise() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
+        rdv.confirmer();
         rdv.realiser();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Demande", rdv.getEtatRendezVous());
+        rdv.realiser();
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
     }
-
 }

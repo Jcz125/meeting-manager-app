@@ -1,30 +1,28 @@
-package eu.telecomnancy.profrdv.server;
+package eu.telecomnancy.profrdv.server.states;
 
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
-import eu.telecomnancy.profrdv.server.model.states.Realise;
+import eu.telecomnancy.profrdv.server.model.states.Confirme;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
 
-public class RealiseTest {
+public class ConfirmeTest {
 
     @Test
     public void testSuperTypes() {
-        Realise realise = new Realise(null);
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", realise);
+        Confirme confirme = new Confirme(null);
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Confirme", confirme);
     }
 
 
     @Test
     public void testAnnulation() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
-        rdv.confirmer();
-        rdv.realiser();
         rdv.annuler();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Annule", rdv.getEtatRendezVous());
     }
 
 
@@ -32,9 +30,7 @@ public class RealiseTest {
     public void testConfirmation() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.confirmer();
-        rdv.realiser();
-        rdv.realiser();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Confirme", rdv.getEtatRendezVous());
     }
 
 
@@ -42,9 +38,8 @@ public class RealiseTest {
     public void testDemande() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.confirmer();
-        rdv.realiser();
         rdv.demande();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Confirme", rdv.getEtatRendezVous());
     }
 
 
@@ -52,7 +47,6 @@ public class RealiseTest {
     public void testRealise() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.confirmer();
-        rdv.realiser();
         rdv.realiser();
         assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
     }
