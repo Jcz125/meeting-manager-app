@@ -35,6 +35,18 @@ public class RendezVous {
     }
 
 
+    public RendezVous(LocalDateTime horaire, ArrayList<Utilisateur> utilisateurs) {
+        this.horaire = horaire;
+        this.utilisateurs = new HashMap<>();
+
+        for (Utilisateur utilisateur : utilisateurs) {
+            this.utilisateurs.put(utilisateur, false);
+        }
+
+        this.salle = null;
+    }
+
+
     public void notifier() {
         // on notifie tous les utilisateurs d'un changement d'état sauf quand il a été réalisé
         if (!(etatRendezVous instanceof Realise)) {
@@ -47,6 +59,27 @@ public class RendezVous {
 
     public void ajoutConfirmation(Utilisateur CurrentUtilisateur) {
         utilisateurs.put(CurrentUtilisateur, true);
+    }
+
+
+    public static ArrayList<RendezVous> genererRendezVous(ArrayList<Utilisateur> utilisateurs, LocalDateTime debut, LocalDateTime fin) {
+        ArrayList<RendezVous> creneaux = new ArrayList<>();
+        LocalDateTime heure = LocalDateTime.from(debut);
+        while (!fin.isEqual(heure)) {
+            boolean addable = true;
+            for (Utilisateur utilisateur : utilisateurs) {
+                if (!utilisateur.estDisponible(heure)) {
+                    addable = false;
+                    break;
+                }
+            }
+
+            if (addable)
+                creneaux.add(new RendezVous(heure, utilisateurs));
+
+            heure = heure.plusMinutes(20);
+        }
+        return creneaux;
     }
 
 

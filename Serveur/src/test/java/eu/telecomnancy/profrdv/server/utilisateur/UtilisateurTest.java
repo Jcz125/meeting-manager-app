@@ -121,17 +121,15 @@ public class UtilisateurTest {
         christophe.add(DayOfWeek.THURSDAY, debut, fin);
 
 
-        ArrayList<Professeur> profs = new ArrayList<>();
-        profs.add(gerald);
-
-        ArrayList<Eleve> eleves = new ArrayList<>();
-        eleves.add(george);
+        ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+        utilisateurs.add(gerald);
+        utilisateurs.add(george);
 
         Salle salle = new Salle(2, 1, "ouest");
         LocalDateTime date1 = LocalDateTime.of(2021, 12, 15, 14, 20);
-        assertFalse(jean.prendreRDV(profs, eleves, salle, date1, "RDV", "Test"));
+        assertFalse(jean.prendreRDV(utilisateurs, salle, date1, "RDV", "Test"));
 
         LocalDateTime date2 = LocalDateTime.of(2021, 12, 15, 9, 20);
-        assertTrue(jean.prendreRDV(profs, eleves, salle, date2, "RDV", "Test"));
+        assertTrue(jean.prendreRDV(utilisateurs, salle, date2, "RDV", "Test"));
     }
 }

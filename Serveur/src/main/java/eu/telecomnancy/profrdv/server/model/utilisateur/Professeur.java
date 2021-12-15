@@ -1,6 +1,5 @@
 package eu.telecomnancy.profrdv.server.model.utilisateur;
 
-import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.disponibilite.Disponibilite;
 
 import java.time.DayOfWeek;
@@ -27,9 +26,9 @@ public class Professeur extends Utilisateur {
     }
 
 
-    public boolean estDisponible(RendezVous rendezVous) {
-        if (RDVs.containsKey(rendezVous.getHoraire()))
+    public boolean estDisponible(LocalDateTime horaire) {
+        if (RDVs.containsKey(horaire))
             return false;
-        return disponibilites.estDisponible(rendezVous.getHoraire());
+        return disponibilites.estDisponible(horaire);
     }
 }

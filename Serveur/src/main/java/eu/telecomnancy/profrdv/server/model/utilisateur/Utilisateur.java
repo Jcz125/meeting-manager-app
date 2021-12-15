@@ -48,28 +48,17 @@ public abstract class Utilisateur {
     }
 
 
-    public abstract boolean estDisponible(RendezVous rendezVous);
+    public abstract boolean estDisponible(LocalDateTime horaire);
 
 
-    public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, Salle salle, LocalDateTime date, String titre, String description) {
-        ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+    public boolean prendreRDV(ArrayList<Utilisateur> utilisateurs, Salle salle, LocalDateTime date, String titre, String description) {
+        utilisateurs.remove(this);
         utilisateurs.add(this);
-        //noinspection SuspiciousMethodCalls
-        profs.remove(this);
-        //noinspection SuspiciousMethodCalls
-        eleves.remove(this);
 
-        utilisateurs.addAll(profs);
-        utilisateurs.addAll(eleves);
         RendezVous rendezVous = new RendezVous(date, utilisateurs, salle, titre, description);
 
-        for (Professeur professeur : profs) {
-            if (!professeur.estDisponible(rendezVous))
-                return false;
-        }
-
-        for (Eleve eleve : eleves) {
-            if (!eleve.estDisponible(rendezVous))
+        for (Utilisateur utilisateur : utilisateurs) {
+            if (!utilisateur.estDisponible(rendezVous.getHoraire()))
                 return false;
         }
 

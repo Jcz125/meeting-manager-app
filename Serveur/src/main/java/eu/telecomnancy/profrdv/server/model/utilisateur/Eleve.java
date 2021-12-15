@@ -1,6 +1,6 @@
 package eu.telecomnancy.profrdv.server.model.utilisateur;
 
-import eu.telecomnancy.profrdv.server.model.RendezVous;
+import java.time.LocalDateTime;
 
 public class Eleve extends Utilisateur {
     public Eleve(String nom, String prenom, String email) {
@@ -8,7 +8,7 @@ public class Eleve extends Utilisateur {
     }
 
 
-    public boolean estDisponible(RendezVous rendezVous) {
-        return !this.RDVs.containsKey(rendezVous.getHoraire());
+    public boolean estDisponible(LocalDateTime horaire) {
+        return !this.RDVs.containsKey(horaire);
     }
 }
