@@ -6,6 +6,8 @@ import eu.telecomnancy.profrdv.client.model.data.RendezVousData;
 import eu.telecomnancy.profrdv.client.model.data.SalleData;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RendezVous {
     private RendezVousData rendezVousREST;
@@ -89,6 +91,8 @@ public class RendezVous {
         rendezVousREST.horaire = horaire;
     }
 
+    public SalleData getSalle() {return this.rendezVousREST.salle;}
+
     public void setSalle(SalleData salle) {
         rendezVousREST.salle = salle;
     }
@@ -103,5 +107,15 @@ public class RendezVous {
     public void setState(EtatRendezVousREST etatRendezVous) {
         this.etatRendezVous = etatRendezVous;
     }*/
+
+    public List<String> getProfstoString() {
+        List<String> profs = new ArrayList<>();
+        return profs;
+    }
+
+    public List<String> getElevestoString() {
+        List<String> eleves = new ArrayList<>();
+        return eleves;
+    }
     //endregion
 }
