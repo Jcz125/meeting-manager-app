@@ -2,6 +2,7 @@ package eu.telecomnancy.profrdv.client;
 
 import eu.telecomnancy.profrdv.client.controllers.MainController;
 import eu.telecomnancy.profrdv.client.controllers.MenuController;
+import eu.telecomnancy.profrdv.client.controllers.PlanningController;
 import eu.telecomnancy.profrdv.client.controllers.PriseRDVController;
 import eu.telecomnancy.profrdv.client.model.Ecole;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
@@ -17,11 +18,11 @@ import java.util.List;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Ecole ecole = new Ecole();
-        List<Utilisateur> utilisateurs = ecole.getUtilisateurs();
-        for (Utilisateur u: utilisateurs) {
-            System.out.println(u.getNom() +  " " + u.getPrenom());
-        }
+//        Ecole ecole = new Ecole();
+//        List<Utilisateur> utilisateurs = ecole.getUtilisateurs();
+//        for (Utilisateur u: utilisateurs) {
+//            System.out.println(u.getNom() +  " " + u.getPrenom());
+//        }
 
         BorderPane panneau = new BorderPane() ;
 
@@ -34,6 +35,11 @@ public class Main extends Application {
         loader2.setLocation(getClass().getResource("PriseRDV.fxml"));
         loader2.setControllerFactory(iC->new PriseRDVController());
         panneau.setBottom(loader2.load());
+
+//        FXMLLoader loader3 = new FXMLLoader();
+//        loader3.setLocation(getClass().getResource("Planning.fxml"));
+//        loader3.setControllerFactory(iC->new PlanningController());
+//        panneau.setCenter(loader3.load());
 
         Scene scene = new Scene(panneau, 1400, 750);
         stage.setTitle("ProfRDV");
