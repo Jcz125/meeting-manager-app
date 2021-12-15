@@ -10,10 +10,12 @@ public class Ecole {
     private List<Integer> disponibilitesIds;
     private List<Integer> utilisateursIds;
 
+
     public Ecole(String nom) {
         this.nom = nom;
         this.utilisateursIds = new ArrayList<>();
     }
+
 
     public String getNom() {
         return this.nom;

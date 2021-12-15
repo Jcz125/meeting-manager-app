@@ -1,0 +1,16 @@
+.button {
+    -fx-font: 16px "Calibri";
+    -fx-background-color: #FFD39D;
+}
+
+.labelTitre {
+    -fx-font: 25px "Calibri";
+    -fx-font-weight: bold;
+    -fx-font-style: #e16512;
+}
+
+.label {
+    -fx-font: 15px "Calibri";
+    -fx-font-style: #461aac;
+    -fx-font-weight: bold;
+}

@@ -14,9 +14,11 @@ public class Professeur extends Utilisateur {
         disponibilites = new ArrayList<>();
     }
 
+
     public void add(Disponibilite disponibilite) {
         disponibilites.add(disponibilite);
     }
+
 
     public boolean estDisponible(RendezVous rendezVous) {
         if (!this.RDVs.containsKey(rendezVous.getHoraire())) {

@@ -4,11 +4,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Salle {
+    private final ArrayList<LocalDateTime> occupation;
     private int numero;
     private int etage;
     private String aile;
-
-    private final ArrayList<LocalDateTime> occupation;
 
 
     public Salle(int numero, int etage, String aile) {
@@ -39,23 +38,23 @@ public class Salle {
     }
 
 
-    public void setEtage(int etage) {
-        this.etage = etage;
-    }
-
-
     public int getEtage() {
         return etage;
     }
 
 
-    public void setAile(String aile) {
-        this.aile = aile;
+    public void setEtage(int etage) {
+        this.etage = etage;
     }
 
 
     public String getAile() {
         return aile;
+    }
+
+
+    public void setAile(String aile) {
+        this.aile = aile;
     }
     //endregion assesseurs
 }
