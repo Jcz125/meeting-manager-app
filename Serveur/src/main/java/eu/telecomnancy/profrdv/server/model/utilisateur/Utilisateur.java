@@ -9,13 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public abstract class Utilisateur {
+    protected final HashMap<LocalDateTime, RendezVous> RDVs;
     private String nom;
     private String prenom;
     private String email;
     private String telephone;
     private boolean notification;
-
-    protected final HashMap<LocalDateTime, RendezVous> RDVs;
 
 
     public Utilisateur(String nom, String prenom, String email) {

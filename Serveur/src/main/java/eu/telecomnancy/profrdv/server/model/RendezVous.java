@@ -14,11 +14,9 @@ public class RendezVous {
 
     private final LocalDateTime horaire;
     private final HashMap<Utilisateur, Boolean> utilisateurs; // on donne une paire pour attribuer une confirmation à tout le monde
-
+    private final Salle salle;
     private String description;
     private String titre;
-    private final Salle salle;
-
     private EtatRendezVous etatRendezVous;
 
 
@@ -100,6 +98,11 @@ public class RendezVous {
     }
 
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
     public String getTitre() {
         return this.titre;
     }
@@ -107,11 +110,6 @@ public class RendezVous {
 
     public void setTitre(String titre) {
         this.titre = titre;
-    }
-
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
 
