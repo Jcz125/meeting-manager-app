@@ -1,6 +1,6 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
-public class CreationController implements Observateur{
+public class PlanningController implements Observateur{
 
     @Override
     public void update() {
