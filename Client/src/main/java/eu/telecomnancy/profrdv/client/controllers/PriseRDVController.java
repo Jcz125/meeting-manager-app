@@ -1,7 +1,6 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.RendezVous;
-import eu.telecomnancy.profrdv.client.model.states.Demande;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
