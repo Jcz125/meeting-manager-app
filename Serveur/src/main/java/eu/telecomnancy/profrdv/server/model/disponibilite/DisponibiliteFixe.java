@@ -39,9 +39,6 @@ public class DisponibiliteFixe {
         if (horaire.toLocalTime().isBefore(debut) || horaire.toLocalTime().isAfter(fin))
             return false;
 
-        if (horaire.toLocalTime().equals(fin))
-            return false;
-
-        return true;
+        return !horaire.toLocalTime().equals(fin);
     }
 }

@@ -5,12 +5,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class NouvelleDisponibilite {
+public class Disponibilite {
     private final ArrayList<DisponibiliteFixe> dispoFixe;
     private final ArrayList<ModificateurDisponibilite> modifsDispo;
 
 
-    public NouvelleDisponibilite() {
+    public Disponibilite() {
         this.dispoFixe = new ArrayList<>();
         this.modifsDispo = new ArrayList<>();
     }

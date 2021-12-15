@@ -1,6 +1,6 @@
 package eu.telecomnancy.profrdv.server.disponibilite;
 
-import eu.telecomnancy.profrdv.server.model.disponibilite.NouvelleDisponibilite;
+import eu.telecomnancy.profrdv.server.model.disponibilite.Disponibilite;
 import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class NouvelleDisponibiliteTest {
+public class DisponibiliteTest {
     @Test
     public void testSuperTypes() {
-        NouvelleDisponibilite nouvelleDisponibilite = new NouvelleDisponibilite();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.disponibilite.NouvelleDisponibilite", nouvelleDisponibilite);
+        Disponibilite disponibilite = new Disponibilite();
+        assertInstanceOf("eu.telecomnancy.profrdv.server.model.disponibilite.NouvelleDisponibilite", disponibilite);
     }
 
 
@@ -26,7 +26,7 @@ public class NouvelleDisponibiliteTest {
         LocalTime fin = LocalTime.of(12, 0);
         LocalDateTime horaire = LocalDateTime.of(2021, 12, 15, 9, 0);
 
-        NouvelleDisponibilite planning = new NouvelleDisponibilite();
+        Disponibilite planning = new Disponibilite();
         planning.add(DayOfWeek.MONDAY, debut, fin);
         planning.add(DayOfWeek.TUESDAY, debut, fin);
         planning.add(DayOfWeek.WEDNESDAY, debut, fin);
