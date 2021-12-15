@@ -11,13 +11,13 @@ public class UtilisateurData {
     public String telephone;
     public boolean notification;
     public boolean estProf;
-    public Integer RDVsIds;
+    public Integer[] RDVsIds;
 
     public UtilisateurData() {
 
     }
 
-    public UtilisateurData(int id, String nom, String prenom, String email, String telephone, boolean notification, Integer RDVsIds, boolean estProf) {
+    public UtilisateurData(int id, String nom, String prenom, String email, String telephone, boolean notification, Integer[] RDVsIds, boolean estProf) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;

@@ -1,10 +1,21 @@
 package eu.telecomnancy.profrdv.server.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+@Entity
 public class Disponibilite {
-    private final LocalDateTime debut;
-    private final LocalDateTime fin;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+
+    private LocalDateTime debut;
+    private LocalDateTime fin;
+
+    public Disponibilite() {}
 
 
     public Disponibilite(LocalDateTime debut, LocalDateTime fin) {
@@ -20,5 +31,9 @@ public class Disponibilite {
 
     public LocalDateTime getDebut() {
         return debut;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

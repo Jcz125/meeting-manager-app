@@ -13,7 +13,7 @@ public class ConfirmeTest {
 
     @Test
     public void testSuperTypes() {
-        Confirme confirme = new Confirme(null);
+        Confirme confirme = new Confirme();
         assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Confirme", confirme);
     }
 

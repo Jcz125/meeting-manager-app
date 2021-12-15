@@ -3,34 +3,33 @@ package eu.telecomnancy.profrdv.server.model.states;
 import eu.telecomnancy.profrdv.server.model.RendezVous;
 
 public class Confirme extends EtatRendezVous {
-    public Confirme(RendezVous rendezVous) {
-        super(rendezVous);
+    public Confirme() {
+
     }
 
-
     @Override
-    public void confirmer() {
+    public void confirmer(RendezVous rendezVous) {
         // il est déjà confirmé
     }
 
 
     @Override
-    public void demande() {
+    public void demande(RendezVous rendezVous) {
         // il est déjà confirmé
     }
 
 
     @Override
-    public void annuler() {
+    public void annuler(RendezVous rendezVous) {
         // on annule le rendez-vous dans ce cas
-        this.rendezVous.setState(new Annule(this.rendezVous));
+        this.rendezVous.setState(EtatRendezVousEnum.ANNULE);
 
     }
 
 
     @Override
-    public void realiser() {
+    public void realiser(RendezVous rendezVous) {
         // le rendez-vous a été réalisé
-        this.rendezVous.setState(new Realise(this.rendezVous));
+        this.rendezVous.setState(EtatRendezVousEnum.REALISE);
     }
 }

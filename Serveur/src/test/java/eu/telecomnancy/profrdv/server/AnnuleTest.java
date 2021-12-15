@@ -14,7 +14,7 @@ public class AnnuleTest {
 
     @Test
     public void testSuperTypes() {
-        Annule annule = new Annule(null);
+        Annule annule = new Annule();
         assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Annule", annule);
     }
 

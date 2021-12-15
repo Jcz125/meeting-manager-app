@@ -13,7 +13,7 @@ public class RealiseTest {
 
     @Test
     public void testSuperTypes() {
-        Realise realise = new Realise(null);
+        Realise realise = new Realise();
         assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", realise);
     }
 
