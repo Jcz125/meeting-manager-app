@@ -39,10 +39,9 @@ public class Salle {
     public void updateData(SalleData data) {
         data.numero = this.data.numero;
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(
+        restTemplate.put(
                 "http://127.0.0.1:8080/salle?id=" + data.numero,
-                this.data,
-                Void.class);
+                this.data);
     }
 
     public SalleData getData() {

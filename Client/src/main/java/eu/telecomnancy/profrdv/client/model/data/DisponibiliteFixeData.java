@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DisponibiliteFixeData {
-    public int id;
+    public Integer id;
 
     public DayOfWeek jour;
     public LocalTime debut;

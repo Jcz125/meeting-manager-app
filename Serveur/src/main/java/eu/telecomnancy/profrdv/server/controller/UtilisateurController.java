@@ -35,6 +35,7 @@ public class UtilisateurController {
     @PostMapping("/utilisateur")
     public Integer setUtilisateur(RequestEntity<UtilisateurData> monUtilisateur) {
         UtilisateurData data = monUtilisateur.getBody();
+        data.id = null;
         Utilisateur utilisateur;
         if (data.estProf)
             utilisateur = new Professeur(data);

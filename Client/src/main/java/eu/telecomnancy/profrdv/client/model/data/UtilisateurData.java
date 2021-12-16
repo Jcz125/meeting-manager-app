@@ -9,8 +9,8 @@ public class UtilisateurData {
     public String prenom;
     public String email;
     public String telephone;
-    public boolean notification;
-    public boolean estProf;
+    public Boolean notification;
+    public Boolean estProf;
     public Integer[] RDVsIds;
     public DisponibiliteFixeData[] disponibiliteFixes;
     public ModificateurDisponibiliteData[] modificateurDisponibilites;

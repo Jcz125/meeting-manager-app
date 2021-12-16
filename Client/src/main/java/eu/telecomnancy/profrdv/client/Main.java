@@ -22,7 +22,7 @@ public class Main extends Application {
         Ecole ecole = new Ecole();
         List<Utilisateur> utilisateurs = ecole.getUtilisateurs();
         for (Utilisateur u : utilisateurs) {
-            System.out.println("L'utilisateur : " + u.getNom() + " " + u.getPrenom() + (u instanceof Professeur ? " est Prof" : " est Eleve"));
+            System.out.println("L'utilisateur : " + u.getNom() + " " + u.getPrenom() + " " + u.getEmail());
             if (u instanceof Professeur) {
                 System.out.println("est un prof avec comme dispo fixe : ");
                 for (DisponibiliteFixe d : u.getDisponibiliteFixe()) {
@@ -36,6 +36,8 @@ public class Main extends Application {
             }
         }
 
+        Utilisateur u = new Eleve("a", "a", "aaa");
+        u.setTelephone("3660");
 
         ProfRDV profRDV = new ProfRDV(stage);
 
