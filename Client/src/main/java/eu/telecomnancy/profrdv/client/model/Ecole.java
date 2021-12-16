@@ -4,7 +4,6 @@ import eu.telecomnancy.profrdv.client.model.data.EcoleData;
 import eu.telecomnancy.profrdv.client.model.data.SalleData;
 import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class Ecole {
     private EcoleData data;
 
     public Ecole() {
-        updateData();
+        fetchData();
     }
 
 
@@ -24,16 +23,23 @@ public class Ecole {
     }
 
 
-    public void updateData() {
+    public void fetchData() {
         RestTemplate restTemplate = new RestTemplate();
         this.data = restTemplate.getForObject(
-                "http://127.0.0.1:8080/ecole", EcoleData.class);
+                "http://127.0.0.1:8080/ecole",
+                EcoleData.class);
     }
 
-
+    public void updateData(EcoleData data) {
+        data.id = this.data.id;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.put(
+                "http://127.0.0.1:8080/ecole",
+                data);
+    }
 
     public List<Utilisateur> getUtilisateurs() {
-        updateData();
+        fetchData();
         List<Utilisateur> utilisateurs = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         for (Integer i : data.utilisateursIds) {
@@ -50,7 +56,7 @@ public class Ecole {
     }
 
     public List<Salle> getSalles() {
-        updateData();
+        fetchData();
         List<Salle> salles = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         for (Integer i : data.salleIds) {
@@ -65,33 +71,33 @@ public class Ecole {
 
 
     public void addUtilisateur(Utilisateur utilisateur) {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.exchange(
-                "http://127.0.0.1:8080/utilisateur?ecoleId=" + data.id + "&userId=" + utilisateur.getId(),
-                HttpMethod.POST,
-                null,
-                Void.class
-        );
+        fetchData();
+        List<Integer> uId = List.of(data.utilisateursIds);
+        uId.add(utilisateur.getId());
+        EcoleData data = new EcoleData();
+        data.utilisateursIds = uId.toArray(new Integer[0]);
+        updateData(data);
     }
 
     public void addSalle(Salle salle) {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.exchange(
-                "http://127.0.0.1:8080/utilisateur?ecoleId=" + data.id + "&salleId=" + salle.getNumero(),
-                HttpMethod.POST,
-                null,
-                Void.class
-        );
+        fetchData();
+        List<Integer> uId = List.of(data.utilisateursIds);
+        uId.add(salle.getNumero());
+        EcoleData data = new EcoleData();
+        data.utilisateursIds = uId.toArray(new Integer[0]);
+        updateData(data);
     }
 
 
     public String getNom() {
-        updateData();
+        fetchData();
         return data.nom;
     }
 
     public void setNom(String nom) {
-        updateData();
+        fetchData();
+        EcoleData data = new EcoleData();
         data.nom = nom;
+        updateData(data);
     }
 }

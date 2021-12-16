@@ -74,5 +74,11 @@ public class Salle {
     public SalleData getData() {
         return new SalleData(numero, etage, aile);
     }
+
+    public void updateData(SalleData data) {
+        this.numero = data.numero;
+        this.etage = data.etage;
+        this.aile = data.aile;
+    }
     //endregion assesseurs
 }

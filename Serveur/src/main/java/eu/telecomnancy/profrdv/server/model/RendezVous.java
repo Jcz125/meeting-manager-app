@@ -2,11 +2,7 @@ package eu.telecomnancy.profrdv.server.model;
 
 import eu.telecomnancy.profrdv.server.SpringConfiguration;
 import eu.telecomnancy.profrdv.server.model.data.RendezVousData;
-import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
-import eu.telecomnancy.profrdv.server.model.states.Demande;
-import eu.telecomnancy.profrdv.server.model.states.EtatRendezVous;
 import eu.telecomnancy.profrdv.server.model.states.EtatRendezVousEnum;
-import eu.telecomnancy.profrdv.server.model.states.Realise;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
 import eu.telecomnancy.profrdv.server.repository.SalleRepository;
 
@@ -64,6 +60,15 @@ public class RendezVous {
         }
 
         this.salle = null;
+    }
+
+    public void updateData(RendezVousData data) {
+        if (etatRendezVous != EtatRendezVousEnum.DEMANDE && etatRendezVous == EtatRendezVousEnum.CONFIRME)
+            return;
+        if (data.titre != null) this.titre = data.titre;
+        if (data.description != null) this.description = data.description;
+        if (etatRendezVous != EtatRendezVousEnum.DEMANDE)
+            return;
     }
 
 

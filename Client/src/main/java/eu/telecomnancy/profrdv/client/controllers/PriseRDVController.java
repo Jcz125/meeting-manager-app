@@ -45,6 +45,7 @@ public class PriseRDVController implements Observateur{
     private List<RendezVous> RDVList = new ArrayList<RendezVous>();
     ObservableList observableList = FXCollections.observableArrayList();
     private String heurRDV ;
+    private List<Utilisateur> listUtilisateur;
 
 
     public PriseRDVController(Utilisateur u){
@@ -73,6 +74,7 @@ public class PriseRDVController implements Observateur{
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 heurRDV = (String)newValue;
                 //System.out.println(heurRDV);
+                //u.prendreRDV(listUtilisateur, heurRDV);
             }
         });
     }
