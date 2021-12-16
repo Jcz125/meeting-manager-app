@@ -99,7 +99,7 @@ public class UtilisateurTest {
     public void testAnnulerRDV() {
         Eleve eleve = new Eleve("Dupont", "Jean", "jean.dupont@telecomnancy.net");
         LocalDateTime date = LocalDateTime.of(2021, 12, 15, 15, 5);
-        RendezVous rendezVous = new RendezVous(date, new ArrayList<>(), null, null, null);
+        RendezVous rendezVous = new RendezVous(date, null, null, null);
         assertFalse(eleve.annulerRDV(rendezVous));
 
         eleve.ajouterRDV(rendezVous);

@@ -21,7 +21,7 @@ public class RealiseTest {
 
     @Test
     public void testAnnulation() {
-        RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
+        RendezVous rdv = new RendezVous(null, null, null, null);
         rdv.confirmer();
         rdv.realiser();
         rdv.annuler();
@@ -31,7 +31,7 @@ public class RealiseTest {
 
     @Test
     public void testConfirmation() {
-        RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
+        RendezVous rdv = new RendezVous(null, null, null, null);
         rdv.confirmer();
         rdv.realiser();
         rdv.realiser();
@@ -41,7 +41,7 @@ public class RealiseTest {
 
     @Test
     public void testDemande() {
-        RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
+        RendezVous rdv = new RendezVous(null, null, null, null);
         rdv.confirmer();
         rdv.realiser();
         rdv.demande();
@@ -51,7 +51,7 @@ public class RealiseTest {
 
     @Test
     public void testRealise() {
-        RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
+        RendezVous rdv = new RendezVous(null, null, null, null);
         rdv.confirmer();
         rdv.realiser();
         rdv.realiser();

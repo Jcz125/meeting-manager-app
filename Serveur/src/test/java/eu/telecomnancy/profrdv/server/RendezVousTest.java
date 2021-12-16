@@ -6,6 +6,7 @@ import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -17,6 +18,8 @@ import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
+@ContextConfiguration
 public class RendezVousTest {
 
     @Test

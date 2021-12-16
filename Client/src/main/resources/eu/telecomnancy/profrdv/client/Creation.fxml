@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../../../../CreationStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.profrdv.client.controllers.CreationController">
    <children>
       <VBox prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -48,20 +47,18 @@
                <children>
                   <Label text="Nom :" />
                   <Label text="Prénom : " GridPane.rowIndex="1" />
-                  <Label text="Identifiant :" GridPane.rowIndex="2" />
-                  <Label text="E-mail : " GridPane.rowIndex="3" />
-                  <Label text="Téléphone : " GridPane.rowIndex="4" />
-                  <Label text="Je suis : " GridPane.rowIndex="5" />
+                  <Label text="E-mail : " GridPane.rowIndex="2" />
+                  <Label text="Téléphone : " GridPane.rowIndex="3" />
+                  <Label text="Je suis : " GridPane.rowIndex="4" />
                   <Label GridPane.rowIndex="2" />
                   <TextField fx:id="nom" prefHeight="21.0" prefWidth="510.0" GridPane.columnIndex="1" />
                   <TextField fx:id="prenom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="id" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="telephone" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <ChoiceBox fx:id="jeSuis" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="telephone" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ChoiceBox fx:id="jeSuis" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <Button fx:id="confirmerButton" mnemonicParsing="false" text="Confirmer ">
+            <Button fx:id="confirmerButton" mnemonicParsing="false" onAction="#confirmer" text="Confirmer ">
                <VBox.margin>
                   <Insets left="250.0" top="50.0" />
                </VBox.margin>
