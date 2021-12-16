@@ -28,13 +28,12 @@ public class PriseRDVCell extends ListCell<String>
 //        }
     }
 
-    @Override
-    public void updateItem(String string, boolean empty)
-    {
-        super.updateItem(string,empty);
-        if(string != null)
-        {
-            Button c = new Button(string);
-        }
-    }
+//    @Override
+//    public void updateItem(String string, boolean empty)
+//    {
+//        super.updateItem(string,empty);
+//        if(string != null)
+//        {
+//        }
+//    }
 }
