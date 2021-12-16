@@ -2,6 +2,8 @@ package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.RendezVous;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -41,6 +44,7 @@ public class PriseRDVController implements Observateur{
     private ArrayList<String> dispoList = new ArrayList<String>();
     private List<RendezVous> RDVList = new ArrayList<RendezVous>();
     ObservableList observableList = FXCollections.observableArrayList();
+    private String heurRDV ;
 
 
     public PriseRDVController(Utilisateur u){
@@ -55,12 +59,22 @@ public class PriseRDVController implements Observateur{
             String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
             String[] words = formattedDateTime.split(" ");
             String date = words[0];
+            DayOfWeek jour = horaire.getDayOfWeek();
+            int numJour = jour.getValue();
             String heur = words[1];
             dispoList.add(heur);
         }
         observableList.removeAll(observableList) ;
         observableList.setAll(dispoList);
         listViewLundi.getItems().addAll(observableList);
+
+        listViewLundi.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                heurRDV = (String)newValue;
+                //System.out.println(heurRDV);
+            }
+        });
     }
 
 //    public void setListView()
