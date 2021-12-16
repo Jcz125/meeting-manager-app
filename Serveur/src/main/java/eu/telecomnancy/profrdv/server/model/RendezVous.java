@@ -55,7 +55,7 @@ public class RendezVous {
     }
 
 
-    public RendezVous(LocalDateTime horaire, ArrayList<Utilisateur> utilisateurs) {
+    public RendezVous(LocalDateTime horaire, List<Utilisateur> utilisateurs) {
         this.horaire = horaire;
         this.utilisateurs = new HashMap<>();
 
@@ -82,10 +82,10 @@ public class RendezVous {
     }
 
 
-    public static ArrayList<RendezVous> genererRendezVous(ArrayList<Utilisateur> utilisateurs, LocalDateTime debut, LocalDateTime fin) {
+    public static List<RendezVous> genererRendezVous(List<Utilisateur> utilisateurs, LocalDateTime debut, LocalDateTime fin) {
         ArrayList<RendezVous> creneaux = new ArrayList<>();
         LocalDateTime heure = LocalDateTime.from(debut);
-        while (!fin.isEqual(heure)) {
+        while (!fin.isEqual(heure) || heure.isAfter(fin)) {
             boolean addable = true;
             for (Utilisateur utilisateur : utilisateurs) {
                 if (!utilisateur.estDisponible(heure)) {

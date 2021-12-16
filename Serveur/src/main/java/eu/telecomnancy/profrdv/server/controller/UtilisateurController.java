@@ -3,6 +3,7 @@ package eu.telecomnancy.profrdv.server.controller;
 import ch.qos.logback.core.read.ListAppender;
 import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.Salle;
+import eu.telecomnancy.profrdv.server.model.data.BooleanResult;
 import eu.telecomnancy.profrdv.server.model.data.RendezVousData;
 import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
@@ -49,26 +50,26 @@ public class UtilisateurController {
     }
 
     @PostMapping("/utilisateur/prendreRDV")
-    public boolean prendreRDV(@RequestParam(value = "userid") Integer userid, RequestEntity<RendezVousData> rendezVousEntity) {
+    public BooleanResult prendreRDV(@RequestParam(value = "userid") Integer userid, RequestEntity<RendezVousData> rendezVousEntity) {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(userid);
         if (utilisateur.isEmpty())
-            return false;
+            return new BooleanResult(false);
         Utilisateur monUtilisateur = utilisateur.get();
         RendezVousData data = rendezVousEntity.getBody();
 
         Optional<Salle> salle = salleRepository.findById(data.salle.numero);
         if (salle.isEmpty())
-            return false;
+            return new BooleanResult(false);
 
         List<Utilisateur> utilisateurs = new ArrayList<>();
         for (Integer id: data.utilisateursIdsConfirmed.keySet()) {
             Optional<Utilisateur> user = utilisateurRepository.findById(id);
             if (user.isEmpty())
-                return false;
+                return new BooleanResult(false);
             utilisateurs.add(user.get());
         }
 
-        return monUtilisateur.prendreRDV(utilisateurs, salle.get(), data.horaire, data.titre, data.description);
+        return new BooleanResult(monUtilisateur.prendreRDV(utilisateurs, salle.get(), data.horaire, data.titre, data.description));
     }
 }
 

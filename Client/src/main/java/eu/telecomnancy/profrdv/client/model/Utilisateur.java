@@ -1,11 +1,16 @@
 package eu.telecomnancy.profrdv.client.model;
 
+import eu.telecomnancy.profrdv.client.model.data.BooleanResult;
 import eu.telecomnancy.profrdv.client.model.data.DisponibiliteFixeData;
 import eu.telecomnancy.profrdv.client.model.data.RendezVousData;
 import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
 import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,27 +55,17 @@ public abstract class Utilisateur {
     //public abstract boolean estDisponible(RendezVous rendezVous);
 
 
-    /*public boolean prendreRDV(List<Professeur> profs, List<Eleve> eleves, LocalDateTime date, String titre, String description) {
-        ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
-        utilisateurs.addAll(profs);
-        utilisateurs.addAll(eleves);
-        RendezVous rendezVous = new RendezVous(date, utilisateurs, titre, description);
-
-        for (Professeur professeur : profs) {
-            if (!professeur.estDisponible(rendezVous))
-                return false;
-        }
-
-        for (Eleve eleve : eleves) {
-            if (!eleve.estDisponible(rendezVous))
-                return false;
-        }
-
-        for (Utilisateur utilisateur : utilisateurs)
-            utilisateur.ajouterRDV(rendezVous);
-
-        return true;
-    }*/
+    public boolean prendreRDV(List<Utilisateur> utilisateurs, LocalDateTime date, String titre, String description, Salle salle) {
+        RendezVousData data = new RendezVousData();
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<RendezVousData> requestUpdate = new HttpEntity<>(data);
+        ResponseEntity<BooleanResult> response =
+                    restTemplate.exchange(
+                            "http://127.0.0.1:8080/utilisateur/prendreRDV",
+                            HttpMethod.POST,
+                            requestUpdate, BooleanResult.class);
+        return response.getBody().success;
+    }
 
 
     //region assesseurs
@@ -138,5 +133,10 @@ public abstract class Utilisateur {
         }
         return disponibiliteFixes;
     }
+
+    public Integer getId() {
+        return data.id;
+    }
+
     //endregion
 }
