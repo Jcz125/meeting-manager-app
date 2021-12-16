@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -8,15 +9,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1400.0" stylesheets="@../../../../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.profrdv.client.controllers.PlanningController">
+<AnchorPane prefHeight="500.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.profrdv.client.controllers.PlanningController">
    <children>
       <VBox prefHeight="500.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Planning : ">
+                  <Label style="-fx-font-size: 25; -fx-text-fill: #461aac;" styleClass="labelTitre" text="Planning : ">
                      <HBox.margin>
-                        <Insets left="40.0" top="40.0" />
+                        <Insets left="40.0" />
                      </HBox.margin>
                   </Label>
                </children>
@@ -128,12 +129,12 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button onAction="#handleSemPrecButton" mnemonicParsing="false" text="&lt;">
+                  <Button mnemonicParsing="false" onAction="#handleSemPrecButton" text="&lt;">
                      <HBox.margin>
                         <Insets left="650.0" right="10.0" top="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button onAction="#handleSemProButton" mnemonicParsing="false" text="&gt;">
+                  <Button mnemonicParsing="false" onAction="#handleSemProButton" text="&gt;">
                      <HBox.margin>
                         <Insets left="10.0" top="20.0" />
                      </HBox.margin>
@@ -143,4 +144,8 @@
          </children>
       </VBox>
    </children>
+   <stylesheets>
+      <URL value="@../../../../style.css" />
+      <URL value="@../../../../CreationStyle.css" />
+   </stylesheets>
 </AnchorPane>

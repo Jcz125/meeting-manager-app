@@ -1,10 +1,7 @@
 package eu.telecomnancy.profrdv.client;
 
 import eu.telecomnancy.profrdv.client.controllers.*;
-import eu.telecomnancy.profrdv.client.model.Ecole;
-import eu.telecomnancy.profrdv.client.model.Professeur;
-import eu.telecomnancy.profrdv.client.model.RendezVous;
-import eu.telecomnancy.profrdv.client.model.Utilisateur;
+import eu.telecomnancy.profrdv.client.model.*;
 import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +36,9 @@ public class Main extends Application {
             }
         }
 
+
+        ProfRDV profRDV = new ProfRDV(stage);
+
         BorderPane panneau = new BorderPane();
 
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("MenuProf.fxml"));
@@ -59,6 +59,10 @@ public class Main extends Application {
         FXMLLoader creationLoader = new FXMLLoader(getClass().getResource("Creation.fxml"));
         creationLoader.setControllerFactory(iC -> new CreationController());
         Parent creationParent = creationLoader.load();
+
+
+        CreationController creationController = creationLoader.getController();
+        creationController.setProfRDV(profRDV);
 
 
         FXMLLoader identificationLoader = new FXMLLoader(getClass().getResource("Identification.fxml"));
