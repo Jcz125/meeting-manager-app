@@ -44,6 +44,13 @@ public class Salle {
                 this.data);
     }
 
+    public void delete() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(
+                "http://127.0.0.1:8080/salle?id=" + data.numero);
+        data = null;
+    }
+
     public SalleData getData() {
         return data;
     }
