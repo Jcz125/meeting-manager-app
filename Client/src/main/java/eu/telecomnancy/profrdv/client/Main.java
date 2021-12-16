@@ -1,9 +1,6 @@
 package eu.telecomnancy.profrdv.client;
 
-import eu.telecomnancy.profrdv.client.controllers.MainController;
-import eu.telecomnancy.profrdv.client.controllers.MenuController;
-import eu.telecomnancy.profrdv.client.controllers.PlanningController;
-import eu.telecomnancy.profrdv.client.controllers.PriseRDVController;
+import eu.telecomnancy.profrdv.client.controllers.*;
 import eu.telecomnancy.profrdv.client.model.Ecole;
 import eu.telecomnancy.profrdv.client.model.Professeur;
 import eu.telecomnancy.profrdv.client.model.RendezVous;
@@ -49,15 +46,20 @@ public class Main extends Application {
         loader1.setControllerFactory(iC->new MenuController());
         panneau.setTop(loader1.load());
 
-        FXMLLoader loader2 = new FXMLLoader();
-        loader2.setLocation(getClass().getResource("PriseRDV.fxml"));
-        loader2.setControllerFactory(iC->new PriseRDVController());
-        panneau.setBottom(loader2.load());
+//        FXMLLoader loader2 = new FXMLLoader();
+//        loader2.setLocation(getClass().getResource("PriseRDV.fxml"));
+//        loader2.setControllerFactory(iC->new PriseRDVController());
+//        panneau.setBottom(loader2.load());
 
 //        FXMLLoader loader3 = new FXMLLoader();
 //        loader3.setLocation(getClass().getResource("Planning.fxml"));
 //        loader3.setControllerFactory(iC->new PlanningController());
 //        panneau.setCenter(loader3.load());
+
+        FXMLLoader loader4 = new FXMLLoader();
+        loader4.setLocation(getClass().getResource("RDV-view.fxml"));
+        loader4.setControllerFactory(iC->new RDVViewController(ecole.getUtilisateurs().get(0)));
+        panneau.setBottom(loader4.load());
 
         Scene scene = new Scene(panneau, 1400, 750);
         stage.setTitle("ProfRDV");
