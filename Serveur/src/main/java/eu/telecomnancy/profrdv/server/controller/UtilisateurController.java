@@ -55,6 +55,14 @@ public class UtilisateurController {
         utilisateurRepository.save(utilisateur.get());
     }
 
+    @DeleteMapping("/utilisateur")
+    public void deleteUtilisateur(@RequestParam(value = "id") Integer id) {
+        Optional<Utilisateur> utilisateur = utilisateurRepository.findById(id);
+        if (utilisateur.isEmpty())
+            return;
+        utilisateurRepository.delete(utilisateur.get());
+    }
+
     @PostMapping("/utilisateur/prendreRDV")
     public BooleanResult prendreRDV(@RequestParam(value = "userid") Integer userid, RequestEntity<RendezVousData> rendezVousEntity) {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(userid);

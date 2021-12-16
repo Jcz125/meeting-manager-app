@@ -36,6 +36,7 @@ public class Ecole {
         restTemplate.put(
                 "http://127.0.0.1:8080/ecole",
                 data);
+        fetchData();
     }
 
     public List<Utilisateur> getUtilisateurs() {
@@ -72,22 +73,27 @@ public class Ecole {
 
     public void addUtilisateur(Utilisateur utilisateur) {
         fetchData();
-        List<Integer> uId = List.of(data.utilisateursIds);
-        uId.add(utilisateur.getId());
+        Integer[] uId = new Integer[data.utilisateursIds.length + 1];
+        for (int i = 0; i < data.utilisateursIds.length; i++) {
+            uId[i] = data.utilisateursIds[i];
+        }
+        uId[data.utilisateursIds.length] = utilisateur.getId();
         EcoleData data = new EcoleData();
-        data.utilisateursIds = uId.toArray(new Integer[0]);
+        data.utilisateursIds = uId;
         updateData(data);
     }
 
     public void addSalle(Salle salle) {
         fetchData();
-        List<Integer> uId = List.of(data.utilisateursIds);
-        uId.add(salle.getNumero());
+        Integer[] sId = new Integer[data.salleIds.length + 1];
+        for (int i = 0; i < data.salleIds.length; i++) {
+            sId[i] = data.salleIds[i];
+        }
+        sId[data.salleIds.length] = salle.getNumero();
         EcoleData data = new EcoleData();
-        data.utilisateursIds = uId.toArray(new Integer[0]);
+        data.salleIds = sId;
         updateData(data);
     }
-
 
     public String getNom() {
         fetchData();

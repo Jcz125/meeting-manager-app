@@ -34,7 +34,7 @@ public class RendezVousController {
         RendezVousData data = monRDV.getBody();
         RendezVous rdv = new RendezVous(data);
         rendezVousRepository.save(rdv);
-        return  rdv.getId();
+        return rdv.getId();
     }
 
     @PutMapping("/rdv")
@@ -45,6 +45,15 @@ public class RendezVousController {
             return;
         rendezVous.get().updateData(data);
         rendezVousRepository.save(rendezVous.get());
+    }
+
+    @DeleteMapping("/rdv")
+    public void deleteRendezVous(@RequestParam(value = "id") Integer id) {
+        Optional<RendezVous> rendezVous = rendezVousRepository.findById(id);
+        if (rendezVous.isEmpty())
+            return;
+        if (rendezVous.get().peutEtreSupprimer())
+            rendezVousRepository.delete(rendezVous.get());
     }
 
     @PostMapping("/genererRendezVous")
