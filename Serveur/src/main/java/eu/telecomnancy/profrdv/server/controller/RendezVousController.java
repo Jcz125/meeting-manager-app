@@ -58,4 +58,13 @@ public class RendezVousController {
 
         return crenaux;
     }
+
+    @PostMapping("/rdv/annuler")
+    public void annulerRendezVous(@RequestParam(value = "id") Integer id) {
+        Optional<RendezVous> rendezVous = rendezVousRepository.findById(id);
+        if (rendezVous.isEmpty())
+            return;
+        RendezVous rdv = rendezVous.get();
+        rdv.annuler();
+    }
 }

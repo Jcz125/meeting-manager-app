@@ -3,14 +3,16 @@ package eu.telecomnancy.profrdv.server.controller;
 import eu.telecomnancy.profrdv.server.model.Ecole;
 import eu.telecomnancy.profrdv.server.model.Salle;
 import eu.telecomnancy.profrdv.server.model.data.EcoleData;
-import eu.telecomnancy.profrdv.server.model.disponibilite.Disponibilite;
-import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
 import eu.telecomnancy.profrdv.server.repository.EcoleRepository;
+import eu.telecomnancy.profrdv.server.repository.SalleRepository;
+import eu.telecomnancy.profrdv.server.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.DayOfWeek;
@@ -24,6 +26,10 @@ import java.util.Optional;
 public class EcoleController {
     @Autowired
     EcoleRepository ecoleRepository;
+    @Autowired
+    UtilisateurRepository utilisateurRepository;
+    @Autowired
+    SalleRepository salleRepository;
 
     @GetMapping("/ecole")
     public EcoleData getEcole() {
@@ -54,6 +60,29 @@ public class EcoleController {
             return null;
         return monEcole.get().getData();
     }
+
+    @PostMapping("/ecole/addUtilisateur")
+    public void addUtilisateur(@RequestParam(value = "ecoleId") Integer ecoleId, @RequestParam(value = "userId") Integer userId) {
+        Optional<Ecole> ecole = ecoleRepository.findById(ecoleId);
+        if (ecole.isEmpty())
+            return;
+        Optional<Utilisateur> utilisateur = utilisateurRepository.findById(userId);
+        if (utilisateur.isEmpty())
+            return;
+        ecole.get().addUtilisateur(utilisateur.get());
+    }
+
+    @PostMapping("/ecole/addSalle")
+    public void addSalle(@RequestParam(value = "ecoleId") Integer ecoleId, @RequestParam(value = "salleId") Integer salleId) {
+        Optional<Ecole> ecole = ecoleRepository.findById(ecoleId);
+        if (ecole.isEmpty())
+            return;
+        Optional<Salle> salle = salleRepository.findById(salleId);
+        if (salle.isEmpty())
+            return;
+        ecole.get().addSalle(salle.get());
+    }
+
 
     /*@PostMapping("/ecole")
     public void setEcole(RequestEntity<Ecole> maSalleRequest) {

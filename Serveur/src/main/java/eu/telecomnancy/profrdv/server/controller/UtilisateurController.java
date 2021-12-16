@@ -1,7 +1,5 @@
 package eu.telecomnancy.profrdv.server.controller;
 
-import ch.qos.logback.core.read.ListAppender;
-import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.Salle;
 import eu.telecomnancy.profrdv.server.model.data.BooleanResult;
 import eu.telecomnancy.profrdv.server.model.data.RendezVousData;
@@ -9,7 +7,6 @@ import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
-import eu.telecomnancy.profrdv.server.repository.RendezVousRepository;
 import eu.telecomnancy.profrdv.server.repository.SalleRepository;
 import eu.telecomnancy.profrdv.server.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;

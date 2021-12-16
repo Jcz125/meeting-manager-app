@@ -2,10 +2,6 @@ package eu.telecomnancy.profrdv.server.controller;
 
 import eu.telecomnancy.profrdv.server.model.Salle;
 import eu.telecomnancy.profrdv.server.model.data.SalleData;
-import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
-import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
-import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
-import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
 import eu.telecomnancy.profrdv.server.repository.SalleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;

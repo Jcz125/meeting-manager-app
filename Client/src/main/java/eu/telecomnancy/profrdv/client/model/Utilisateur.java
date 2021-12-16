@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Utilisateur {
-    private UtilisateurData data;
+    protected UtilisateurData data;
 
     public Utilisateur(UtilisateurData utilisateurREST) {
         this.data = utilisateurREST;
@@ -26,15 +26,24 @@ public abstract class Utilisateur {
         data.nom = nom;
         data.prenom = prenom;
         data.email = email;
+        data.estProf = this instanceof Professeur;
+        HttpEntity<UtilisateurData> dataRequest = new HttpEntity<>(data);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.exchange(
+                "http://127.0.0.1:8080/utilisateur",
+                HttpMethod.POST,
+                dataRequest,
+                Void.class
+        );
     }
 
-
-    /*public void notifier(RendezVous rendezVous) {
-        // fonction pour notifier l'utilisateur d'un changement d'état d'un rendez-vous auquel il participe
-        if (notification) {
-        }
-    }*/
-
+    public void updateData() {
+        RestTemplate restTemplate = new RestTemplate();
+        this.data =
+                restTemplate.getForObject(
+                        "http://127.0.0.1:8080/utilisateur?id=" + data.id,
+                        UtilisateurData.class);
+    }
 
     /*public void ajouterRDV(RendezVous rendezVous) {
         if (!this.RDVs.containsKey(rendezVous.getHoraire())) {
@@ -69,51 +78,8 @@ public abstract class Utilisateur {
 
 
     //region assesseurs
-    public String getNom() {
-        return data.nom;
-    }
-
-
-    public void setNom(String nom) {
-        data.nom = nom;
-    }
-
-
-    public String getPrenom() {
-        return data.prenom;
-    }
-
-
-    public void setPrenom(String prenom) {
-        data.prenom = prenom;
-    }
-
-
-    public String getEmail() {
-        return data.email;
-    }
-
-
-    public void setEmail(String email) {
-        data.email = email;
-    }
-
-
-    public String getTelephone() {
-        return data.telephone;
-    }
-
-
-    public void setTelephone(String telephone) {
-        data.telephone = telephone;
-    }
-
-
-    public void setNotification(boolean notification) {
-        data.notification = notification;
-    }
-
     public List<RendezVous> getRDVs() {
+        updateData();
         List<RendezVous> rendezVous = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         for (Integer id: data.RDVsIds) {
@@ -127,6 +93,7 @@ public abstract class Utilisateur {
     }
 
     public List<DisponibiliteFixe> getDisponibiliteFixe() {
+        updateData();
         List<DisponibiliteFixe> disponibiliteFixes = new ArrayList<>();
         for(DisponibiliteFixeData dispo: data.disponibiliteFixes) {
             disponibiliteFixes.add(new DisponibiliteFixe(dispo));
@@ -136,6 +103,46 @@ public abstract class Utilisateur {
 
     public Integer getId() {
         return data.id;
+    }
+
+    public String getNom() {
+        updateData();
+        return data.nom;
+    }
+
+    public String getPrenom() {
+        updateData();
+        return data.prenom;
+    }
+
+    public String getTelephone() {
+        updateData();
+        return data.telephone;
+    }
+
+    public void setNom(String nom) {
+        data.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        data.prenom = prenom;
+    }
+
+    public String getEmail() {
+        return data.email;
+    }
+
+    public void setEmail(String email) {
+        data.email = email;
+    }
+
+
+    public void setTelephone(String telephone) {
+        data.telephone = telephone;
+    }
+
+    public void setNotification(boolean notification) {
+        data.notification = notification;
     }
 
     //endregion
