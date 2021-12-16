@@ -97,6 +97,40 @@ public class PlanningController implements Observateur{
 //        }
     }
 
+    public void setCalender(int param){
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+        c.add(Calendar.DATE, param);
+        String formattedDay1 = df.format(c.getTime());
+        lundi.setText(formattedDay1);
+
+        c.add(Calendar.DATE, 1);
+        String formattedDay2 = df.format(c.getTime());
+        mardi.setText(formattedDay2);
+
+        c.add(Calendar.DATE, 1);
+        String formattedDay3 = df.format(c.getTime());
+        mercredi.setText(formattedDay3);
+
+        c.add(Calendar.DATE, 1);
+        String formattedDay4 = df.format(c.getTime());
+        jeudi.setText(formattedDay4);
+
+        c.add(Calendar.DATE, 1);
+        String formattedDay5 = df.format(c.getTime());
+        vendredi.setText(formattedDay5);
+
+        c.add(Calendar.DATE, 1);
+        String formattedDay6 = df.format(c.getTime());
+        samedi.setText(formattedDay6);
+
+        c.add(Calendar.DATE, 1);
+        String formattedDay7 = df.format(c.getTime());
+        dimanche.setText(formattedDay7);
+    }
+
     public void setHours() {
         for (RendezVous rdv : RDVs) {
 
@@ -121,76 +155,13 @@ public class PlanningController implements Observateur{
     @FXML
     private void handleSemProButton(){
         count++;
-
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
-        c.add(Calendar.DATE, count*7);
-        String formattedDay1 = df.format(c.getTime());
-        lundi.setText(formattedDay1);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay2 = df.format(c.getTime());
-        mardi.setText(formattedDay2);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay3 = df.format(c.getTime());
-        mercredi.setText(formattedDay3);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay4 = df.format(c.getTime());
-        jeudi.setText(formattedDay4);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay5 = df.format(c.getTime());
-        vendredi.setText(formattedDay5);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay6 = df.format(c.getTime());
-        samedi.setText(formattedDay6);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay7 = df.format(c.getTime());
-        dimanche.setText(formattedDay7);
-
+        setCalender(count*7);
     }
 
     @FXML
     private void handleSemPrecButton(){
         count--;
-
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
-        c.add(Calendar.DATE, count*7);
-        String formattedDay1 = df.format(c.getTime());
-        lundi.setText(formattedDay1);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay2 = df.format(c.getTime());
-        mardi.setText(formattedDay2);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay3 = df.format(c.getTime());
-        mercredi.setText(formattedDay3);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay4 = df.format(c.getTime());
-        jeudi.setText(formattedDay4);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay5 = df.format(c.getTime());
-        vendredi.setText(formattedDay5);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay6 = df.format(c.getTime());
-        samedi.setText(formattedDay6);
-
-        c.add(Calendar.DATE, 1);
-        String formattedDay7 = df.format(c.getTime());
-        dimanche.setText(formattedDay7);
+        setCalender(count*7);
     }
 
     @Override
