@@ -204,7 +204,7 @@ public class PlanningController implements Observateur{
             System.out.println("count"+count);
 
             if (count == Integer.parseInt(String.valueOf(diff/7))) {
-                switch ((int)diff) {
+                switch ((int)(diff%7)) {
                     case 0 :
                         RdvlistLundi.add(new Pair(heur,titre));
                         break;
