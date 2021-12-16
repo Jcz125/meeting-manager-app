@@ -13,14 +13,14 @@ import static javax.persistence.DiscriminatorType.INTEGER;
 import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
 @Entity
-@Inheritance(strategy=SINGLE_TABLE)
-@DiscriminatorColumn(name="utilisateur_type", discriminatorType=INTEGER)
+@Inheritance(strategy = SINGLE_TABLE)
+@DiscriminatorColumn(name = "utilisateur_type", discriminatorType = INTEGER)
 public abstract class Utilisateur {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToMany(targetEntity=RendezVous.class, cascade=CascadeType.ALL)
+    @ManyToMany(targetEntity = RendezVous.class, cascade = CascadeType.ALL)
     protected List<RendezVous> RDVs;
     @Column(nullable = false)
     private String nom;
@@ -32,12 +32,15 @@ public abstract class Utilisateur {
     private boolean notification;
 
 
-    public Utilisateur() {}
+    public Utilisateur() {
+    }
+
 
     public Utilisateur(String nom, String prenom, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+        this.RDVs = new ArrayList<>();
     }
 
 
@@ -49,7 +52,7 @@ public abstract class Utilisateur {
 
 
     public void ajouterRDV(RendezVous rendezVous) {
-        for (RendezVous rdv: RDVs) {
+        for (RendezVous rdv : RDVs) {
             if (rdv.getHoraire() == rendezVous.getHoraire())
                 return;
         }
@@ -58,7 +61,7 @@ public abstract class Utilisateur {
 
 
     public boolean annulerRDV(RendezVous rendezVous) {
-        for (RendezVous rdv: RDVs) {
+        for (RendezVous rdv : RDVs) {
             if (rdv.getHoraire() == rendezVous.getHoraire()) {
                 rdv.annuler();
                 return true;
@@ -90,6 +93,7 @@ public abstract class Utilisateur {
 
         return true;
     }
+
 
     public UtilisateurData getData() {
         Integer[] RDVsIds = new Integer[RDVs.size()];
@@ -144,6 +148,7 @@ public abstract class Utilisateur {
     public void setNotification(boolean notification) {
         this.notification = notification;
     }
+
 
     public Integer getId() {
         return id;

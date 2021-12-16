@@ -1,8 +1,9 @@
 package eu.telecomnancy.profrdv.server.model.utilisateur;
 
-import java.time.LocalDateTime;
+import eu.telecomnancy.profrdv.server.model.RendezVous;
 
 import javax.persistence.Entity;
+import java.time.LocalDateTime;
 
 @Entity
 public class Eleve extends Utilisateur {
@@ -10,9 +11,15 @@ public class Eleve extends Utilisateur {
         super(nom, prenom, email);
     }
 
-    public Eleve() {}
+
+    public Eleve() {
+    }
+
 
     public boolean estDisponible(LocalDateTime horaire) {
-        return !this.RDVs.containsKey(horaire);
+        for (RendezVous rdv : RDVs)
+            if (rdv.getHoraire().isEqual(horaire))
+                return false;
+        return true;
     }
 }
