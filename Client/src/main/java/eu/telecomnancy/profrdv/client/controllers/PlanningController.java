@@ -47,7 +47,7 @@ public class PlanningController implements Observateur{
     private List<RendezVous> RDVs ;
     private LocalDate jour ;
     private Label[] listJour = {lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche};
-    private int count=0;
+    private int count = 0;
 
     private ArrayList<Pair> RdvlistLundi = new ArrayList<Pair>();
     private ArrayList<Pair> RdvlistMardi = new ArrayList<Pair>();
@@ -158,16 +158,16 @@ public class PlanningController implements Observateur{
     }
 
     private long DaysBetween(String str1, String str2) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH);
-        Date firstDate = sdf.parse(str1);
-        Date secondDate = sdf.parse(str2);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH);
+            Date firstDate = sdf.parse(str1);
+            Date secondDate = sdf.parse(str2);
 
-        long diff = secondDate.getTime() - firstDate.getTime();
+            long diff = secondDate.getTime() - firstDate.getTime();
 
-        TimeUnit time = TimeUnit.DAYS;
-        long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
-        //System.out.println("The difference in days is : "+diffrence);
-        return diffrence ;
+            TimeUnit time = TimeUnit.DAYS;
+            long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
+            //System.out.println("The difference in days is : "+diffrence);
+            return diffrence ;
     }
 
     public void setHours() throws ParseException {
@@ -200,9 +200,10 @@ public class PlanningController implements Observateur{
 
             long diff = DaysBetween(date, formattedDay1);
 
-            System.out.println(diff);
+            System.out.println("diff"+diff);
+            System.out.println("count"+count);
 
-            if (count == diff/7) {
+            if (count == Integer.parseInt(String.valueOf(diff/7))) {
                 switch ((int)diff) {
                     case 0 :
                         RdvlistLundi.add(new Pair(heur,titre));
@@ -237,14 +238,6 @@ public class PlanningController implements Observateur{
         listViewConst(observableListVendredi, RdvlistVendredi, listViewVendredi);
         listViewConst(observableListSamedi, RdvlistSamedi, listViewSamedi);
         listViewConst(observableListDimanche, RdvlistDimanche, listViewDimanche);
-
-//        listViewLundi.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-//                heurRDV = (String)newValue;
-//                //System.out.println(heurRDV);
-//            }
-//        });
 
     }
 
