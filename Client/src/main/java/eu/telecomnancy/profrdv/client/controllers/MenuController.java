@@ -6,8 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 public class MenuController implements Observateur {
@@ -20,6 +18,7 @@ public class MenuController implements Observateur {
     private Parent creation;
     private Parent planning;
     private Parent espacePerso;
+    private Parent identification;
 
 
     public MenuController() {
@@ -47,18 +46,19 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handleIdButton(ActionEvent actionEvent) {
-        String id = (String) JOptionPane.showInputDialog(new Component() {
-                                                         },
-                "Identifiant",
-                "Identifiez-Vous",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                null,
-                null);
-
-        if (id != null) {
-            this.idToConnect = id;
-        }
+//        String id = (String) JOptionPane.showInputDialog(new Component() {
+//                                                         },
+//                "Identifiant",
+//                "Identifiez-Vous",
+//                JOptionPane.PLAIN_MESSAGE,
+//                null,
+//                null,
+//                null);
+//
+//        if (id != null) {
+//            this.idToConnect = id;
+//        }
+        panneau.setBottom(identification);
     }
 
 
@@ -85,6 +85,11 @@ public class MenuController implements Observateur {
 
     public void setEspacePersoNode(Parent parent) {
         this.espacePerso = parent;
+    }
+
+
+    public void setIdentificationNode(Parent parent) {
+        this.identification = parent;
     }
 
 

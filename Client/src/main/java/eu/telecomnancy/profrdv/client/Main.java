@@ -1,9 +1,6 @@
 package eu.telecomnancy.profrdv.client;
 
-import eu.telecomnancy.profrdv.client.controllers.CreationController;
-import eu.telecomnancy.profrdv.client.controllers.EspacePerso;
-import eu.telecomnancy.profrdv.client.controllers.MenuController;
-import eu.telecomnancy.profrdv.client.controllers.PriseRDVController;
+import eu.telecomnancy.profrdv.client.controllers.*;
 import eu.telecomnancy.profrdv.client.model.Ecole;
 import eu.telecomnancy.profrdv.client.model.Professeur;
 import eu.telecomnancy.profrdv.client.model.RendezVous;
@@ -44,7 +41,7 @@ public class Main extends Application {
 
         BorderPane panneau = new BorderPane();
 
-        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("MenuEleve.fxml"));
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("MenuProf.fxml"));
         menuLoader.setControllerFactory(iC -> new MenuController());
         panneau.setTop(menuLoader.load());
 
@@ -59,6 +56,11 @@ public class Main extends Application {
         Parent creationParent = creationLoader.load();
 
 
+        FXMLLoader identificationLoader = new FXMLLoader(getClass().getResource("Identification.fxml"));
+        identificationLoader.setControllerFactory(iC -> new IdentificationController());
+        Parent identificationParent = identificationLoader.load();
+
+
         FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("EspacePerso.fxml"));
         espacePersoLoader.setControllerFactory(iC -> new EspacePerso());
         Parent espacePersoParent = espacePersoLoader.load();
@@ -69,18 +71,12 @@ public class Main extends Application {
         menuController.setPlanningNode(priseRDVParent);
         menuController.setCreationNode(creationParent);
         menuController.setEspacePersoNode(espacePersoParent);
+        menuController.setIdentificationNode(identificationParent);
 
         menuController.setPanneau(panneau);
 
         panneau.setBottom(priseRDVParent);
 
-
-//        creationLoader.setControllerFactory(iC -> new MenuController());
-
-        //        FXMLLoader loader3 = new FXMLLoader();
-        //        loader3.setLocation(getClass().getResource("Planning.fxml"));
-        //        loader3.setControllerFactory(iC->new PlanningController());
-        //        panneau.setCenter(loader3.load());
 
         Scene scene = new Scene(panneau, 1400, 750);
         stage.setTitle("ProfRDV");
