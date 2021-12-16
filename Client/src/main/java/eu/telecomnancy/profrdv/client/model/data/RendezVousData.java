@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RendezVousData {
@@ -16,10 +17,11 @@ public class RendezVousData {
     public SalleData salle;
 
     public EtatRendezVousData etatRendezVous;
-    public HashMap<Integer, Boolean> utilisateursIdsConfirmed;
+    public Map<Integer, Boolean> utilisateursIdsConfirmed;
 
+    public RendezVousData() {}
 
-    public RendezVousData(int id, LocalDateTime horaire, HashMap<Integer, Boolean> utilisateursIdsConfirmed, String description, String titre, SalleData salle, EtatRendezVousData etatRendezVous) {
+    public RendezVousData(int id, LocalDateTime horaire, Map<Integer, Boolean> utilisateursIdsConfirmed, String description, String titre, SalleData salle, EtatRendezVousData etatRendezVous) {
         this.description = description;
         this.horaire = horaire;
         this.id = id;

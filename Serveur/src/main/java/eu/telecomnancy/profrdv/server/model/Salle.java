@@ -1,6 +1,10 @@
 package eu.telecomnancy.profrdv.server.model;
 
+import eu.telecomnancy.profrdv.server.SpringConfiguration;
+import eu.telecomnancy.profrdv.server.model.data.RendezVousData;
+import eu.telecomnancy.profrdv.server.model.data.SalleData;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
+import eu.telecomnancy.profrdv.server.repository.RendezVousRepository;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,14 +13,10 @@ import java.util.List;
 
 @Entity
 public class Salle {
-    private ArrayList<LocalDateTime> occupation;
     @Id
     private int numero;
     private int etage;
     private String aile;
-
-    @OneToMany(targetEntity=Utilisateur.class, cascade=CascadeType.ALL)
-    private List<Utilisateur> utilisateurs;
 
     public Salle() {}
 
@@ -24,14 +24,18 @@ public class Salle {
         this.numero = numero;
         this.etage = etage;
         this.aile = aile;
-        this.occupation = new ArrayList<>();
     }
 
+    public Salle(SalleData data) {
+        this(data.numero, data.etage, data.aile);
+    }
 
     public boolean estDisponible(LocalDateTime date) {
-        for (LocalDateTime localDateTime : occupation)
-            if (localDateTime.isEqual(date))
+        RendezVousRepository rendezVousRepository = (RendezVousRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("rendezVousRepository");
+        for (RendezVous rdv : rendezVousRepository.findAll()) {
+            if (rdv.getHoraire().isEqual(date) && rdv.getSalle().getNumero() == this.numero)
                 return false;
+        }
 
         return true;
     }
@@ -65,6 +69,10 @@ public class Salle {
 
     public void setAile(String aile) {
         this.aile = aile;
+    }
+
+    public SalleData getData() {
+        return new SalleData(numero, etage, aile);
     }
     //endregion assesseurs
 }

@@ -3,23 +3,24 @@ package eu.telecomnancy.profrdv.server.model.disponibilite;
 import eu.telecomnancy.profrdv.server.model.data.DisponibiliteData;
 import eu.telecomnancy.profrdv.server.model.data.DisponibiliteFixeData;
 import eu.telecomnancy.profrdv.server.model.data.ModificateurDisponibiliteData;
+import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Disponibilite {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    private ArrayList<DisponibiliteFixe> dispoFixe = null;
-    private ArrayList<ModificateurDisponibilite> modifsDispo = null;
+    @OneToMany(targetEntity= DisponibiliteFixe.class, cascade=CascadeType.ALL)
+    private List<DisponibiliteFixe> dispoFixe = null;
+    @OneToMany(targetEntity=ModificateurDisponibilite.class, cascade=CascadeType.ALL)
+    private List<ModificateurDisponibilite> modifsDispo = null;
 
 
     public Disponibilite() {

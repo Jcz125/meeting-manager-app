@@ -15,10 +15,11 @@ public class DisponibiliteFixe {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    private final DayOfWeek jour;
-    private final LocalTime debut;
-    private final LocalTime fin;
+    private DayOfWeek jour;
+    private LocalTime debut;
+    private LocalTime fin;
 
+    public DisponibiliteFixe() {}
 
     public DisponibiliteFixe(DayOfWeek jour, LocalTime debut, LocalTime fin) {
         this.jour = jour;

@@ -1,4 +1,4 @@
-package eu.telecomnancy.profrdv.server.model.data;
+package eu.telecomnancy.profrdv.client.model.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

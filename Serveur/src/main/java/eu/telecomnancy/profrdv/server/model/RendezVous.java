@@ -1,17 +1,18 @@
 package eu.telecomnancy.profrdv.server.model;
 
+import eu.telecomnancy.profrdv.server.SpringConfiguration;
+import eu.telecomnancy.profrdv.server.model.data.RendezVousData;
+import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 import eu.telecomnancy.profrdv.server.model.states.Demande;
 import eu.telecomnancy.profrdv.server.model.states.EtatRendezVous;
 import eu.telecomnancy.profrdv.server.model.states.EtatRendezVousEnum;
 import eu.telecomnancy.profrdv.server.model.states.Realise;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
+import eu.telecomnancy.profrdv.server.repository.SalleRepository;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class RendezVous {
@@ -33,17 +34,23 @@ public class RendezVous {
     public RendezVous() {}
 
 
-    public RendezVous(LocalDateTime horaire, ArrayList<Utilisateur> utilisateurs, Salle salle, String titre, String description) {
+    public RendezVous(LocalDateTime horaire, Salle salle, String titre, String description) {
         this.horaire = horaire;
         this.utilisateurs = new HashMap<>();
-
-        for (Utilisateur utilisateur : utilisateurs) {
-            this.utilisateurs.put(utilisateur, false);
-        }
-
         this.description = description;
         this.titre = titre;
         this.salle = salle;
+        this.etatRendezVous = EtatRendezVousEnum.DEMANDE;
+    }
+
+    public RendezVous(RendezVousData data) {
+        SalleRepository salleRepository = (SalleRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("salleRepository");
+        Optional<Salle> salle = salleRepository.findById(data.salle.numero);
+        this.horaire = data.horaire;
+        this.utilisateurs = new HashMap<>();
+        this.description = data.description;
+        this.titre = data.titre;
+        this.salle = salle.isEmpty() ? null : salle.get();
         this.etatRendezVous = EtatRendezVousEnum.DEMANDE;
     }
 
@@ -165,6 +172,14 @@ public class RendezVous {
 
     public Integer getId() {
         return id;
+    }
+
+    public RendezVousData getData() {
+        Map<Integer, Boolean> utilisateursIdsConfirmed = new HashMap<>();
+        for (Utilisateur utilisateur: utilisateurs.keySet()) {
+            utilisateursIdsConfirmed.put(utilisateur.getId(), utilisateurs.get(utilisateur));
+        }
+        return new RendezVousData(id, horaire, utilisateursIdsConfirmed, description, titre, salle.getData(), etatRendezVous.getData());
     }
 
     //endregion

@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.server.model.states;
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
+import eu.telecomnancy.profrdv.server.model.data.EtatRendezVousData;
 
 public enum EtatRendezVousEnum {
     ANNULE(new Annule()),
@@ -36,7 +37,23 @@ public enum EtatRendezVousEnum {
     }
 
 
-    public void realiser(RendezVous rendezVous) {
-        state.realiser(rendezVous);
+    public void realiser(RendezVous rendezVous)  { state.realiser(rendezVous);}
+
+    public EtatRendezVousData getData() {
+        switch (this) {
+            case ANNULE -> {
+                return EtatRendezVousData.ANNULE;
+            }
+            case CONFIRME -> {
+                return EtatRendezVousData.CONFIRME;
+            }
+            case DEMANDE -> {
+                return EtatRendezVousData.DEMANDE;
+            }
+            case REALISE -> {
+                return EtatRendezVousData.REALISE;
+            }
+        }
+        return EtatRendezVousData.DEMANDE;
     }
 }

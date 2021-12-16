@@ -13,10 +13,12 @@ public class ModificateurDisponibilite {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    private final boolean inclut;
-    private final LocalDateTime debut;
-    private final LocalDateTime fin;
+    private boolean inclut;
 
+    private LocalDateTime debut;
+    private LocalDateTime fin;
+
+    public ModificateurDisponibilite() {}
 
     public ModificateurDisponibilite(boolean inclusion, LocalDateTime debut, LocalDateTime fin) {
         this.inclut = inclusion;

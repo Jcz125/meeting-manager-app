@@ -1,6 +1,5 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
-import eu.telecomnancy.profrdv.client.model.Disponibilite;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;

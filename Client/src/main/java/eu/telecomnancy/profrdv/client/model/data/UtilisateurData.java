@@ -12,12 +12,15 @@ public class UtilisateurData {
     public boolean notification;
     public boolean estProf;
     public Integer[] RDVsIds;
+    public DisponibiliteFixeData[] disponibiliteFixes;
+    public ModificateurDisponibiliteData[] modificateurDisponibilites;
+
 
     public UtilisateurData() {
 
     }
 
-    public UtilisateurData(int id, String nom, String prenom, String email, String telephone, boolean notification, Integer[] RDVsIds, boolean estProf) {
+    public UtilisateurData(int id, String nom, String prenom, String email, String telephone, boolean notification, Integer[] RDVsIds, boolean estProf, DisponibiliteFixeData[] disponibiliteFixes, ModificateurDisponibiliteData[] modificateurDisponibilites) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -26,5 +29,7 @@ public class UtilisateurData {
         this.notification = notification;
         this.RDVsIds = RDVsIds;
         this.estProf = estProf;
+        this.disponibiliteFixes = disponibiliteFixes;
+        this.modificateurDisponibilites = modificateurDisponibilites;
     }
 }

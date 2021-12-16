@@ -2,7 +2,10 @@ package eu.telecomnancy.profrdv.server.model.utilisateur;
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.Salle;
+import eu.telecomnancy.profrdv.server.model.data.DisponibiliteData;
 import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
+import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
+import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -43,6 +46,14 @@ public abstract class Utilisateur {
         this.RDVs = new ArrayList<>();
     }
 
+    public Utilisateur(UtilisateurData data) {
+        this.nom = data.nom;
+        this.prenom = data.prenom;
+        this.email = data.email;
+        this.telephone = data.telephone;
+        this.notification = data.notification;;
+    }
+
 
     public void notifier(RendezVous rendezVous) {
         // fonction pour notifier l'utilisateur d'un changement d'état d'un rendez-vous auquel il participe
@@ -74,11 +85,11 @@ public abstract class Utilisateur {
     public abstract boolean estDisponible(LocalDateTime horaire);
 
 
-    public boolean prendreRDV(ArrayList<Utilisateur> utilisateurs, Salle salle, LocalDateTime date, String titre, String description) {
+    public boolean prendreRDV(List<Utilisateur> utilisateurs, Salle salle, LocalDateTime date, String titre, String description) {
         utilisateurs.remove(this);
         utilisateurs.add(this);
 
-        RendezVous rendezVous = new RendezVous(date, utilisateurs, salle, titre, description);
+        RendezVous rendezVous = new RendezVous(date, salle, titre, description);
 
         for (Utilisateur utilisateur : utilisateurs) {
             if (!utilisateur.estDisponible(rendezVous.getHoraire()))
@@ -100,7 +111,13 @@ public abstract class Utilisateur {
         for (int i = 0; i < RDVs.size(); i++) {
             RDVsIds[i] = RDVs.get(i).getId();
         }
-        return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, this instanceof Professeur, null, null);
+        DisponibiliteData disponibiliteData;
+        if (this instanceof Professeur) {
+            Professeur prof = (Professeur) this;
+            disponibiliteData = prof.getDisponibilites().getData();
+            return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, true, disponibiliteData.dispo, disponibiliteData.modifs);
+        }
+        return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, false, null, null);
     }
 
 

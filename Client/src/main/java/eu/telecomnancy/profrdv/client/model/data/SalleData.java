@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SalleData {
-    public final int id;
     public int numero;
     public int etage;
     public String aile;
+    public SalleData() {}
 
-    public SalleData(int id, int numero, int etage, String aile) {
-        this.id = id;
+    public SalleData(int numero, int etage, String aile) {
         this.numero = numero;
         this.etage =  etage;
         this.aile = aile;

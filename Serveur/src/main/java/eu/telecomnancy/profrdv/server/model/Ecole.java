@@ -31,6 +31,7 @@ public class Ecole {
     public Ecole(String nom) {
         this.nom = nom;
         this.utilisateurs = new ArrayList<>();
+        this.salles = new ArrayList<>();
     }
 
 
@@ -53,6 +54,11 @@ public class Ecole {
     public void addUtilisateur(Utilisateur utilisateur) {
         utilisateurs.add(utilisateur);
     }
+
+    public void addSalle(Salle salle) {
+        salles.add(salle);
+    }
+
 
     public Integer getId() {
         return id;

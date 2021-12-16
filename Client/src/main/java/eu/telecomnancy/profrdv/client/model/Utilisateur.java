@@ -1,19 +1,26 @@
 package eu.telecomnancy.profrdv.client.model;
 
+import eu.telecomnancy.profrdv.client.model.data.DisponibiliteFixeData;
+import eu.telecomnancy.profrdv.client.model.data.RendezVousData;
 import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
+import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Utilisateur {
-    private UtilisateurData utilisateurREST;
+    private UtilisateurData data;
 
     public Utilisateur(UtilisateurData utilisateurREST) {
-        this.utilisateurREST = utilisateurREST;
+        this.data = utilisateurREST;
     }
 
     public Utilisateur(String nom, String prenom, String email) {
-        utilisateurREST = new UtilisateurData();
-        utilisateurREST.nom = nom;
-        utilisateurREST.prenom = prenom;
-        utilisateurREST.email = email;
+        data = new UtilisateurData();
+        data.nom = nom;
+        data.prenom = prenom;
+        data.email = email;
     }
 
 
@@ -68,51 +75,68 @@ public abstract class Utilisateur {
 
     //region assesseurs
     public String getNom() {
-        return utilisateurREST.nom;
+        return data.nom;
     }
 
 
     public void setNom(String nom) {
-        utilisateurREST.nom = nom;
+        data.nom = nom;
     }
 
 
     public String getPrenom() {
-        return utilisateurREST.prenom;
+        return data.prenom;
     }
 
 
     public void setPrenom(String prenom) {
-        utilisateurREST.prenom = prenom;
+        data.prenom = prenom;
     }
 
 
     public String getEmail() {
-        return utilisateurREST.email;
+        return data.email;
     }
 
 
     public void setEmail(String email) {
-        utilisateurREST.email = email;
+        data.email = email;
     }
 
 
     public String getTelephone() {
-        return utilisateurREST.telephone;
+        return data.telephone;
     }
 
 
     public void setTelephone(String telephone) {
-        utilisateurREST.telephone = telephone;
+        data.telephone = telephone;
     }
 
 
     public void setNotification(boolean notification) {
-        utilisateurREST.notification = notification;
+        data.notification = notification;
     }
 
-    public RendezVous[] getRDVs() {
-        return new RendezVous[0];
+    public List<RendezVous> getRDVs() {
+        List<RendezVous> rendezVous = new ArrayList<>();
+        RestTemplate restTemplate = new RestTemplate();
+        for (Integer id: data.RDVsIds) {
+            RendezVousData response =
+                    restTemplate.getForObject(
+                            "http://127.0.0.1:8080/rdv?id=" + id,
+                            RendezVousData.class);
+            rendezVous.add(new RendezVous(response));
+        }
+        return rendezVous;
+    }
+
+    public List<DisponibiliteFixe> getDisponibiliteFixe() {
+        List<DisponibiliteFixe> disponibiliteFixes = new ArrayList<>();
+        for(DisponibiliteFixeData dispo: data.disponibiliteFixes) {
+            disponibiliteFixes.add(new DisponibiliteFixe(dispo));
+        }
+        return disponibiliteFixes;
     }
     //endregion
 }

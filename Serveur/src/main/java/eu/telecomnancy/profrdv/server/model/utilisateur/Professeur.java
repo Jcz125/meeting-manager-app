@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.server.model.utilisateur;
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
+import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 import eu.telecomnancy.profrdv.server.model.disponibilite.Disponibilite;
 
 import javax.persistence.CascadeType;
@@ -15,10 +16,8 @@ public class Professeur extends Utilisateur {
     @OneToOne(cascade = CascadeType.ALL)
     private Disponibilite disponibilites;
 
-
-    public Professeur() {
-    }
-
+    public Professeur() {}
+    public Professeur(UtilisateurData data) {super(data);}
 
     public Professeur(String nom, String prenom, String email) {
         super(nom, prenom, email);
@@ -41,5 +40,9 @@ public class Professeur extends Utilisateur {
             if (rdv.getHoraire().isEqual(horaire))
                 return false;
         return disponibilites.estDisponible(horaire);
+    }
+
+    public Disponibilite getDisponibilites() {
+        return disponibilites;
     }
 }

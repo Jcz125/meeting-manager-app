@@ -6,7 +6,9 @@ import eu.telecomnancy.profrdv.client.controllers.PlanningController;
 import eu.telecomnancy.profrdv.client.controllers.PriseRDVController;
 import eu.telecomnancy.profrdv.client.model.Ecole;
 import eu.telecomnancy.profrdv.client.model.Professeur;
+import eu.telecomnancy.profrdv.client.model.RendezVous;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
+import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,25 +20,27 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main extends Application {
-
     private MenuController mc;
 
     @Override
     public void start(Stage stage) throws IOException {
-        /*Ecole ecole = new Ecole();
+        Ecole ecole = new Ecole();
         List<Utilisateur> utilisateurs = ecole.getUtilisateurs();
         for (Utilisateur u: utilisateurs) {
-            System.out.println(u.getNom() +  " " + u.getPrenom());
-//            if (mc.getIdToConnect().equals(u.getId())){
-//                if (u instanceof Professeur){                           // identifiant donnée est un id d'un professeur
-//
-//                }
-//                else {                                                  // identifiant donnée est un id d'un eleve
-//
-//                }
-//
-//            }
-        }*/
+            System.out.println("L'utilisateur : " + u.getNom() +  " " + u.getPrenom() + (u instanceof Professeur ? " est Prof" : " est Eleve"));
+            if (u instanceof Professeur) {
+                System.out.println("est un prof avec comme dispo fixe : ");
+                for (DisponibiliteFixe d: u.getDisponibiliteFixe()) {
+                    System.out.println("Le " + d.getJour() + " de " + d.getDebut() + " à " + d.getFin());
+                }
+            }
+            else
+                System.out.println("est un élève");
+            System.out.println("Et a comme RDV :");
+            for (RendezVous rdv: u.getRDVs()) {
+                System.out.println("\"" + rdv.getTitre() + "\"" + "  " + rdv.getHoraire());
+            }
+        }
 
         BorderPane panneau = new BorderPane() ;
 
