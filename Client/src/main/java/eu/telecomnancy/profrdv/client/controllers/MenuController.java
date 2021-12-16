@@ -19,6 +19,7 @@ public class MenuController implements Observateur {
     private Parent planning;
     private Parent espacePerso;
     private Parent identification;
+    private Parent accueil;
 
 
     public MenuController() {
@@ -28,7 +29,7 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handleAccueilButton(ActionEvent actionEvent) {
-
+        panneau.setBottom(accueil);
     }
 
 
@@ -90,6 +91,11 @@ public class MenuController implements Observateur {
 
     public void setIdentificationNode(Parent parent) {
         this.identification = parent;
+    }
+
+
+    public void setPriseRDV(Parent parent) {
+        this.accueil = parent;
     }
 
 
