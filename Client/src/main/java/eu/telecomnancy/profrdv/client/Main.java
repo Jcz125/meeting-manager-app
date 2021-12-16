@@ -104,7 +104,7 @@ public class Main extends Application {
 //        loader4.setLocation(getClass().getResource("RDV-view.fxml"));
 //        loader4.setControllerFactory(iC -> new RDVViewController(ecole.getUtilisateurs().get(0)));
 //        panneau.setBottom(loader4.load());
-        
+
         Scene scene = new Scene(panneau, 1400, 750);
         stage.setTitle("ProfRDV");
         stage.setScene(scene);

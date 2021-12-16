@@ -21,7 +21,7 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-        <VBox prefHeight="568.0" prefWidth="738.0">
+        <VBox prefHeight="568.0" prefWidth="738.0" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
             <children>
                 <Label style="-fx-font-size: 25; -fx-font-style: Bold;" styleClass="labelTitre" text="Information" textFill="#461aac">
                     <VBox.margin>
@@ -67,7 +67,7 @@
                 </GridPane>
             </children>
         </VBox>
-      <AnchorPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-      <AnchorPane fx:id="rightPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+      <AnchorPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+      <AnchorPane fx:id="rightPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
    </children>
 </GridPane>
