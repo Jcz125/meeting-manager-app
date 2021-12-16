@@ -9,7 +9,7 @@ import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RendezVousData {
-    public int id;
+    public Integer id;
     public LocalDateTime horaire;
 
     public String description;

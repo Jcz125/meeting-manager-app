@@ -16,8 +16,8 @@ public class Professeur extends Utilisateur {
     @OneToOne(cascade = CascadeType.ALL)
     private Disponibilite disponibilites;
 
-    public Professeur() {}
-    public Professeur(UtilisateurData data) {super(data);}
+    public Professeur() {disponibilites = new Disponibilite();}
+    public Professeur(UtilisateurData data) {super(data); disponibilites = new Disponibilite();}
 
     public Professeur(String nom, String prenom, String email) {
         super(nom, prenom, email);

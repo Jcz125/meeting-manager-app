@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BooleanResult {
-    public boolean success;
+    public Boolean success;
 
     public BooleanResult() {}
 

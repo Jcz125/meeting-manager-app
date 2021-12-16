@@ -6,9 +6,8 @@ import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ModificateurDisponibiliteData {
-
-    public int id;
-    public boolean inclut;
+    public Integer id;
+    public Boolean inclut;
     public LocalDateTime debut;
     public LocalDateTime fin;
 

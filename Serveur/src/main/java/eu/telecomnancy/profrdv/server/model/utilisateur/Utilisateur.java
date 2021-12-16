@@ -51,8 +51,9 @@ public abstract class Utilisateur {
         this.nom = data.nom;
         this.prenom = data.prenom;
         this.email = data.email;
-        this.telephone = data.telephone;
-        this.notification = data.notification;;
+        this.telephone = data.telephone == null ? "" : data.telephone;
+        this.notification = data.notification == null ? false : data.notification;
+        this.RDVs = new ArrayList<>();
     }
 
 

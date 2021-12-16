@@ -6,7 +6,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EcoleData {
-    public int id;
+    public Integer id;
     public String nom;
     public Integer[] salleIds;
     public Integer[] utilisateursIds;
