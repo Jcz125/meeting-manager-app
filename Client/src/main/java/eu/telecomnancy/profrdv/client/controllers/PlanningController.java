@@ -3,13 +3,14 @@ package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.RendezVous;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.GridPane;
 
-import javax.swing.*;
-import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -42,6 +43,8 @@ public class PlanningController implements Observateur{
     private LocalDate jour ;
     private Label[] listJour = {lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche};
     private int count=0;
+    private ArrayList<String> Rdvlist = new ArrayList<String>();
+    ObservableList observableList = FXCollections.observableArrayList();
 
     public PlanningController(Utilisateur u){
         this.u = u ;
@@ -95,6 +98,7 @@ public class PlanningController implements Observateur{
 //            listJour[i].setText(formattedDay);
 //            c.add(Calendar.DATE, 1);
 //        }
+        setHours();
     }
 
     public void setCalender(int param){
@@ -133,23 +137,38 @@ public class PlanningController implements Observateur{
 
     public void setHours() {
         for (RendezVous rdv : RDVs) {
-
             LocalDateTime horaire = rdv.getHoraire();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
-
             String[] words = formattedDateTime.split(" ");
             String date = words[0];
-            String heur = words[1];
-
             DayOfWeek jour = horaire.getDayOfWeek();
             int numJour = jour.getValue();
-//
-//            String[] HeurMin = heur.split(":");
-//            int numHeur = Integer.parseInt(HeurMin[0]);
-//            int numMin = Integer.parseInt(HeurMin[1]);
-//            int numMinTotal = (numHeur*60)+numMin ;
+            String heur = words[1];
+            Rdvlist.add(heur);
         }
+        observableList.removeAll(observableList) ;
+        observableList.setAll(Rdvlist);
+        listViewLundi.getItems().addAll(observableList);
+
+//        for (RendezVous rdv : RDVs) {
+//
+//            LocalDateTime horaire = rdv.getHoraire();
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//            String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
+//
+//            String[] words = formattedDateTime.split(" ");
+//            String date = words[0];
+//            String heur = words[1];
+//
+//            DayOfWeek jour = horaire.getDayOfWeek();
+//            int numJour = jour.getValue();
+////
+////            String[] HeurMin = heur.split(":");
+////            int numHeur = Integer.parseInt(HeurMin[0]);
+////            int numMin = Integer.parseInt(HeurMin[1]);
+////            int numMinTotal = (numHeur*60)+numMin ;
+//        }
     }
 
     @FXML
