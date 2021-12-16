@@ -6,7 +6,8 @@
 .labelTitre {
     -fx-font: 25px "Calibri";
     -fx-font-weight: bold;
-    -fx-text-fill: #e16512;
+    /*-fx-text-fill: #e16512;*/
+    -fx-text-fill: #461aac;
 }
 
 .labelHeur {
@@ -16,6 +17,6 @@
 
 .label {
     -fx-font: 15px "Calibri";
-    -fx-text-fill: #461aac;
+    /*-fx-text-fill: #461aac;*/
     -fx-font-weight: bold;
 }
