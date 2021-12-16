@@ -1,18 +1,7 @@
 package eu.telecomnancy.profrdv.client;
 
 import eu.telecomnancy.profrdv.client.controllers.*;
-import eu.telecomnancy.profrdv.client.model.Ecole;
-import eu.telecomnancy.profrdv.client.model.Professeur;
-import eu.telecomnancy.profrdv.client.model.RendezVous;
-import eu.telecomnancy.profrdv.client.model.Utilisateur;
-
-import eu.telecomnancy.profrdv.client.controllers.MainController;
-import eu.telecomnancy.profrdv.client.controllers.MenuController;
-import eu.telecomnancy.profrdv.client.controllers.PlanningController;
-import eu.telecomnancy.profrdv.client.controllers.PriseRDVController;
-
 import eu.telecomnancy.profrdv.client.model.*;
-
 import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -83,11 +72,24 @@ public class Main extends Application {
 
         FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("EspacePerso.fxml"));
         espacePersoLoader.setControllerFactory(iC -> new EspacePerso());
+
         Parent espacePersoParent = espacePersoLoader.load();
+
+        
+        EspacePerso espacePersoController = espacePersoLoader.getController();
+
+        FXMLLoader centerPaneLoader = new FXMLLoader(getClass().getResource("ConfigDispo.fxml"));
+        centerPaneLoader.setControllerFactory(iC -> new ConfigDispoController());
+
+        FXMLLoader leftPaneLoader = new FXMLLoader(getClass().getResource("RDV-view.fxml"));
+        leftPaneLoader.setControllerFactory(iC -> new RDVViewController(ecole.getUtilisateurs().get(0)));
+
+
+        espacePersoController.setCenter(centerPaneLoader.load());
+        espacePersoController.setLeft(leftPaneLoader.load());
 
 
         MenuController menuController = menuLoader.getController();
-
 
         menuController.setPriseRDV(priseRDVParent);
         menuController.setPlanningNode(planningParent);
@@ -100,10 +102,10 @@ public class Main extends Application {
         panneau.setBottom(planningParent);
 
 
-        FXMLLoader loader4 = new FXMLLoader();
-        loader4.setLocation(getClass().getResource("RDV-view.fxml"));
-        loader4.setControllerFactory(iC->new RDVViewController(ecole.getUtilisateurs().get(0)));
-        panneau.setBottom(loader4.load());
+//        FXMLLoader loader4 = new FXMLLoader();
+//        loader4.setLocation(getClass().getResource("RDV-view.fxml"));
+//        loader4.setControllerFactory(iC -> new RDVViewController(ecole.getUtilisateurs().get(0)));
+//        panneau.setBottom(loader4.load());
 
         Scene scene = new Scene(panneau, 1400, 750);
         stage.setTitle("ProfRDV");
