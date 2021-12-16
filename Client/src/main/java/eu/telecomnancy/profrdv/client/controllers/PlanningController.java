@@ -24,8 +24,6 @@ public class PlanningController implements Observateur{
     }
 
 
-
-
     @Override
     public void update() {
 
