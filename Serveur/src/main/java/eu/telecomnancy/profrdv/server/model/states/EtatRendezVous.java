@@ -5,9 +5,11 @@ import eu.telecomnancy.profrdv.server.model.RendezVous;
 public abstract class EtatRendezVous {
     protected RendezVous rendezVous;
 
+
     public EtatRendezVous() {
 
     }
+
 
     public void setRDV(RendezVous rendezVous) {
         this.rendezVous = rendezVous;

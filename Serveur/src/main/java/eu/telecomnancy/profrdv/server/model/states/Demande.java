@@ -11,7 +11,7 @@ public class Demande extends EtatRendezVous {
     @Override
     public void confirmer(RendezVous rendezVous) {
         // le rendez-vous a été confirmé par tous les participants
-        this.rendezVous.setState(EtatRendezVousEnum.CONFIRME);
+        rendezVous.setState(EtatRendezVousEnum.CONFIRME);
     }
 
 
@@ -24,7 +24,7 @@ public class Demande extends EtatRendezVous {
     @Override
     public void annuler(RendezVous rendezVous) {
         // le rendez-vous est annulé
-        this.rendezVous.setState(EtatRendezVousEnum.ANNULE);
+        rendezVous.setState(EtatRendezVousEnum.ANNULE);
     }
 
 

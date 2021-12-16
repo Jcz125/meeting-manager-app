@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @SuppressWarnings("ALL")
 public class AnnuleTest {
@@ -24,7 +26,7 @@ public class AnnuleTest {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.annuler();
         rdv.annuler();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Annule", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "ANNULE");
     }
 
 
@@ -33,7 +35,7 @@ public class AnnuleTest {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.annuler();
         rdv.confirmer();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Annule", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "ANNULE");
     }
 
 
@@ -42,7 +44,7 @@ public class AnnuleTest {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.annuler();
         rdv.demande();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Annule", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "ANNULE");
     }
 
 
@@ -51,6 +53,6 @@ public class AnnuleTest {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.annuler();
         rdv.realiser();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Annule", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "ANNULE");
     }
 }

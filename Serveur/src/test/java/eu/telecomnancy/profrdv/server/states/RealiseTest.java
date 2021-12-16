@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RealiseTest {
 
@@ -24,7 +25,7 @@ public class RealiseTest {
         rdv.confirmer();
         rdv.realiser();
         rdv.annuler();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "REALISE");
     }
 
 
@@ -34,7 +35,7 @@ public class RealiseTest {
         rdv.confirmer();
         rdv.realiser();
         rdv.realiser();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "REALISE");
     }
 
 
@@ -44,7 +45,7 @@ public class RealiseTest {
         rdv.confirmer();
         rdv.realiser();
         rdv.demande();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "REALISE");
     }
 
 
@@ -54,6 +55,6 @@ public class RealiseTest {
         rdv.confirmer();
         rdv.realiser();
         rdv.realiser();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "REALISE");
     }
 }

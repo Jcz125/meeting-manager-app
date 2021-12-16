@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConfirmeTest {
 
@@ -22,7 +23,7 @@ public class ConfirmeTest {
     public void testAnnulation() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.annuler();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Annule", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "ANNULE");
     }
 
 
@@ -30,7 +31,7 @@ public class ConfirmeTest {
     public void testConfirmation() {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.confirmer();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Confirme", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "CONFIRME");
     }
 
 
@@ -39,7 +40,7 @@ public class ConfirmeTest {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.confirmer();
         rdv.demande();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Confirme", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "CONFIRME");
     }
 
 
@@ -48,6 +49,6 @@ public class ConfirmeTest {
         RendezVous rdv = new RendezVous(null, new ArrayList<>(), null, null, null);
         rdv.confirmer();
         rdv.realiser();
-        assertInstanceOf("eu.telecomnancy.profrdv.server.model.states.Realise", rdv.getEtatRendezVous());
+        assertEquals(rdv.getEtatRendezVous().name(), "REALISE");
     }
 }

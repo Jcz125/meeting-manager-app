@@ -7,6 +7,7 @@ public class Confirme extends EtatRendezVous {
 
     }
 
+
     @Override
     public void confirmer(RendezVous rendezVous) {
         // il est déjà confirmé
@@ -22,7 +23,7 @@ public class Confirme extends EtatRendezVous {
     @Override
     public void annuler(RendezVous rendezVous) {
         // on annule le rendez-vous dans ce cas
-        this.rendezVous.setState(EtatRendezVousEnum.ANNULE);
+        rendezVous.setState(EtatRendezVousEnum.ANNULE);
 
     }
 
@@ -30,6 +31,6 @@ public class Confirme extends EtatRendezVous {
     @Override
     public void realiser(RendezVous rendezVous) {
         // le rendez-vous a été réalisé
-        this.rendezVous.setState(EtatRendezVousEnum.REALISE);
+        rendezVous.setState(EtatRendezVousEnum.REALISE);
     }
 }
