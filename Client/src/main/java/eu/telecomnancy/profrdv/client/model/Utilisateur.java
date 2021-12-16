@@ -1,9 +1,6 @@
 package eu.telecomnancy.profrdv.client.model;
 
-import eu.telecomnancy.profrdv.client.model.data.BooleanResult;
-import eu.telecomnancy.profrdv.client.model.data.DisponibiliteFixeData;
-import eu.telecomnancy.profrdv.client.model.data.RendezVousData;
-import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
+import eu.telecomnancy.profrdv.client.model.data.*;
 import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -12,7 +9,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Utilisateur {
     protected UtilisateurData data;
@@ -29,15 +28,16 @@ public abstract class Utilisateur {
         data.estProf = this instanceof Professeur;
         HttpEntity<UtilisateurData> dataRequest = new HttpEntity<>(data);
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.exchange(
+        data.id = restTemplate.exchange(
                 "http://127.0.0.1:8080/utilisateur",
                 HttpMethod.POST,
                 dataRequest,
-                Void.class
-        );
+                Integer.class
+        ).getBody();
+        fetchData();
     }
 
-    public void updateData() {
+    public void fetchData() {
         RestTemplate restTemplate = new RestTemplate();
         this.data =
                 restTemplate.getForObject(
@@ -45,32 +45,31 @@ public abstract class Utilisateur {
                         UtilisateurData.class);
     }
 
-    /*public void ajouterRDV(RendezVous rendezVous) {
-        if (!this.RDVs.containsKey(rendezVous.getHoraire())) {
-            this.RDVs.put(rendezVous.getHoraire(), rendezVous);
-        }
-    }*/
+    public void updateData(UtilisateurData data) {
+        data.id = this.data.id;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForObject(
+                "http://127.0.0.1:8080/utilisateur?id=" + data.id,
+                this.data,
+                Void.class);
+    }
 
-
-    /*public boolean annulerRDV(RendezVous rendezVous) {
-        if (this.RDVs.containsKey(rendezVous.getHoraire())) {
-            rendezVous.annuler();
-            return true;
-        }
-        return false;
-    }*/
-
-
-    //public abstract boolean estDisponible(RendezVous rendezVous);
-
-
-    public boolean prendreRDV(List<Utilisateur> utilisateurs, LocalDateTime date, String titre, String description, Salle salle) {
+    public boolean prendreRDV(List<Utilisateur> utilisateurs, LocalDateTime horaire, String titre, String description, Salle salle) {
         RendezVousData data = new RendezVousData();
+        data.horaire = horaire;
+        data.titre = titre;
+        data.description = description;
+        data.salle = salle.getData();
+        Map<Integer, Boolean> utilisateursIdsConfirmed = new HashMap<>();
+        for (Utilisateur u: utilisateurs) {
+            utilisateursIdsConfirmed.put(u.getId(), false);
+        }
+        data.utilisateursIdsConfirmed = utilisateursIdsConfirmed;
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<RendezVousData> requestUpdate = new HttpEntity<>(data);
         ResponseEntity<BooleanResult> response =
                     restTemplate.exchange(
-                            "http://127.0.0.1:8080/utilisateur/prendreRDV",
+                            "http://127.0.0.1:8080/utilisateur/prendreRDV?id=" + data.id,
                             HttpMethod.POST,
                             requestUpdate, BooleanResult.class);
         return response.getBody().success;
@@ -79,7 +78,7 @@ public abstract class Utilisateur {
 
     //region assesseurs
     public List<RendezVous> getRDVs() {
-        updateData();
+        fetchData();
         List<RendezVous> rendezVous = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         for (Integer id: data.RDVsIds) {
@@ -93,7 +92,7 @@ public abstract class Utilisateur {
     }
 
     public List<DisponibiliteFixe> getDisponibiliteFixe() {
-        updateData();
+        fetchData();
         List<DisponibiliteFixe> disponibiliteFixes = new ArrayList<>();
         for(DisponibiliteFixeData dispo: data.disponibiliteFixes) {
             disponibiliteFixes.add(new DisponibiliteFixe(dispo));
@@ -106,43 +105,58 @@ public abstract class Utilisateur {
     }
 
     public String getNom() {
-        updateData();
+        fetchData();
         return data.nom;
     }
 
     public String getPrenom() {
-        updateData();
+        fetchData();
         return data.prenom;
     }
 
     public String getTelephone() {
-        updateData();
+        fetchData();
         return data.telephone;
     }
 
-    public void setNom(String nom) {
-        data.nom = nom;
-    }
-
-    public void setPrenom(String prenom) {
-        data.prenom = prenom;
-    }
-
     public String getEmail() {
+        fetchData();
         return data.email;
     }
 
-    public void setEmail(String email) {
-        data.email = email;
+    public void setNom(String nom) {
+        fetchData();
+        UtilisateurData data = new UtilisateurData();
+        data.nom = nom;
+        updateData(data);
     }
 
+    public void setPrenom(String prenom) {
+        fetchData();
+        UtilisateurData data = new UtilisateurData();
+        data.prenom = prenom;
+        updateData(data);
+    }
+
+    public void setEmail(String email) {
+        fetchData();
+        UtilisateurData data = new UtilisateurData();
+        data.email = email;
+        updateData(data);
+    }
 
     public void setTelephone(String telephone) {
+        fetchData();
+        UtilisateurData data = new UtilisateurData();
         data.telephone = telephone;
+        updateData(data);
     }
 
     public void setNotification(boolean notification) {
+        fetchData();
+        UtilisateurData data = new UtilisateurData();
         data.notification = notification;
+        updateData(data);
     }
 
     //endregion

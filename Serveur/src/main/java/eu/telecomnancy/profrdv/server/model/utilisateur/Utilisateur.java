@@ -6,6 +6,7 @@ import eu.telecomnancy.profrdv.server.model.data.DisponibiliteData;
 import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
 import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
+import org.springframework.http.RequestEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -118,6 +119,10 @@ public abstract class Utilisateur {
             return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, true, disponibiliteData.dispo, disponibiliteData.modifs);
         }
         return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, false, null, null);
+    }
+
+    public void updateData(RequestEntity<UtilisateurData> monUtilisateur) {
+
     }
 
 

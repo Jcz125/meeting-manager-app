@@ -5,10 +5,7 @@ import eu.telecomnancy.profrdv.server.model.data.SalleData;
 import eu.telecomnancy.profrdv.server.repository.SalleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -26,9 +23,20 @@ public class SalleController {
     }
 
     @PostMapping("/salle")
-    public void createSalle(RequestEntity<SalleData> maSalle) {
+    public Integer createSalle(RequestEntity<SalleData> maSalle) {
         SalleData data = maSalle.getBody();
         Salle salle = new Salle(data);
         salleRepository.save(salle);
+        return salle.getNumero();
+    }
+
+    @PutMapping("/salle")
+    public void updateSalle(RequestEntity<SalleData> maSalle) {
+        SalleData data = maSalle.getBody();
+        Optional<Salle> salle = salleRepository.findById(data.numero);
+        if (salle.isEmpty())
+            return;
+        salle.get().updateData(data);
+        salleRepository.save(salle.get());
     }
 }
