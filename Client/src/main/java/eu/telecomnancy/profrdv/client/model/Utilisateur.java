@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Utilisateur {
-    private UtilisateurData data;
+    protected UtilisateurData data;
 
     public Utilisateur(UtilisateurData utilisateurREST) {
         this.data = utilisateurREST;
@@ -26,6 +26,15 @@ public abstract class Utilisateur {
         data.nom = nom;
         data.prenom = prenom;
         data.email = email;
+        data.estProf = this instanceof Professeur;
+        HttpEntity<UtilisateurData> dataRequest = new HttpEntity<>(data);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.exchange(
+                "http://127.0.0.1:8080/utilisateur",
+                HttpMethod.POST,
+                dataRequest,
+                Void.class
+        );
     }
 
 

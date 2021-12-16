@@ -24,6 +24,6 @@ public class ProfRDV {
 
 
     public void ajouterUtilisateur(Utilisateur utilisateur) {
-        this.ecole.ajouterUtilisateur(utilisateur);
+        this.ecole.addUtilisateur(utilisateur);
     }
 }

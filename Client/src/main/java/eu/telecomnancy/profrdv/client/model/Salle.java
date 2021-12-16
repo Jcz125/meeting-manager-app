@@ -1,41 +1,53 @@
 package eu.telecomnancy.profrdv.client.model;
 
 import eu.telecomnancy.profrdv.client.model.data.SalleData;
+import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.client.RestTemplate;
 
 public class Salle {
-    private SalleData salleREST;
+    private SalleData data;
 
     public Salle (SalleData salleREST) {
-        this.salleREST = salleREST;
+        this.data = salleREST;
     }
 
     public Salle (int numero, int etage, String aile) {
-        salleREST.numero = numero;
-        salleREST.etage =  etage;
-        salleREST.aile = aile;
+        data.numero = numero;
+        data.etage =  etage;
+        data.aile = aile;
+        HttpEntity<SalleData> dataRequest = new HttpEntity<>(data);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.exchange(
+                "http://127.0.0.1:8080/salle",
+                HttpMethod.POST,
+                dataRequest,
+                Void.class
+        );
     }
 
     public int getNumero() {
-        return salleREST.numero;
+        return data.numero;
     }
 
     public void setNumero(int numero) {
-        salleREST.numero = numero;
+        data.numero = numero;
     }
 
     public void setEtage(int etage) {
-        salleREST.etage = etage;
+        data.etage = etage;
     }
 
     public int getEtage() {
-        return salleREST.etage;
+        return data.etage;
     }
 
     public void setAile(String aile) {
-        salleREST.aile = aile;
+        data.aile = aile;
     }
 
     public String getAile() {
-        return salleREST.aile;
+        return data.aile;
     }
 }
