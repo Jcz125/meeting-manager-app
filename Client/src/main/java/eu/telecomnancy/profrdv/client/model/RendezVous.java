@@ -1,12 +1,13 @@
 package eu.telecomnancy.profrdv.client.model;
 
 
-import eu.telecomnancy.profrdv.client.model.data.EtatRendezVousData;
-import eu.telecomnancy.profrdv.client.model.data.RendezVousData;
-import eu.telecomnancy.profrdv.client.model.data.SalleData;
-import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
+import eu.telecomnancy.profrdv.client.model.data.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,26 @@ public class RendezVous {
     }
     //endregion
 
+    public static List<RendezVous> genererRendezVous(List<Utilisateur> utilisateurs, LocalDateTime debut, LocalDateTime fin) {
+        List<Integer> utilisateursId = new ArrayList<>();
+        for (Utilisateur u: utilisateurs) {
+            utilisateursId.add(u.getId());
+        }
+        RechercheRDVData data = new RechercheRDVData(debut, fin , utilisateursId);
 
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<RechercheRDVData> requestUpdate = new HttpEntity<>(data);
+        ResponseEntity<RDVList> response =
+                restTemplate.exchange(
+                        "http://127.0.0.1:8080/genererRendezVous",
+                        HttpMethod.POST,
+                        requestUpdate, RDVList.class);
+        List<RendezVous> rendezVous = new ArrayList<>();
+        for (RendezVousData d: response.getBody().rendezVousList) {
+            rendezVous.add(new RendezVous(d));
+        }
+        return rendezVous;
+    }
 
 
     //region assesseurs

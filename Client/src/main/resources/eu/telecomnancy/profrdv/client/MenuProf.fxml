@@ -6,48 +6,43 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="100.0" prefWidth="1500.0" stylesheets="@../../../../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.profrdv.client.controllers.MenuController">
-    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="101.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <HBox prefHeight="100.0" prefWidth="1482.0">
       <children>
-         <HBox prefHeight="66.0" prefWidth="1400.0">
-            <children>
-               <ImageView fitHeight="60.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@logo.png" />
-                  </image>
-                  <HBox.margin>
-                     <Insets bottom="20.0" left="100.0" right="100.0" top="20.0" />
-                  </HBox.margin>
-               </ImageView>
-               <Button fx:id="accueilButton" mnemonicParsing="false" onAction="#handleAccueilButton" styleClass="btn-outline-secondary" text="Accueil">
-                  <HBox.margin>
-                     <Insets left="50.0" right="100.0" top="30.0" />
-                  </HBox.margin>
-               </Button>
-               <Button fx:id="planningButton" mnemonicParsing="false" onAction="#handlePlanningButton" text="Planning">
-                  <HBox.margin>
-                     <Insets right="100.0" top="30.0" />
-                  </HBox.margin>
-               </Button>
-               <Button fx:id="personalButton" mnemonicParsing="false" onAction="#handlePersonalButton" text="Espace personnel">
-                  <HBox.margin>
-                     <Insets right="100.0" top="30.0" />
-                  </HBox.margin>
-               </Button>
-               <Button fx:id="idButton" mnemonicParsing="false" onAction="#handleIdButton" text="Identification">
-                  <HBox.margin>
-                     <Insets right="100.0" top="30.0" />
-                  </HBox.margin>
-               </Button>
-               <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreateButton" text="Creation de compte">
-                  <HBox.margin>
-                     <Insets top="30.0" />
-                  </HBox.margin>
-               </Button>
-            </children>
-         </HBox>
+         <ImageView fitHeight="60.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@logo.png" />
+            </image>
+            <HBox.margin>
+               <Insets bottom="20.0" left="100.0" right="100.0" top="20.0" />
+            </HBox.margin>
+         </ImageView>
+         <Button fx:id="accueilButton" mnemonicParsing="false" onAction="#handleAccueilButton" prefHeight="30.0" prefWidth="217.0" styleClass="btn-outline-secondary" text="Prendre un rendez-vous">
+            <HBox.margin>
+               <Insets left="50.0" right="80.0" top="30.0" />
+            </HBox.margin>
+         </Button>
+         <Button fx:id="planningButton" mnemonicParsing="false" onAction="#handlePlanningButton" text="Planning">
+            <HBox.margin>
+               <Insets right="80.0" top="30.0" />
+            </HBox.margin>
+         </Button>
+         <Button fx:id="personalButton" mnemonicParsing="false" onAction="#handlePersonalButton" text="Espace personnel">
+            <HBox.margin>
+               <Insets right="80.0" top="30.0" />
+            </HBox.margin>
+         </Button>
+         <Button fx:id="idButton" mnemonicParsing="false" onAction="#handleIdButton" text="Identification">
+            <HBox.margin>
+               <Insets right="80.0" top="30.0" />
+            </HBox.margin>
+         </Button>
+         <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreateButton" text="Creation de compte">
+            <HBox.margin>
+               <Insets top="30.0" />
+            </HBox.margin>
+         </Button>
       </children>
-   </VBox>
+   </HBox>
 </AnchorPane>
