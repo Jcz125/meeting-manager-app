@@ -47,7 +47,7 @@ public class Main extends Application {
 
 
         FXMLLoader planningLoader = new FXMLLoader(getClass().getResource("Planning.fxml"));
-        planningLoader.setControllerFactory(iC -> new PlanningController());
+        planningLoader.setControllerFactory(iC -> new PlanningController(utilisateurs.get(0)));
         Parent planningParent = planningLoader.load();
 
 
