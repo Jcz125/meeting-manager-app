@@ -68,6 +68,7 @@ public class RendezVous {
                 "http://127.0.0.1:8080/rdv/annuler?id=" + data.id,
                 HttpMethod.POST,
                 null, Void.class);
+        fetchData();
     }
 
     //region assesseurs

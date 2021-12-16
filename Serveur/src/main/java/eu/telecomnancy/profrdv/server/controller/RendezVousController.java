@@ -22,11 +22,11 @@ public class RendezVousController {
     UtilisateurRepository utilisateurRepository;
 
     @GetMapping("/rdv")
-    public RendezVousData getRendezVous(@RequestParam(value = "id") Integer id) {
-        Optional<RendezVous> rendezVous = rendezVousRepository.findById(id);
-        if (rendezVous.isEmpty())
-            return null;
-        return rendezVous.get().getData();
+    public Integer createRDV(RequestEntity<RendezVousData> monRDV) {
+        RendezVousData data = monRDV.getBody();
+        RendezVous rdv = new RendezVous(data);
+        rendezVousRepository.save(rdv);
+        return rdv.getId();
     }
 
     @PostMapping("/rdv")

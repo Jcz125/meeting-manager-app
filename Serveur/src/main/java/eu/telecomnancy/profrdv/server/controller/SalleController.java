@@ -45,6 +45,6 @@ public class SalleController {
         Optional<Salle> salle = salleRepository.findById(id);
         if (salle.isEmpty())
             return;
-        salleRepository.delete(salle);
+        salleRepository.delete(salle.get());
     }
 }
