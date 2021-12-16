@@ -71,11 +71,11 @@ public class Main extends Application {
 
 
         FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("EspacePerso.fxml"));
-        espacePersoLoader.setControllerFactory(iC -> new EspacePerso());
+        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController());
 
         Parent espacePersoParent = espacePersoLoader.load();
-        
-        EspacePerso espacePersoController = espacePersoLoader.getController();
+
+        EspacePersoController espacePersoController = espacePersoLoader.getController();
 
         FXMLLoader centerPaneLoader = new FXMLLoader(getClass().getResource("ConfigDispo.fxml"));
         centerPaneLoader.setControllerFactory(iC -> new ConfigDispoController());
@@ -98,13 +98,9 @@ public class Main extends Application {
 
         menuController.setPanneau(panneau);
 
-        panneau.setBottom(planningParent);
+        panneau.setCenter(planningParent);
 
-//        FXMLLoader loader4 = new FXMLLoader();
-//        loader4.setLocation(getClass().getResource("RDV-view.fxml"));
-//        loader4.setControllerFactory(iC -> new RDVViewController(ecole.getUtilisateurs().get(0)));
-//        panneau.setBottom(loader4.load());
-        
+
         Scene scene = new Scene(panneau, 1400, 750);
         stage.setTitle("ProfRDV");
         stage.setScene(scene);

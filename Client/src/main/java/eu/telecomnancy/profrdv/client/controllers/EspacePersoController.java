@@ -3,14 +3,14 @@ package eu.telecomnancy.profrdv.client.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
-public class EspacePerso implements Observateur {
+public class EspacePersoController implements Observateur {
     @FXML
     private AnchorPane centerPane;
     @FXML
     private AnchorPane rightPane;
 
 
-    public EspacePerso() {
+    public EspacePersoController() {
 
     }
 
@@ -28,5 +28,6 @@ public class EspacePerso implements Observateur {
 
     public void setLeft(AnchorPane left) {
         this.rightPane.getChildren().add(left);
+        left.setMaxHeight(300);
     }
 }

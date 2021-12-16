@@ -29,19 +29,19 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handleAccueilButton(ActionEvent actionEvent) {
-        panneau.setBottom(accueil);
+        panneau.setCenter(accueil);
     }
 
 
     @FXML
     private void handlePersonalButton(ActionEvent actionEvent) {
-        panneau.setBottom(espacePerso);
+        panneau.setCenter(espacePerso);
     }
 
 
     @FXML
     private void handlePlanningButton(ActionEvent actionEvent) {
-        panneau.setBottom(planning);
+        panneau.setCenter(planning);
     }
 
 
@@ -59,7 +59,7 @@ public class MenuController implements Observateur {
 //        if (id != null) {
 //            this.idToConnect = id;
 //        }
-        panneau.setBottom(identification);
+        panneau.setCenter(identification);
     }
 
 
@@ -70,7 +70,7 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handleCreateButton(ActionEvent actionEvent) throws IOException {
-        panneau.setBottom(creation);
+        panneau.setCenter(creation);
     }
 
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UtilisateurData {
-    public int id;
+    public Integer id;
     public String nom;
     public String prenom;
     public String email;
