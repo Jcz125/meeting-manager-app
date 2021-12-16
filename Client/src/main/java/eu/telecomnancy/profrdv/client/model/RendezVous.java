@@ -48,6 +48,7 @@ public class RendezVous {
     }
 
     public void updateData(RendezVousData data) {
+        data.id = this.data.id;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(
                 "http://127.0.0.1:8080/rdv?id=" + data.id,

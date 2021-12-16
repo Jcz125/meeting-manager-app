@@ -31,6 +31,7 @@ public class Ecole {
     }
 
     public void updateData(EcoleData data) {
+        data.id = this.data.id;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.put(
                 "http://127.0.0.1:8080/ecole",
