@@ -11,6 +11,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,7 +44,7 @@ public class RendezVousTest {
         utilisateurs.add(eleve2);
         utilisateurs.add(professeur1);
         utilisateurs.add(professeur2);
-        ArrayList<RendezVous> creneaux = RendezVous.genererRendezVous(utilisateurs, debut, fin);
+        List<RendezVous> creneaux = RendezVous.genererRendezVous(utilisateurs, debut, fin);
 
         assertEquals(creneaux.size(), 6);
         Salle salle = new Salle(2, 2, "nord");

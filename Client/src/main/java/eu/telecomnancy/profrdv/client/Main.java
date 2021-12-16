@@ -46,6 +46,11 @@ public class Main extends Application {
         panneau.setTop(menuLoader.load());
 
 
+        FXMLLoader priseRDVLoader = new FXMLLoader(getClass().getResource("PriseRDV.fxml"));
+        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs.get(0)));
+        Parent priseRDVParent = priseRDVLoader.load();
+
+
         FXMLLoader planningLoader = new FXMLLoader(getClass().getResource("Planning.fxml"));
         planningLoader.setControllerFactory(iC -> new PlanningController(utilisateurs.get(0)));
         Parent planningParent = planningLoader.load();
@@ -68,6 +73,8 @@ public class Main extends Application {
 
         MenuController menuController = menuLoader.getController();
 
+
+        menuController.setPriseRDV(priseRDVParent);
         menuController.setPlanningNode(planningParent);
         menuController.setCreationNode(creationParent);
         menuController.setEspacePersoNode(espacePersoParent);
