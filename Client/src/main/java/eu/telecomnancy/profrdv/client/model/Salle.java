@@ -27,7 +27,16 @@ public class Salle {
         );
     }
 
+    public void updateData() {
+        RestTemplate restTemplate = new RestTemplate();
+        this.data =
+                restTemplate.getForObject(
+                        "http://127.0.0.1:8080/salle?id=" + data.numero,
+                        SalleData.class);
+    }
+
     public int getNumero() {
+        updateData();
         return data.numero;
     }
 
@@ -40,6 +49,7 @@ public class Salle {
     }
 
     public int getEtage() {
+        updateData();
         return data.etage;
     }
 
@@ -48,6 +58,7 @@ public class Salle {
     }
 
     public String getAile() {
+        updateData();
         return data.aile;
     }
 }

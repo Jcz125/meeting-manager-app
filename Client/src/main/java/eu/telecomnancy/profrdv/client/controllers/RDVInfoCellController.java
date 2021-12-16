@@ -53,7 +53,7 @@ public class RDVInfoCellController implements Observateur {
         this.descriptionRDV.setText(rdv.getDescription());
         this.dateRDV.setText("" + rdv.getHoraire().getDayOfMonth() + "/" + rdv.getHoraire().getMonthValue() + "/" + rdv.getHoraire().getYear());
         this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + rdv.getHoraire().getMinute());
-        this.lieuRDV.setText("" + rdv.getSalle().etage + " " + rdv.getSalle().aile + " " + rdv.getSalle().numero);
+        this.lieuRDV.setText("" + rdv.getSalle().getEtage() + " " + rdv.getSalle().getAile() + " " + rdv.getSalle().getNumero());
         List<String> profs = rdv.getProfstoString();
         List<String> eleves = rdv.getElevestoString();
 
@@ -63,10 +63,6 @@ public class RDVInfoCellController implements Observateur {
         for (String str : eleves) {
             listEleve.getChildren().add(new Label(str));
         }
-    }
-
-    public void confirmer() {
-        rdv.confirmer();
     }
 
     public void modifier() {
@@ -83,7 +79,7 @@ public class RDVInfoCellController implements Observateur {
         this.descriptionRDV.setText(rdv.getDescription());
         this.dateRDV.setText("" + rdv.getHoraire().getDayOfMonth() + "/" + rdv.getHoraire().getMonthValue() + "/" + rdv.getHoraire().getYear());
         this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + rdv.getHoraire().getMinute());
-        this.lieuRDV.setText("" + rdv.getSalle().etage + " " + rdv.getSalle().aile + " " + rdv.getSalle().numero);
+        this.lieuRDV.setText("" + rdv.getSalle().getEtage() + " " + rdv.getSalle().getAile() + " " + rdv.getSalle().getNumero());
         List<String> profs = rdv.getProfstoString();
         List<String> eleves = rdv.getElevestoString();
         this.listProf.getChildren().removeAll();

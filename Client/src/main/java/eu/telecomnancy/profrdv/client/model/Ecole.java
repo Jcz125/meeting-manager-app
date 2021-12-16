@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.client.model;
 
 import eu.telecomnancy.profrdv.client.model.data.EcoleData;
+import eu.telecomnancy.profrdv.client.model.data.SalleData;
 import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
@@ -13,11 +14,8 @@ public class Ecole {
 
     private EcoleData data;
 
-
     public Ecole() {
-        RestTemplate restTemplate = new RestTemplate();
-        this.data = restTemplate.getForObject(
-                "http://127.0.0.1:8080/ecole", EcoleData.class);
+        updateData();
     }
 
 
@@ -26,17 +24,16 @@ public class Ecole {
     }
 
 
-    public String getNom() {
-        return data.nom;
+    public void updateData() {
+        RestTemplate restTemplate = new RestTemplate();
+        this.data = restTemplate.getForObject(
+                "http://127.0.0.1:8080/ecole", EcoleData.class);
     }
 
-
-    public void setNom(String nom) {
-        data.nom = nom;
-    }
 
 
     public List<Utilisateur> getUtilisateurs() {
+        updateData();
         List<Utilisateur> utilisateurs = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         for (Integer i : data.utilisateursIds) {
@@ -50,6 +47,20 @@ public class Ecole {
                 utilisateurs.add(new Eleve(response));
         }
         return utilisateurs;
+    }
+
+    public List<Salle> getSalles() {
+        updateData();
+        List<Salle> salles = new ArrayList<>();
+        RestTemplate restTemplate = new RestTemplate();
+        for (Integer i : data.salleIds) {
+            SalleData response =
+                    restTemplate.getForObject(
+                            "http://127.0.0.1:8080/salle?id=" + i,
+                            SalleData.class);
+            salles.add(new Salle(response));
+        }
+        return salles;
     }
 
 
@@ -73,4 +84,14 @@ public class Ecole {
         );
     }
 
+
+    public String getNom() {
+        updateData();
+        return data.nom;
+    }
+
+    public void setNom(String nom) {
+        updateData();
+        data.nom = nom;
+    }
 }

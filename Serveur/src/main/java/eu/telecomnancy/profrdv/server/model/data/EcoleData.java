@@ -8,15 +8,15 @@ import java.util.List;
 public class EcoleData {
     public int id;
     public String nom;
-    public Integer[] disponibilitesIds;
+    public Integer[] salleIds;
     public Integer[] utilisateursIds;
 
     public EcoleData() {}
 
-    public EcoleData(int id, String nom, Integer[] disponibilitesIds, Integer[] utilisateursIds) {
+    public EcoleData(int id, String nom, Integer[] salleIds, Integer[] utilisateursIds) {
         this.id = id;
         this.nom = nom;
-        this.disponibilitesIds = disponibilitesIds;
+        this.salleIds = salleIds;
         this.utilisateursIds = utilisateursIds;
     }
 }

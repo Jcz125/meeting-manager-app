@@ -3,8 +3,6 @@ package eu.telecomnancy.profrdv.server.controller;
 import eu.telecomnancy.profrdv.server.model.Ecole;
 import eu.telecomnancy.profrdv.server.model.Salle;
 import eu.telecomnancy.profrdv.server.model.data.EcoleData;
-import eu.telecomnancy.profrdv.server.model.disponibilite.Disponibilite;
-import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
