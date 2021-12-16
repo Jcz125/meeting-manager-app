@@ -34,6 +34,14 @@ public class DisponibiliteFixe {
         return data.fin;
     }
 
+    public void setDebut(LocalTime time) {
+        this.data.debut = time;
+    }
+
+    public void setFin(LocalTime time) {
+        this.data.fin = time;
+    }
+
 
     public boolean estDedans(LocalDateTime horaire) {
         if (data.jour != horaire.getDayOfWeek())
