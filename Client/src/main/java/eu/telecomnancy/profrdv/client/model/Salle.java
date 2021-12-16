@@ -1,7 +1,7 @@
 package eu.telecomnancy.profrdv.client.model;
 
+import eu.telecomnancy.profrdv.client.model.data.RendezVousData;
 import eu.telecomnancy.profrdv.client.model.data.SalleData;
-import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
@@ -27,7 +27,7 @@ public class Salle {
         );
     }
 
-    public void updateData() {
+    public void fetchData() {
         RestTemplate restTemplate = new RestTemplate();
         this.data =
                 restTemplate.getForObject(
@@ -35,30 +35,52 @@ public class Salle {
                         SalleData.class);
     }
 
-    public int getNumero() {
-        updateData();
-        return data.numero;
+    public void updateData(SalleData data) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForObject(
+                "http://127.0.0.1:8080/salle?id=" + data.numero,
+                this.data,
+                Void.class);
     }
 
+    public SalleData getData() {
+        return data;
+    }
+
+
     public void setNumero(int numero) {
+        fetchData();
+        SalleData data = new SalleData();
         data.numero = numero;
+        updateData(data);
     }
 
     public void setEtage(int etage) {
+        fetchData();
+        SalleData data = new SalleData();
         data.etage = etage;
-    }
-
-    public int getEtage() {
-        updateData();
-        return data.etage;
+        updateData(data);
     }
 
     public void setAile(String aile) {
+        fetchData();
+        SalleData data = new SalleData();
         data.aile = aile;
+        updateData(data);
+    }
+
+    public int getNumero() {
+        fetchData();
+        return data.numero;
+    }
+
+    public int getEtage() {
+        fetchData();
+        return data.etage;
     }
 
     public String getAile() {
-        updateData();
+        fetchData();
         return data.aile;
     }
 }

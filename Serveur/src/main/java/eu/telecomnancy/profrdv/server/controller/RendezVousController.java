@@ -1,20 +1,14 @@
 package eu.telecomnancy.profrdv.server.controller;
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
-import eu.telecomnancy.profrdv.server.model.Salle;
 import eu.telecomnancy.profrdv.server.model.data.RechercheRDVData;
 import eu.telecomnancy.profrdv.server.model.data.RendezVousData;
-import eu.telecomnancy.profrdv.server.model.data.SalleData;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
 import eu.telecomnancy.profrdv.server.repository.RendezVousRepository;
 import eu.telecomnancy.profrdv.server.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
-import org.springframework.ui.context.support.UiApplicationContextUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +34,16 @@ public class RendezVousController {
         RendezVousData data = monRDV.getBody();
         RendezVous rdv = new RendezVous(data);
         rendezVousRepository.save(rdv);
+    }
+
+    @PutMapping("/rdv")
+    public void updateRDV(RequestEntity<RendezVousData> monRDV) {
+        RendezVousData data = monRDV.getBody();
+        Optional<RendezVous> rendezVous = rendezVousRepository.findById(data.id);
+        if (rendezVous.isEmpty())
+            return;
+        rendezVous.get().updateData(data);
+        rendezVousRepository.save(rendezVous.get());
     }
 
     @PostMapping("/genererRendezVous")

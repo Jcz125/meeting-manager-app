@@ -6,5 +6,24 @@ public enum EtatRendezVousData {
     ANNULE,
     CONFIRME,
     DEMANDE,
-    REALISE
+    REALISE;
+
+    @Override
+    public String toString() {
+        switch (this) {
+            case ANNULE -> {
+                return "Annulé";
+            }
+            case DEMANDE -> {
+                return "Demandé";
+            }
+            case REALISE -> {
+                return "Réalisé";
+            }
+            case CONFIRME -> {
+                return "Confirmé";
+            }
+        }
+        return "";
+    }
 }

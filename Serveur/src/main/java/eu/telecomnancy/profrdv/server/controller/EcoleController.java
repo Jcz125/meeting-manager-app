@@ -10,10 +10,8 @@ import eu.telecomnancy.profrdv.server.repository.EcoleRepository;
 import eu.telecomnancy.profrdv.server.repository.SalleRepository;
 import eu.telecomnancy.profrdv.server.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.RequestEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -61,26 +59,13 @@ public class EcoleController {
         return monEcole.get().getData();
     }
 
-    @PostMapping("/ecole/addUtilisateur")
-    public void addUtilisateur(@RequestParam(value = "ecoleId") Integer ecoleId, @RequestParam(value = "userId") Integer userId) {
-        Optional<Ecole> ecole = ecoleRepository.findById(ecoleId);
-        if (ecole.isEmpty())
+    @PutMapping("/ecole")
+    public void updateEcole(RequestEntity<EcoleData> ecole) {
+        EcoleData data = ecole.getBody();
+        Optional<Ecole> ecoleOptional = ecoleRepository.findById(data.id);
+        if (ecoleOptional.isEmpty())
             return;
-        Optional<Utilisateur> utilisateur = utilisateurRepository.findById(userId);
-        if (utilisateur.isEmpty())
-            return;
-        ecole.get().addUtilisateur(utilisateur.get());
-    }
-
-    @PostMapping("/ecole/addSalle")
-    public void addSalle(@RequestParam(value = "ecoleId") Integer ecoleId, @RequestParam(value = "salleId") Integer salleId) {
-        Optional<Ecole> ecole = ecoleRepository.findById(ecoleId);
-        if (ecole.isEmpty())
-            return;
-        Optional<Salle> salle = salleRepository.findById(salleId);
-        if (salle.isEmpty())
-            return;
-        ecole.get().addSalle(salle.get());
+        ecoleOptional.get().updateData(data);
     }
 
 

@@ -11,10 +11,7 @@ import eu.telecomnancy.profrdv.server.repository.SalleRepository;
 import eu.telecomnancy.profrdv.server.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +41,16 @@ public class UtilisateurController {
         else
             utilisateur = new Eleve(data);
         utilisateurRepository.save(utilisateur);
+    }
+
+    @PutMapping("/utilisateur")
+    public void updateUtilisateur(RequestEntity<UtilisateurData> monUtilisateur) {
+        UtilisateurData data = monUtilisateur.getBody();
+        Optional<Utilisateur> utilisateur = utilisateurRepository.findById(data.id);
+        if (utilisateur.isEmpty())
+            return;
+        utilisateur.get().updateData(monUtilisateur);
+        utilisateurRepository.save(utilisateur.get());
     }
 
     @PostMapping("/utilisateur/prendreRDV")
