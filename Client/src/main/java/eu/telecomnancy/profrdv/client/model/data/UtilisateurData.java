@@ -32,4 +32,5 @@ public class UtilisateurData {
         this.disponibiliteFixes = disponibiliteFixes;
         this.modificateurDisponibilites = modificateurDisponibilites;
     }
+
 }

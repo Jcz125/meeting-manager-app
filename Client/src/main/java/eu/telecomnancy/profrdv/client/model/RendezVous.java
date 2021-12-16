@@ -4,10 +4,13 @@ package eu.telecomnancy.profrdv.client.model;
 import eu.telecomnancy.profrdv.client.model.data.EtatRendezVousData;
 import eu.telecomnancy.profrdv.client.model.data.RendezVousData;
 import eu.telecomnancy.profrdv.client.model.data.SalleData;
+import eu.telecomnancy.profrdv.client.model.data.UtilisateurData;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RendezVous {
     private RendezVousData rendezVousREST;
@@ -108,14 +111,64 @@ public class RendezVous {
         this.etatRendezVous = etatRendezVous;
     }*/
 
-    public List<String> getProfstoString() {
-        List<String> profs = new ArrayList<>();
+    public List<Utilisateur> getUtilisateurs() {
+        List<Utilisateur> utilisateurs = new ArrayList<>();
+        RestTemplate restTemplate = new RestTemplate();
+        for (Map.Entry<Integer, Boolean> entry : this.rendezVousREST.utilisateursIdsConfirmed.entrySet()) {
+            UtilisateurData response =
+                    restTemplate.getForObject(
+                            "http://127.0.0.1:8080/utilisateur?id=" + entry.getKey(),
+                            UtilisateurData.class);
+            if (response.estProf)
+                utilisateurs.add(new Professeur(response));
+            else
+                utilisateurs.add(new Eleve(response));
+        }
+        return utilisateurs;
+    }
+
+    public List<Utilisateur> getProfs() {
+        List<Utilisateur> profs = new ArrayList<>();
+        RestTemplate restTemplate = new RestTemplate();
+        for (Map.Entry<Integer, Boolean> entry : this.rendezVousREST.utilisateursIdsConfirmed.entrySet()) {
+            UtilisateurData response =
+                    restTemplate.getForObject(
+                            "http://127.0.0.1:8080/utilisateur?id=" + entry.getKey(),
+                            UtilisateurData.class);
+            if (response.estProf)
+                profs.add(new Professeur(response));
+        }
         return profs;
     }
 
-    public List<String> getElevestoString() {
-        List<String> eleves = new ArrayList<>();
+    public List<Utilisateur> getEleves() {
+        List<Utilisateur> eleves = new ArrayList<>();
+        RestTemplate restTemplate = new RestTemplate();
+        for (Map.Entry<Integer, Boolean> entry : this.rendezVousREST.utilisateursIdsConfirmed.entrySet()) {
+            UtilisateurData response =
+                    restTemplate.getForObject(
+                            "http://127.0.0.1:8080/utilisateur?id=" + entry.getKey(),
+                            UtilisateurData.class);
+            if (!response.estProf)
+                eleves.add(new Eleve(response));
+        }
         return eleves;
+    }
+
+    public List<String> getProfstoString() {
+        List<String> profString = new ArrayList<>();
+        List<Utilisateur> users = this.getProfs();
+        for (Utilisateur user : users)
+            profString.add(user.getPrenom() + " " + user.getNom());
+        return profString;
+    }
+
+    public List<String> getElevestoString() {
+        List<String> eleveString = new ArrayList<>();
+        List<Utilisateur> users = this.getEleves();
+        for (Utilisateur user : users)
+            eleveString.add(user.getPrenom() + " " + user.getNom());
+        return eleveString;
     }
     //endregion
 }
