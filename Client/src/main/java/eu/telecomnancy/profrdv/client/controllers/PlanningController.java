@@ -10,16 +10,18 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.util.Pair;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class PlanningController implements Observateur{
 
@@ -30,6 +32,9 @@ public class PlanningController implements Observateur{
     @FXML private Label vendredi; // = new Label("Lundi");
     @FXML private Label samedi; //= new Label("Lundi");
     @FXML private Label dimanche; //= new Label("Lundi");
+    @FXML private Label titre ;
+    @FXML private Label description ;
+    @FXML private Label lieu ;
     @FXML private ListView listViewLundi ;
     @FXML private ListView listViewMardi ;
     @FXML private ListView listViewMercredi ;
@@ -43,8 +48,25 @@ public class PlanningController implements Observateur{
     private LocalDate jour ;
     private Label[] listJour = {lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche};
     private int count=0;
-    private ArrayList<String> Rdvlist = new ArrayList<String>();
-    ObservableList observableList = FXCollections.observableArrayList();
+
+    private ArrayList<Pair> RdvlistLundi = new ArrayList<Pair>();
+    private ArrayList<Pair> RdvlistMardi = new ArrayList<Pair>();
+    private ArrayList<Pair> RdvlistMercredi = new ArrayList<Pair>();
+    private ArrayList<Pair> RdvlistJeudi = new ArrayList<Pair>();
+    private ArrayList<Pair> RdvlistVendredi = new ArrayList<Pair>();
+    private ArrayList<Pair> RdvlistSamedi = new ArrayList<Pair>();
+    private ArrayList<Pair> RdvlistDimanche = new ArrayList<Pair>();
+
+    ObservableList observableListLundi = FXCollections.observableArrayList();
+    ObservableList observableListMardi = FXCollections.observableArrayList();
+    ObservableList observableListMercredi = FXCollections.observableArrayList();
+    ObservableList observableListJeudi = FXCollections.observableArrayList();
+    ObservableList observableListVendredi = FXCollections.observableArrayList();
+    ObservableList observableListSamedi = FXCollections.observableArrayList();
+    ObservableList observableListDimanche = FXCollections.observableArrayList();
+
+
+    private String heurRDV ;
 
     public PlanningController(Utilisateur u){
         this.u = u ;
@@ -60,7 +82,7 @@ public class PlanningController implements Observateur{
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws ParseException {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -135,8 +157,22 @@ public class PlanningController implements Observateur{
         dimanche.setText(formattedDay7);
     }
 
-    public void setHours() {
+    private long DaysBetween(String str1, String str2) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH);
+        Date firstDate = sdf.parse(str1);
+        Date secondDate = sdf.parse(str2);
+
+        long diff = secondDate.getTime() - firstDate.getTime();
+
+        TimeUnit time = TimeUnit.DAYS;
+        long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
+        //System.out.println("The difference in days is : "+diffrence);
+        return diffrence ;
+    }
+
+    public void setHours() throws ParseException {
         for (RendezVous rdv : RDVs) {
+            String titre = rdv.getTitre();
             LocalDateTime horaire = rdv.getHoraire();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
@@ -145,42 +181,90 @@ public class PlanningController implements Observateur{
             DayOfWeek jour = horaire.getDayOfWeek();
             int numJour = jour.getValue();
             String heur = words[1];
-            Rdvlist.add(heur);
-        }
-        observableList.removeAll(observableList) ;
-        observableList.setAll(Rdvlist);
-        listViewLundi.getItems().addAll(observableList);
 
-//        for (RendezVous rdv : RDVs) {
-//
-//            LocalDateTime horaire = rdv.getHoraire();
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//            String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
-//
-//            String[] words = formattedDateTime.split(" ");
-//            String date = words[0];
-//            String heur = words[1];
-//
-//            DayOfWeek jour = horaire.getDayOfWeek();
-//            int numJour = jour.getValue();
-////
-////            String[] HeurMin = heur.split(":");
-////            int numHeur = Integer.parseInt(HeurMin[0]);
-////            int numMin = Integer.parseInt(HeurMin[1]);
-////            int numMinTotal = (numHeur*60)+numMin ;
-//        }
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            //c.add(Calendar.DATE, 1);
+            //c.add(Calendar.DATE, 7 * count);
+            String formattedDay1 = df.format(c.getTime());
+
+            long diff = DaysBetween(date, formattedDay1);
+
+            System.out.println(diff);
+
+            if (count == diff/7) {
+                switch ((int)diff) {
+                    case 0 :
+                        RdvlistLundi.add(new Pair(heur,titre));
+                        break;
+                    case 1 :
+                        RdvlistMardi.add(new Pair(heur,titre));
+                        break;
+                    case 2 :
+                        RdvlistMercredi.add(new Pair(heur,titre));
+                        break;
+                    case 3 :
+                        RdvlistJeudi.add(new Pair(heur,titre));
+                        break;
+                    case 4 :
+                        RdvlistVendredi.add(new Pair(heur,titre));
+                        break;
+                    case 5 :
+                        RdvlistSamedi.add(new Pair(heur,titre));
+                        break;
+                    case 6 :
+                        RdvlistDimanche.add(new Pair(heur,titre));
+                        break;
+                    default:
+                        break ;
+                }
+            }
+        }
+        listViewConst(observableListLundi, RdvlistLundi, listViewLundi);
+        listViewConst(observableListMardi, RdvlistMardi, listViewMardi);
+        listViewConst(observableListMercredi, RdvlistMercredi, listViewMercredi);
+        listViewConst(observableListJeudi, RdvlistJeudi, listViewJeudi);
+        listViewConst(observableListVendredi, RdvlistVendredi, listViewVendredi);
+        listViewConst(observableListSamedi, RdvlistSamedi, listViewSamedi);
+        listViewConst(observableListDimanche, RdvlistDimanche, listViewDimanche);
+
+        RdvlistLundi.clear();
+        RdvlistMardi.clear();
+        RdvlistMercredi.clear();
+        RdvlistJeudi.clear();
+        RdvlistVendredi.clear();
+        RdvlistSamedi.clear();
+        RdvlistDimanche.clear();
+
+//        listViewLundi.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+//                heurRDV = (String)newValue;
+//                //System.out.println(heurRDV);
+//            }
+//        });
+
+    }
+
+    private void listViewConst(ObservableList o, ArrayList<Pair> list, ListView listView){
+        o.removeAll(o) ;
+        o.setAll(list);
+        listView.getItems().addAll(o);
     }
 
     @FXML
-    private void handleSemProButton(){
+    private void handleSemProButton() throws ParseException {
         count++;
         setCalender(count*7);
+        setHours();
     }
 
     @FXML
-    private void handleSemPrecButton(){
+    private void handleSemPrecButton() throws ParseException {
         count--;
         setCalender(count*7);
+        setHours();
     }
 
     @Override
