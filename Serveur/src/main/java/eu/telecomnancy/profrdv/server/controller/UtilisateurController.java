@@ -33,7 +33,7 @@ public class UtilisateurController {
     }
 
     @PostMapping("/utilisateur")
-    public void setUtilisateur(RequestEntity<UtilisateurData> monUtilisateur) {
+    public Integer setUtilisateur(RequestEntity<UtilisateurData> monUtilisateur) {
         UtilisateurData data = monUtilisateur.getBody();
         Utilisateur utilisateur;
         if (data.estProf)
@@ -41,6 +41,7 @@ public class UtilisateurController {
         else
             utilisateur = new Eleve(data);
         utilisateurRepository.save(utilisateur);
+        return utilisateur.getId();
     }
 
     @PutMapping("/utilisateur")

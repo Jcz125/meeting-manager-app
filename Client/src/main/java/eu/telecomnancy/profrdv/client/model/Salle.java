@@ -19,12 +19,13 @@ public class Salle {
         data.aile = aile;
         HttpEntity<SalleData> dataRequest = new HttpEntity<>(data);
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.exchange(
+        data.numero = restTemplate.exchange(
                 "http://127.0.0.1:8080/salle",
                 HttpMethod.POST,
                 dataRequest,
-                Void.class
-        );
+                Integer.class
+        ).getBody();
+        fetchData();
     }
 
     public void fetchData() {

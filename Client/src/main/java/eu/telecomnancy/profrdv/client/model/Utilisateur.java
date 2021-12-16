@@ -28,12 +28,13 @@ public abstract class Utilisateur {
         data.estProf = this instanceof Professeur;
         HttpEntity<UtilisateurData> dataRequest = new HttpEntity<>(data);
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.exchange(
+        data.id = restTemplate.exchange(
                 "http://127.0.0.1:8080/utilisateur",
                 HttpMethod.POST,
                 dataRequest,
-                Void.class
-        );
+                Integer.class
+        ).getBody();
+        fetchData();
     }
 
     public void fetchData() {

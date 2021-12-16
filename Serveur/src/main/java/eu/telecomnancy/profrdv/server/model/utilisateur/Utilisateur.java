@@ -121,6 +121,10 @@ public abstract class Utilisateur {
         return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, false, null, null);
     }
 
+    public void updateData(RequestEntity<UtilisateurData> monUtilisateur) {
+
+    }
+
 
     //region assesseurs
     public String getNom() {
@@ -170,10 +174,6 @@ public abstract class Utilisateur {
 
     public Integer getId() {
         return id;
-    }
-
-    public void updateData(RequestEntity<UtilisateurData> monUtilisateur) {
-
     }
     //endregion
 }

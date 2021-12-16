@@ -23,10 +23,11 @@ public class SalleController {
     }
 
     @PostMapping("/salle")
-    public void createSalle(RequestEntity<SalleData> maSalle) {
+    public Integer createSalle(RequestEntity<SalleData> maSalle) {
         SalleData data = maSalle.getBody();
         Salle salle = new Salle(data);
         salleRepository.save(salle);
+        return salle.getNumero();
     }
 
     @PutMapping("/salle")

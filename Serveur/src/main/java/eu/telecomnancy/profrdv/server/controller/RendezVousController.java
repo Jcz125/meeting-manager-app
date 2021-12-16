@@ -30,10 +30,11 @@ public class RendezVousController {
     }
 
     @PostMapping("/rdv")
-    public void createRDV(RequestEntity<RendezVousData> monRDV) {
+    public Integer createRDV(RequestEntity<RendezVousData> monRDV) {
         RendezVousData data = monRDV.getBody();
         RendezVous rdv = new RendezVous(data);
         rendezVousRepository.save(rdv);
+        return  rdv.getId();
     }
 
     @PutMapping("/rdv")
