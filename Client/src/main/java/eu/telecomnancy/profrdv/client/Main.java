@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.client;
 
 import eu.telecomnancy.profrdv.client.controllers.CreationController;
+import eu.telecomnancy.profrdv.client.controllers.EspacePerso;
 import eu.telecomnancy.profrdv.client.controllers.MenuController;
 import eu.telecomnancy.profrdv.client.controllers.PriseRDVController;
 import eu.telecomnancy.profrdv.client.model.Ecole;
@@ -58,15 +59,16 @@ public class Main extends Application {
         Parent creationParent = creationLoader.load();
 
 
-//        FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("EspacePerso.fxml"));
-//        Parent espacePersoParent = espacePersoLoader.load();
+        FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("EspacePerso.fxml"));
+        espacePersoLoader.setControllerFactory(iC -> new EspacePerso());
+        Parent espacePersoParent = espacePersoLoader.load();
 
 
         MenuController menuController = menuLoader.getController();
 
         menuController.setPlanningNode(priseRDVParent);
         menuController.setCreationNode(creationParent);
-//        menuController.setEspacePersoNode(espacePersoParent);
+        menuController.setEspacePersoNode(espacePersoParent);
 
         menuController.setPanneau(panneau);
 
