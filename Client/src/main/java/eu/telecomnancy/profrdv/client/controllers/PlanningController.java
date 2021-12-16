@@ -171,6 +171,15 @@ public class PlanningController implements Observateur{
     }
 
     public void setHours() throws ParseException {
+
+        listViewLundi.getItems().clear();
+        listViewMardi.getItems().clear();
+        listViewMercredi.getItems().clear();
+        listViewJeudi.getItems().clear();
+        listViewVendredi.getItems().clear();
+        listViewSamedi.getItems().clear();
+        listViewDimanche.getItems().clear();
+
         for (RendezVous rdv : RDVs) {
             String titre = rdv.getTitre();
             LocalDateTime horaire = rdv.getHoraire();
@@ -229,14 +238,6 @@ public class PlanningController implements Observateur{
         listViewConst(observableListSamedi, RdvlistSamedi, listViewSamedi);
         listViewConst(observableListDimanche, RdvlistDimanche, listViewDimanche);
 
-        RdvlistLundi.clear();
-        RdvlistMardi.clear();
-        RdvlistMercredi.clear();
-        RdvlistJeudi.clear();
-        RdvlistVendredi.clear();
-        RdvlistSamedi.clear();
-        RdvlistDimanche.clear();
-
 //        listViewLundi.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
 //            @Override
 //            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -251,6 +252,7 @@ public class PlanningController implements Observateur{
         o.removeAll(o) ;
         o.setAll(list);
         listView.getItems().addAll(o);
+        list.clear();
     }
 
     @FXML
