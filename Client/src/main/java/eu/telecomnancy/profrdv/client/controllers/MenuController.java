@@ -19,6 +19,7 @@ public class MenuController implements Observateur {
     private BorderPane panneau;
     private Parent creation;
     private Parent planning;
+    private Parent espacePerso;
 
 
     public MenuController() {
@@ -34,7 +35,7 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handlePersonalButton(ActionEvent actionEvent) {
-
+        panneau.setBottom(espacePerso);
     }
 
 
@@ -72,13 +73,18 @@ public class MenuController implements Observateur {
     }
 
 
-    public void setCreationScene(Parent parent) {
+    public void setCreationNode(Parent parent) {
         this.creation = parent;
     }
 
 
-    public void setPlanningScene(Parent parent) {
+    public void setPlanningNode(Parent parent) {
         this.planning = parent;
+    }
+
+
+    public void setEspacePersoNode(Parent parent) {
+        this.espacePerso = parent;
     }
 
 
