@@ -1,7 +1,10 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.*
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.6.1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
 }
 
 group 'eu.telecomnancy.profrdv.server'
@@ -30,6 +33,10 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    shadow 'org.springframework.boot:spring-boot-starter-web'
+    shadow 'org.springframework.boot:spring-boot-starter-data-jpa'
+    shadow 'org.postgresql:postgresql'
+    shadow 'com.h2database:h2'
 
 }
 
@@ -39,6 +46,18 @@ test {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'eu.telecomnancy.profrdv.server.MainController'
+        attributes 'Main-Class': 'eu.telecomnancy.profrdv.server.Main'
+    }
+}
+
+shadowJar {
+    // Required for Spring https://github.com/spring-projects/spring-boot/issues/1828
+    mergeServiceFiles()
+    append 'META-INF/spring.handlers'
+    append 'META-INF/spring.schemas'
+    append 'META-INF/spring.tooling'
+    transform(PropertiesFileTransformer) {
+        paths = ['META-INF/spring.factories' ]
+        mergeStrategy = "append"
     }
 }
