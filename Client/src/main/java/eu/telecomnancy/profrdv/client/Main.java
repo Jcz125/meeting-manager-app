@@ -49,9 +49,10 @@ public class Main extends Application {
         loader1.setControllerFactory(iC->new MenuController());
         panneau.setTop(loader1.load());
 
+        Utilisateur utilisateur = utilisateurs.get(0);
         FXMLLoader loader2 = new FXMLLoader();
         loader2.setLocation(getClass().getResource("PriseRDV.fxml"));
-        loader2.setControllerFactory(iC->new PriseRDVController());
+        loader2.setControllerFactory(iC->new PriseRDVController(utilisateur));
         panneau.setBottom(loader2.load());
 
 //        FXMLLoader loader3 = new FXMLLoader();
