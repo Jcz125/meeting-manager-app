@@ -47,32 +47,7 @@ public class RDVInfoCellController extends ListCell<RendezVous> implements Obser
 
 
     public RDVInfoCellController() {
-        this.rdv = rdv;
-//        this.titreRDV.setText(rdv.getTitre());
-//        this.etatRDV.setText(rdv.getEtatRendezVoustoString()); // implementer la methode pour recuperer le string de l'etat du rdv
-//        this.descriptionRDV.setText(rdv.getDescription());
-//        this.dateRDV.setText("" + rdv.getHoraire().getDayOfMonth() + "/" + rdv.getHoraire().getMonthValue() + "/" + rdv.getHoraire().getYear());
-//        this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + rdv.getHoraire().getMinute());
-//        this.lieuRDV.setText("" + rdv.getSalle().etage + " " + rdv.getSalle().aile + " " + rdv.getSalle().numero);
-//        List<String> profs = rdv.getProfstoString();
-//        List<String> eleves = rdv.getElevestoString();
-//
-//        for (String str : profs) {
-//            listProf.getChildren().add(new Label(str));
-//        }
-//        for (String str : eleves) {
-//            listEleve.getChildren().add(new Label(str));
-//        }
 
-//        this.titreRDV = new Label("Sans nom");
-//        this.etatRDV = new Label("Sans état");
-//        this.descriptionRDV = new Label("Pas de description.");
-//        this.dateRDV = new Label("JJ/MM/AAAA");
-//        this.heureRDV = new Label("HH:mm");
-//        this.lieuRDV = new Label("Pas de lieu.");
-//
-//        this.listProf = new VBox();
-//        this.listEleve = new VBox();
     }
 
     public void initialize() {
@@ -113,53 +88,40 @@ public class RDVInfoCellController extends ListCell<RendezVous> implements Obser
             setGraphic(null);
         } else {
             if (fxmlLoader == null) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("ListRDVInfoCell.fxml"));
+//                fxmlLoader = new FXMLLoader(getClass().getResource("ListRDVInfoCell.fxml"));
+                fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/eu/telecomnancy/profrdv/client/ListRDVInfoCell.fxml"));
+                System.out.println("path: "+getClass().getResource("/eu/telecomnancy/profrdv/client/ListRDVInfoCell.fxml"));
                 fxmlLoader.setController(this);
+                try {
+                    fxmlLoader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            try {
-                fxmlLoader.load();
-            } catch (IOException e){
-                e.printStackTrace();
+            this.rdv = rdv;
+            this.titreRDV.setText(rdv.getTitre());
+            this.etatRDV.setText(rdv.getEtatRendezVoustoString());
+            this.descriptionRDV.setText(rdv.getDescription());
+            this.dateRDV.setText("" + rdv.getHoraire().getDayOfMonth() + "/" + rdv.getHoraire().getMonthValue() + "/" + rdv.getHoraire().getYear());
+            this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + rdv.getHoraire().getMinute());
+            this.lieuRDV.setText("" + rdv.getSalle().getEtage() + " " + rdv.getSalle().getAile() + " " + rdv.getSalle().getNumero());
+            List<String> profs = rdv.getProfstoString();
+            List<String> eleves = rdv.getElevestoString();
+
+            for (String str : profs) {
+                listProf.getChildren().add(new Label(str));
             }
-        }
-        this.rdv = rdv;
-        this.titreRDV.setText(rdv.getTitre());
-        this.etatRDV.setText(rdv.getEtatRendezVoustoString());
-        this.descriptionRDV.setText(rdv.getDescription());
-        this.dateRDV.setText("" + rdv.getHoraire().getDayOfMonth() + "/" + rdv.getHoraire().getMonthValue() + "/" + rdv.getHoraire().getYear());
-        this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + rdv.getHoraire().getMinute());
-        this.lieuRDV.setText("" + rdv.getSalle().getEtage() + " " + rdv.getSalle().getAile() + " " + rdv.getSalle().getNumero());
-        List<String> profs = rdv.getProfstoString();
-        List<String> eleves = rdv.getElevestoString();
+            for (String str : eleves) {
+                listEleve.getChildren().add(new Label(str));
+            }
 
-        for (String str : profs) {
-            listProf.getChildren().add(new Label(str));
+            setText(null);
+            setGraphic(anchorPaneRDVInfoCell);
         }
-        for (String str : eleves) {
-            listEleve.getChildren().add(new Label(str));
-        }
-
-        setText(null);
-        setGraphic(anchorPaneRDVInfoCell);
     }
 
     public void update() {
-//        this.titreRDV.setText(rdv.getTitre());
-//        this.etatRDV.setText(rdv.getEtatRendezVoustoString()); // implementer la methode pour recuperer le string de l'etat du rdv
-//        this.descriptionRDV.setText(rdv.getDescription());
-//        this.dateRDV.setText("" + rdv.getHoraire().getDayOfMonth() + "/" + rdv.getHoraire().getMonthValue() + "/" + rdv.getHoraire().getYear());
-//        this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + rdv.getHoraire().getMinute());
-//        this.lieuRDV.setText("" + rdv.getSalle().etage + " " + rdv.getSalle().aile + " " + rdv.getSalle().numero);
-//        List<String> profs = rdv.getProfstoString();
-//        List<String> eleves = rdv.getElevestoString();
-//        this.listProf.getChildren().removeAll();
-//        this.listEleve.getChildren().removeAll();
-//        // ajouter à la base de données
-//        for (String str : profs) {
-//            listProf.getChildren().add(new Label(str));
-//        }
-//        for (String str : eleves) {
-//            listEleve.getChildren().add(new Label(str));
-//        }
+
     }
 }
