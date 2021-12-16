@@ -36,8 +36,8 @@ public class Main extends Application {
             }
         }
 
-        Utilisateur u = new Eleve("a", "a", "aaa");
-        u.setTelephone("3660");
+//        Utilisateur u = new Eleve("a", "a", "aaa");
+//        u.setTelephone("3660");
 
         ProfRDV profRDV = new ProfRDV(stage);
 
