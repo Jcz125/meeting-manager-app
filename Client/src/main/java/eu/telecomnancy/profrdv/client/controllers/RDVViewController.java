@@ -20,18 +20,33 @@ public class RDVViewController implements Observateur {
     }
 
     public void initialize() {
-//        for (RendezVous rdv : user.getRDVs()) {
-//            RDVInfoCellController rdvInfo = new RDVInfoCellController();
-//            rdvInfo.setInfo(rdv);
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListRDVInfoCell.fxml"));
-//            fxmlLoader.setController(this);
-//            try {
-//                fxmlLoader.load();
-//            }
-//            catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+        for (RendezVous rdv : user.getRDVs()) {
+            RDVInfoCellController rdvInfo = new RDVInfoCellController();
+            rdvInfo.setInfo(rdv);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListRDVInfoCell.fxml"));
+            fxmlLoader.setController(this);
+            try {
+                fxmlLoader.load();
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            rdvInfo.setInfo(rdv);
+        }
+    }
+
+    public void add(RendezVous rdv) {
+        RDVInfoCellController rdvInfo = new RDVInfoCellController();
+        rdvInfo.setInfo(rdv);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListRDVInfoCell.fxml"));
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        rdvInfo.setInfo(rdv);
     }
 
     public void update() {

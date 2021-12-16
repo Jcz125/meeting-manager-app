@@ -13,7 +13,6 @@ import java.util.List;
 
 public class RDVInfoCellController implements Observateur {
 
-    private Utilisateur user;
     private RendezVous rdv;
     @FXML
     private Label titreRDV;
@@ -38,11 +37,8 @@ public class RDVInfoCellController implements Observateur {
     @FXML
     private VBox listEleve;
 
-    private List<String> profs;
-    private List<String> eleves;
 
-
-    public void RDVInfoCellController() {
+    public RDVInfoCellController() {
 
     }
 
@@ -58,13 +54,13 @@ public class RDVInfoCellController implements Observateur {
         this.dateRDV.setText("" + rdv.getHoraire().getDayOfMonth() + "/" + rdv.getHoraire().getMonthValue() + "/" + rdv.getHoraire().getYear());
         this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + rdv.getHoraire().getMinute());
         this.lieuRDV.setText("" + rdv.getSalle().etage + " " + rdv.getSalle().aile + " " + rdv.getSalle().numero);
-        this.profs = rdv.getProfstoString();
-        this.eleves = rdv.getElevestoString();
+        List<String> profs = rdv.getProfstoString();
+        List<String> eleves = rdv.getElevestoString();
 
-        for (String str : this.profs) {
+        for (String str : profs) {
             listProf.getChildren().add(new Label(str));
         }
-        for (String str : this.eleves) {
+        for (String str : eleves) {
             listEleve.getChildren().add(new Label(str));
         }
     }
@@ -82,6 +78,22 @@ public class RDVInfoCellController implements Observateur {
     }
 
     public void update() {
-
+        this.titreRDV.setText(rdv.getTitre());
+        this.etatRDV.setText(rdv.getEtatRendezVoustoString()); // implementer la methode pour recuperer le string de l'etat du rdv
+        this.descriptionRDV.setText(rdv.getDescription());
+        this.dateRDV.setText("" + rdv.getHoraire().getDayOfMonth() + "/" + rdv.getHoraire().getMonthValue() + "/" + rdv.getHoraire().getYear());
+        this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + rdv.getHoraire().getMinute());
+        this.lieuRDV.setText("" + rdv.getSalle().etage + " " + rdv.getSalle().aile + " " + rdv.getSalle().numero);
+        List<String> profs = rdv.getProfstoString();
+        List<String> eleves = rdv.getElevestoString();
+        this.listProf.getChildren().removeAll();
+        this.listEleve.getChildren().removeAll();
+        // ajouter à la base de données
+        for (String str : profs) {
+            listProf.getChildren().add(new Label(str));
+        }
+        for (String str : eleves) {
+            listEleve.getChildren().add(new Label(str));
+        }
     }
 }
