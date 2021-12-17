@@ -52,7 +52,7 @@ public class RendezVousTest {
         Professeur professeur1 = new Professeur("a", "b", "c");
         Professeur professeur2 = new Professeur("a", "b", "c");
 
-        professeur1.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.of(8, 0), LocalTime.of(12, 0)));
+        professeur1.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.of(8, 0), LocalTime.of(11, 59)));
         professeur2.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(14, 0)));
 
         LocalDateTime debut = LocalDateTime.of(2021, 12, 13, 0, 0);
