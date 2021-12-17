@@ -1,6 +1,8 @@
 package eu.telecomnancy.profrdv.server.disponibilite;
 
 import eu.telecomnancy.profrdv.server.model.disponibilite.Disponibilite;
+import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
+import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
 import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
@@ -27,14 +29,14 @@ public class DisponibiliteTest {
         LocalDateTime horaire = LocalDateTime.of(2021, 12, 15, 9, 0);
 
         Disponibilite planning = new Disponibilite();
-        planning.add(DayOfWeek.MONDAY, debut, fin);
-        planning.add(DayOfWeek.TUESDAY, debut, fin);
-        planning.add(DayOfWeek.WEDNESDAY, debut, fin);
+        planning.add(new DisponibiliteFixe(DayOfWeek.MONDAY, debut, fin));
+        planning.add(new DisponibiliteFixe(DayOfWeek.TUESDAY, debut, fin));
+        planning.add(new DisponibiliteFixe(DayOfWeek.WEDNESDAY, debut, fin));
         assertTrue(planning.estDisponible(horaire));
 
         LocalDateTime debutException = LocalDateTime.of(2021, 12, 15, 9, 0);
         LocalDateTime finException = LocalDateTime.of(2021, 12, 15, 12, 0);
-        planning.add(false, debutException, finException);
+        planning.add(new ModificateurDisponibilite(false, debutException, finException));
         assertFalse(planning.estDisponible(horaire));
 
         horaire = LocalDateTime.of(2021, 12, 15, 12, 0);
@@ -45,7 +47,7 @@ public class DisponibiliteTest {
 
         LocalDateTime debutInclusion = LocalDateTime.of(2021, 12, 15, 16, 0);
         LocalDateTime finInclusion = LocalDateTime.of(2021, 12, 15, 17, 0);
-        planning.add(true, debutInclusion, finInclusion);
+        planning.add(new ModificateurDisponibilite(true, debutInclusion, finInclusion));
 
         horaire = LocalDateTime.of(2021, 12, 15, 16, 0);
         assertTrue(planning.estDisponible(horaire));

@@ -13,21 +13,23 @@ import java.util.*;
 @Entity
 public class RendezVous {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(nullable = false)
     private LocalDateTime horaire;
-    @ManyToMany(targetEntity=Utilisateur.class, cascade=CascadeType.ALL)
+    @ManyToMany(targetEntity = Utilisateur.class, cascade = CascadeType.ALL)
     private Map<Utilisateur, Boolean> utilisateurs; // on donne une paire pour attribuer une confirmation à tout le monde
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Salle salle;
     private String description;
     @Column(nullable = false)
     private String titre;
     private EtatRendezVousEnum etatRendezVous;
 
-    public RendezVous() {}
+
+    public RendezVous() {
+    }
 
 
     public RendezVous(LocalDateTime horaire, Salle salle, String titre, String description) {
@@ -38,6 +40,7 @@ public class RendezVous {
         this.salle = salle;
         this.etatRendezVous = EtatRendezVousEnum.DEMANDE;
     }
+
 
     public RendezVous(RendezVousData data) {
         SalleRepository salleRepository = (SalleRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("salleRepository");
@@ -61,6 +64,7 @@ public class RendezVous {
 
         this.salle = null;
     }
+
 
     public void updateData(RendezVousData data) {
         if (etatRendezVous != EtatRendezVousEnum.DEMANDE && etatRendezVous == EtatRendezVousEnum.CONFIRME)
@@ -90,7 +94,7 @@ public class RendezVous {
     public static List<RendezVous> genererRendezVous(List<Utilisateur> utilisateurs, LocalDateTime debut, LocalDateTime fin) {
         ArrayList<RendezVous> creneaux = new ArrayList<>();
         LocalDateTime heure = LocalDateTime.from(debut);
-        while (!fin.isEqual(heure) && heure.isBefore(fin)) {
+        while (!heure.isEqual(fin) && heure.isBefore(fin)) {
             boolean addable = true;
             for (Utilisateur utilisateur : utilisateurs) {
                 if (!utilisateur.estDisponible(heure)) {
@@ -175,20 +179,27 @@ public class RendezVous {
         return salle;
     }
 
+
     public Integer getId() {
         return id;
     }
 
+
     public RendezVousData getData() {
         Map<Integer, Boolean> utilisateursIdsConfirmed = new HashMap<>();
-        for (Utilisateur utilisateur: utilisateurs.keySet()) {
+        for (Utilisateur utilisateur : utilisateurs.keySet()) {
             utilisateursIdsConfirmed.put(utilisateur.getId(), utilisateurs.get(utilisateur));
         }
         return new RendezVousData(id, horaire, utilisateursIdsConfirmed, description, titre, salle == null ? null : salle.getData(), etatRendezVous == null ? null : etatRendezVous.getData());
     }
 
+
     public boolean peutEtreSupprimer() {
         return !utilisateurs.containsValue(true);
+    }
+
+    public void confirme(Utilisateur utilisateur) {
+        utilisateurs.replace(utilisateur, true);
     }
 
     //endregion

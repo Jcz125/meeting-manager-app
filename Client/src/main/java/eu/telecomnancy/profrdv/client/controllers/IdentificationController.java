@@ -1,9 +1,7 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.Professeur;
-import eu.telecomnancy.profrdv.client.model.RendezVous;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
-import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,33 +21,43 @@ public class IdentificationController implements Observateur {
     @FXML
     private TextField email;
 
+    private MenuController menuController;
+
 
     @FXML
     private void initialize() {
-        
+
     }
 
 
     public IdentificationController(List<Utilisateur> u) {
-        this.utilis = u ;
+        this.utilis = u;
     }
+
 
     public void handleConfirmer() {
         String mail = this.email.getText();
         for (Utilisateur u : utilis) {
-            if (u.getEmail().equals(email)){
+            if (u.getEmail().equals(mail)) {
                 if (u instanceof Professeur) {
-
+                    this.menuController.chargerProfMenu();
+                    break;
                 } else {
-
+                    this.menuController.chargerEleveMenu();
+                    break;
                 }
             }
         }
     }
+
 
     @Override
     public void update() {
 
     }
 
+
+    public void setMenuController(MenuController menuController) {
+        this.menuController = menuController;
+    }
 }

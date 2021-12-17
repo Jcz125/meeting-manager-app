@@ -2,6 +2,7 @@ package eu.telecomnancy.profrdv.server.utilisateur;
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.Salle;
+import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
@@ -47,8 +48,8 @@ public class UtilisateurTest {
 
         LocalTime debut = LocalTime.of(8, 0);
         LocalTime fin = LocalTime.of(12, 0);
-        gerald.add(DayOfWeek.WEDNESDAY, debut, fin);
-        christophe.add(DayOfWeek.THURSDAY, debut, fin);
+        gerald.add(new DisponibiliteFixe(DayOfWeek.WEDNESDAY, debut, fin));
+        christophe.add(new DisponibiliteFixe(DayOfWeek.THURSDAY, debut, fin));
 
 
         ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
