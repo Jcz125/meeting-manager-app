@@ -129,15 +129,15 @@ public class PriseRDVController implements Observateur{
     }
 
     private void LoadUtilisateur(String u) {
-        observableListUtil.removeAll(observableListUtil) ;
+        //observableListUtil.removeAll(observableListUtil) ;
         observableListUtil.add(u);
         listViewProfs.setItems(observableListUtil);
-        listViewProfs.setCellFactory(new Callback<ListView, ListCell>() {
-            @Override
-            public ListCell call(ListView param) {
-                return new PriseRDVCell();
-            }
-        });
+//        listViewProfs.setCellFactory(new Callback<ListView, ListCell>() {
+//            @Override
+//            public ListCell call(ListView param) {
+//                return new PriseRDVCell();
+//            }
+//        });
     }
 
     private void loadData() throws ParseException {
