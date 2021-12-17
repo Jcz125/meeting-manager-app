@@ -1,7 +1,7 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.Ecole;
-import eu.telecomnancy.profrdv.client.model.Professeur;
+import eu.telecomnancy.profrdv.client.model.ProfRDV;
 import eu.telecomnancy.profrdv.client.model.RendezVous;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import javafx.beans.value.ChangeListener;
@@ -18,41 +18,58 @@ import java.awt.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class PriseRDVController implements Observateur{
+public class PriseRDVController implements Observateur {
 
-    @FXML private TextField researchBar ;
-    @FXML private Label lundi ;
-    @FXML private Label mardi ;
-    @FXML private Label mercredi ;
-    @FXML private Label jeudi ;
-    @FXML private Label vendredi ;
-    @FXML private Label samedi ;
-    @FXML private Label dimanche ;
-    @FXML private ListView listViewLundi ;
-    @FXML private ListView listViewMardi ;
-    @FXML private ListView listViewMercredi ;
-    @FXML private ListView listViewJeudi ;
-    @FXML private ListView listViewVendredi ;
-    @FXML private ListView listViewSamedi ;
-    @FXML private ListView listViewDimanche ;
-    @FXML private ListView listViewProfs ;
-    private List<Utilisateur> u ;
-    private List<RendezVous> dispo = new ArrayList<>() ;
+    @FXML
+    private TextField researchBar;
+    @FXML
+    private Label lundi;
+    @FXML
+    private Label mardi;
+    @FXML
+    private Label mercredi;
+    @FXML
+    private Label jeudi;
+    @FXML
+    private Label vendredi;
+    @FXML
+    private Label samedi;
+    @FXML
+    private Label dimanche;
+    @FXML
+    private ListView listViewLundi;
+    @FXML
+    private ListView listViewMardi;
+    @FXML
+    private ListView listViewMercredi;
+    @FXML
+    private ListView listViewJeudi;
+    @FXML
+    private ListView listViewVendredi;
+    @FXML
+    private ListView listViewSamedi;
+    @FXML
+    private ListView listViewDimanche;
+    @FXML
+    private ListView listViewProfs;
+    private List<Utilisateur> u;
+    private List<RendezVous> dispo = new ArrayList<>();
     private ArrayList<String> dispoList = new ArrayList<String>();
     private List<RendezVous> RDVList = new ArrayList<RendezVous>();
     ObservableList observableList = FXCollections.observableArrayList();
-    private String heurRDV ;
-    private LocalDateTime horaireRDV ;
+    private String heurRDV;
+    private LocalDateTime horaireRDV;
     private List<Utilisateur> listUtilisateur;
     private List<String> listString;
     private int count = 0;
-    private Utilisateur util ;
+    private Utilisateur util;
 
     private ArrayList<String> RdvlistLundi = new ArrayList<String>();
     private ArrayList<String> RdvlistMardi = new ArrayList<String>();
@@ -62,6 +79,7 @@ public class PriseRDVController implements Observateur{
     private ArrayList<String> RdvlistSamedi = new ArrayList<String>();
     private ArrayList<String> RdvlistDimanche = new ArrayList<String>();
     private ArrayList<String> Rdvlist = new ArrayList<String>();
+    private ProfRDV profRDV;
 
     ObservableList observableListLundi = FXCollections.observableArrayList();
     ObservableList observableListMardi = FXCollections.observableArrayList();
@@ -72,10 +90,13 @@ public class PriseRDVController implements Observateur{
     ObservableList observableListDimanche = FXCollections.observableArrayList();
     ObservableList observableListUtil = FXCollections.observableArrayList();
 
-    public PriseRDVController(List<Utilisateur> u, Utilisateur util){
-        this.u = u ;
-        this.util = util ;
+
+    public PriseRDVController(List<Utilisateur> u, Utilisateur util, ProfRDV profRDV) {
+        this.u = u;
+        this.util = util;
+        this.profRDV = profRDV;
     }
+
 
     @FXML
     void initialize() throws ParseException {
@@ -114,6 +135,7 @@ public class PriseRDVController implements Observateur{
         loadData();
     }
 
+
     private long DaysBetween(String str1, String str2) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH);
         Date firstDate = sdf.parse(str1);
@@ -124,8 +146,9 @@ public class PriseRDVController implements Observateur{
         TimeUnit time = TimeUnit.DAYS;
         long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
         //System.out.println("The difference in days is : "+diffrence);
-        return diffrence ;
+        return diffrence;
     }
+
 
     private void LoadUtilisateur(String u) {
         //observableListUtil.removeAll(observableListUtil) ;
@@ -138,6 +161,7 @@ public class PriseRDVController implements Observateur{
 //            }
 //        });
     }
+
 
     private void loadData() throws ParseException {
 
@@ -153,11 +177,10 @@ public class PriseRDVController implements Observateur{
         int hour = debut.getHour();
         int min = debut.getMinute();
 
-        if ( min%20 == 0 ) {
+        if (min % 20 == 0) {
             debut = LocalDateTime.of(debut.getYear(), debut.getMonthValue(), debut.getDayOfMonth(), hour, min, 00);
-        }
-        else {
-            debut = debut.plusMinutes(20-(min%20));
+        } else {
+            debut = debut.plusMinutes(20 - (min % 20));
         }
 
         Calendar c1 = Calendar.getInstance();
@@ -165,7 +188,7 @@ public class PriseRDVController implements Observateur{
         c1.add(Calendar.DATE, 6);
         Date finX = c1.getTime();
 
-        LocalDateTime fin = LocalDateTime.of(finX.getYear()+1900, finX.getMonth()+1, finX.getDate(), 23, 40, 00);
+        LocalDateTime fin = LocalDateTime.of(finX.getYear() + 1900, finX.getMonth() + 1, finX.getDate(), 23, 40, 00);
 
 //        System.out.println("sund "+fin);
 //        System.out.println("auj "+debut);
@@ -196,32 +219,32 @@ public class PriseRDVController implements Observateur{
             //System.out.println("diff  "+ diff);
 
             //if (count == Integer.parseInt(String.valueOf(diff/7))) {
-                //switch ((int)(diff%7)) {
-                switch (numJour) {
-                    case 1 :
-                        RdvlistLundi.add(heur);
-                        break;
-                    case 2 :
-                        RdvlistMardi.add(heur);
-                        break;
-                    case 3 :
-                        RdvlistMercredi.add(heur);
-                        break;
-                    case 4 :
-                        RdvlistJeudi.add(heur);
-                        break;
-                    case 5 :
-                        RdvlistVendredi.add(heur);
-                        break;
-                    case 6 :
-                        RdvlistSamedi.add(heur);
-                        break;
-                    case 7 :
-                        RdvlistDimanche.add(heur);
-                        break;
-                    default:
-                        break ;
-                }
+            //switch ((int)(diff%7)) {
+            switch (numJour) {
+                case 1:
+                    RdvlistLundi.add(heur);
+                    break;
+                case 2:
+                    RdvlistMardi.add(heur);
+                    break;
+                case 3:
+                    RdvlistMercredi.add(heur);
+                    break;
+                case 4:
+                    RdvlistJeudi.add(heur);
+                    break;
+                case 5:
+                    RdvlistVendredi.add(heur);
+                    break;
+                case 6:
+                    RdvlistSamedi.add(heur);
+                    break;
+                case 7:
+                    RdvlistDimanche.add(heur);
+                    break;
+                default:
+                    break;
+            }
 
         }
         listViewConst(observableListLundi, RdvlistLundi, listViewLundi);
@@ -233,7 +256,8 @@ public class PriseRDVController implements Observateur{
         listViewConst(observableListDimanche, RdvlistDimanche, listViewDimanche);
     }
 
-    public void setCalender(int param){
+
+    public void setCalender(int param) {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -267,57 +291,55 @@ public class PriseRDVController implements Observateur{
         dimanche.setText(formattedDay7);
     }
 
+
     @FXML
     private void handleSemProButton() throws ParseException {
         count++;
-        setCalender(count*7);
+        setCalender(count * 7);
         loadData();
     }
+
 
     @FXML
     private void handleSemPrecButton() throws ParseException {
         count--;
-        setCalender(count*7);
+        setCalender(count * 7);
         loadData();
     }
 
-    private void listViewConst(ObservableList o, ArrayList<String> list, ListView listView){
-        o.removeAll(o) ;
+
+    private void listViewConst(ObservableList o, ArrayList<String> list, ListView listView) {
+        o.removeAll(o);
         o.setAll(list);
         listView.getItems().addAll(o);
 
         listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                heurRDV = (String)newValue;
-                String[] heurMin= heurRDV.split(":");
+                heurRDV = (String) newValue;
+                String[] heurMin = heurRDV.split(":");
                 int heur = Integer.parseInt(heurMin[0]);
                 int min = Integer.parseInt(heurMin[1]);
 
-                Label label = new Label() ;
+                Label label = new Label();
 
                 if (listView == listViewLundi) {
                     label.setText(lundi.getText());
-                }
-                else if (listView == listViewMardi) {
+                } else if (listView == listViewMardi) {
                     label.setText(mardi.getText());
-                }
-                else if (listView == listViewMercredi) {
+                } else if (listView == listViewMercredi) {
                     label.setText(mercredi.getText());
-                }
-                else if(listView == listViewJeudi) {
+                } else if (listView == listViewJeudi) {
                     label.setText(jeudi.getText());
-                }
-                else if(listView == listViewVendredi) {
+                } else if (listView == listViewVendredi) {
                     label.setText(vendredi.getText());
-                }
-                else if(listView == listViewSamedi) {
+                } else if (listView == listViewSamedi) {
                     label.setText(samedi.getText());
-                }else if (listView == listViewDimanche){
+                } else if (listView == listViewDimanche) {
                     label.setText(dimanche.getText());
                 }
 
-                String[] jourMoisAn= label.getText().split("/");
+                String[] jourMoisAn = label.getText().split("/");
                 int jour = Integer.parseInt(jourMoisAn[0]);
                 int mois = Integer.parseInt(jourMoisAn[1]);
                 int an = Integer.parseInt(jourMoisAn[2]);
@@ -348,7 +370,7 @@ public class PriseRDVController implements Observateur{
 
     @FXML
     private void handleResearchButton() throws ParseException {
-        String prof = this.researchBar.getText() ;
+        String prof = this.researchBar.getText();
         LoadUtilisateur(prof);
         // chercher l'utilisateur correspondant
         loadData();
@@ -356,8 +378,9 @@ public class PriseRDVController implements Observateur{
 
 
     @FXML
-    private void handlePriseRDVButton(){
-        String titre = (String) JOptionPane.showInputDialog(new Component(){},
+    private void handlePriseRDVButton() {
+        String titre = (String) JOptionPane.showInputDialog(new Component() {
+                                                            },
                 "Titre",
                 "Titre du Rendez-vous",
                 JOptionPane.PLAIN_MESSAGE,
@@ -365,7 +388,8 @@ public class PriseRDVController implements Observateur{
                 null,
                 null);
 
-        String description = (String) JOptionPane.showInputDialog(new Component(){},
+        String description = (String) JOptionPane.showInputDialog(new Component() {
+                                                                  },
                 "Description",
                 "Description du rendez-vous",
                 JOptionPane.PLAIN_MESSAGE,
@@ -378,19 +402,25 @@ public class PriseRDVController implements Observateur{
         Ecole ecole = new Ecole();
         listUtilisateur = new ArrayList<>();
         listString = listViewProfs.getItems();
-        for (String mail  : listString){
+        for (String mail : listString) {
             for (Utilisateur u : ecole.getUtilisateurs()) {
-                if (u.getEmail().equals(mail)){
+                if (u.getEmail().equals(mail)) {
                     listUtilisateur.add(u);
                 }
             }
         }
         util.prendreRDV(listUtilisateur, horaireRDV, titre, description, ecole.getSalles().get(0));
+        this.profRDV.updateListView();
     }
 
 
     @Override
     public void update() {
 
+    }
+
+
+    public void setProfRDV(ProfRDV profRDV) {
+        this.profRDV = profRDV;
     }
 }

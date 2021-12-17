@@ -48,6 +48,7 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handlePersonalButton(ActionEvent actionEvent) {
+        this.profRDV.updateListView();
         panneau.setCenter(espacePerso);
     }
 
@@ -152,6 +153,7 @@ public class MenuController implements Observateur {
             } else {
                 espacePersoController.setCenter(leftPaneLoader.load());
             }
+            this.profRDV.setRdvViewController(leftPaneLoader.getController());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -175,7 +177,8 @@ public class MenuController implements Observateur {
 
     private void setPriseRDV() {
         FXMLLoader priseRDVLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/PriseRDV.fxml"));
-        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs, this.profRDV.getConnectedUtilisateur()));
+        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs, this.profRDV.getConnectedUtilisateur(), this.profRDV));
+
         try {
             this.priseRDV = priseRDVLoader.load();
         } catch (IOException e) {

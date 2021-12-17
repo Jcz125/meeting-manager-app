@@ -1,16 +1,18 @@
 package eu.telecomnancy.profrdv.client.model;
 
 import eu.telecomnancy.profrdv.client.controllers.Observateur;
+import eu.telecomnancy.profrdv.client.controllers.RDVViewController;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class ProfRDV {
-    private Stage stage ;
+    private Stage stage;
     private Ecole ecole;
     private ArrayList<Observateur> listObservateur = new ArrayList<Observateur>();
     private Utilisateur connectedUtilisateur;
+    private RDVViewController rdvViewController;
 
 
     public ProfRDV(Stage stage) {
@@ -50,5 +52,15 @@ public class ProfRDV {
 
     public Utilisateur getConnectedUtilisateur() {
         return connectedUtilisateur;
+    }
+
+
+    public void updateListView() {
+        this.rdvViewController.update();
+    }
+
+
+    public void setRdvViewController(RDVViewController rdvViewController) {
+        this.rdvViewController = rdvViewController;
     }
 }
