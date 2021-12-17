@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.Ecole;
+import eu.telecomnancy.profrdv.client.model.Professeur;
 import eu.telecomnancy.profrdv.client.model.RendezVous;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import javafx.beans.value.ChangeListener;
@@ -49,6 +50,7 @@ public class PriseRDVController implements Observateur{
     private String heurRDV ;
     private LocalDateTime horaireRDV ;
     private List<Utilisateur> listUtilisateur;
+    private List<String> listString;
     private int count = 0;
     private Utilisateur util ;
 
@@ -323,7 +325,6 @@ public class PriseRDVController implements Observateur{
                 int mois = Integer.parseInt(jourMoisAn[1]);
                 int an = Integer.parseInt(jourMoisAn[2]);
                 horaireRDV = LocalDateTime.of(an, mois, jour, heur, min, 00);
-                System.out.println("maked "+horaireRDV);
             }
         });
         list.clear();
@@ -378,6 +379,14 @@ public class PriseRDVController implements Observateur{
 
         //Create RDV ;
         Ecole ecole = new Ecole();
+        listString = listViewProfs.getItems();
+        for (String mail  : listString){
+            for (Utilisateur u : ecole.getUtilisateurs()) {
+                if (u.getEmail().equals(mail)){
+                    listUtilisateur.add(u);
+                }
+            }
+        }
         util.prendreRDV(listUtilisateur, horaireRDV, titre, description, ecole.getSalles().get(0));
 
     }

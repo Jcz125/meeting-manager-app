@@ -38,7 +38,7 @@ public class IdentificationController implements Observateur {
     public void handleConfirmer() {
         String mail = this.email.getText();
         for (Utilisateur u : utilis) {
-            if (u.getEmail().equals(mail)) {
+            if ((u.getEmail().equals(mail))){
                 if (u instanceof Professeur) {
                     this.menuController.chargerProfMenu();
                     break;
