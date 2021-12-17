@@ -57,7 +57,7 @@
                               <Insets left="10.0" right="20.0" />
                            </VBox.margin>
                         </ListView>
-                        <Button fx:id="prendreRDV" onAction="#handlePriseRDVButton" mnemonicParsing="false" text="Prendre un RDV">
+                        <Button fx:id="prendreRDV" mnemonicParsing="false" onAction="#handlePriseRDVButton" text="Prendre un RDV">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
@@ -166,6 +166,20 @@
                <VBox.margin>
                   <Insets left="100.0" />
                </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="precButtoon" onAction="#handleSemPrecButton" mnemonicParsing="false" text="&lt;">
+                     <HBox.margin>
+                        <Insets left="700.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="proButton" onAction="#handleSemProButton" mnemonicParsing="false" text="&gt;">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
             </HBox>
          </children>
       </VBox>

@@ -194,14 +194,9 @@ public class PlanningController implements Observateur{
             Calendar c = Calendar.getInstance();
             c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            //c.add(Calendar.DATE, 1);
-            //c.add(Calendar.DATE, 7 * count);
             String formattedDay1 = df.format(c.getTime());
 
             long diff = DaysBetween(date, formattedDay1);
-
-            System.out.println("diff"+diff);
-            System.out.println("count"+count);
 
             if (count == Integer.parseInt(String.valueOf(diff/7))) {
                 switch ((int)(diff%7)) {
