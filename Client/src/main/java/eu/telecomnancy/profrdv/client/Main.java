@@ -1,11 +1,10 @@
 package eu.telecomnancy.profrdv.client;
 
-import eu.telecomnancy.profrdv.client.controllers.*;
+import eu.telecomnancy.profrdv.client.controllers.MenuController;
 import eu.telecomnancy.profrdv.client.model.*;
 import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -46,61 +45,13 @@ public class Main extends Application {
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("MenuProf.fxml"));
         menuLoader.setControllerFactory(iC -> new MenuController());
         panneau.setTop(menuLoader.load());
-
-
-        FXMLLoader priseRDVLoader = new FXMLLoader(getClass().getResource("PriseRDV.fxml"));
-        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs, utilisateurs.get(0)));
-        Parent priseRDVParent = priseRDVLoader.load();
-
-
-        FXMLLoader planningLoader = new FXMLLoader(getClass().getResource("Planning.fxml"));
-        planningLoader.setControllerFactory(iC -> new PlanningController(utilisateurs.get(0)));
-        Parent planningParent = planningLoader.load();
-
-
-        FXMLLoader creationLoader = new FXMLLoader(getClass().getResource("Creation.fxml"));
-        creationLoader.setControllerFactory(iC -> new CreationController());
-        Parent creationParent = creationLoader.load();
-
-
-        CreationController creationController = creationLoader.getController();
-        creationController.setProfRDV(profRDV);
-
-
-        FXMLLoader identificationLoader = new FXMLLoader(getClass().getResource("Identification.fxml"));
-        identificationLoader.setControllerFactory(iC -> new IdentificationController(ecole.getUtilisateurs()));
-        Parent identificationParent = identificationLoader.load();
-
-
-        FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("EspacePerso.fxml"));
-        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController(ecole.getUtilisateurs().get(0)));
-
-        Parent espacePersoParent = espacePersoLoader.load();
-
-        EspacePersoController espacePersoController = espacePersoLoader.getController();
-
-        FXMLLoader centerPaneLoader = new FXMLLoader(getClass().getResource("ConfigDispo.fxml"));
-        centerPaneLoader.setControllerFactory(iC -> new ConfigDispoController(ecole.getUtilisateurs().get(0)));
-
-        FXMLLoader leftPaneLoader = new FXMLLoader(getClass().getResource("RDV-view.fxml"));
-        leftPaneLoader.setControllerFactory(iC -> new RDVViewController(ecole.getUtilisateurs().get(0)));
-
-
-        espacePersoController.setCenter(centerPaneLoader.load());
-        espacePersoController.setLeft(leftPaneLoader.load());
-
-
         MenuController menuController = menuLoader.getController();
-
-        menuController.setPriseRDV(priseRDVParent);
-        menuController.setPlanningNode(planningParent);
-        menuController.setCreationNode(creationParent);
-        menuController.setEspacePersoNode(espacePersoParent);
-        menuController.setIdentificationNode(identificationParent);
-
+        menuController.init(utilisateurs, ecole);
         menuController.setPanneau(panneau);
+        menuController.setProfRDV(profRDV);
 
-        panneau.setCenter(identificationParent);
+
+        panneau.setCenter(menuController.getIdentification());
 
 
         Scene scene = new Scene(panneau, 1400, 750);
