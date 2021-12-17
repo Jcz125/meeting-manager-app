@@ -43,7 +43,7 @@ public class ConfigDispoController implements Observateur {
 
     public ConfigDispoController(Utilisateur user) {
         this.user = user;
-        new DispoViewController(((Professeur) user).getDispoJour(DayOfWeek.MONDAY), this.lundiDispo);
+        this.lundiDispo = (new DispoViewController(((Professeur) user).getDispoJour(DayOfWeek.MONDAY), this.lundiDispo)).getDispoList();
 //        this.lundiDispo = (new DispoViewController(((Professeur) user).getDispoJour(DayOfWeek.MONDAY))).getDispoList();
         System.out.println("#######dispolundi: "+((Professeur) user).getDispoJour(DayOfWeek.MONDAY).get(0).getDebut());
     }
