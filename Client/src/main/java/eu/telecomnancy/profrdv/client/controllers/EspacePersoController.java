@@ -21,11 +21,10 @@ public class EspacePersoController implements Observateur {
     @FXML
     private TextField telephone;
 
-    private Utilisateur u ;
-
+    private Utilisateur u;
 
     public EspacePersoController(Utilisateur u) {
-        this.u = u ;
+        this.u = u;
     }
 
     @FXML

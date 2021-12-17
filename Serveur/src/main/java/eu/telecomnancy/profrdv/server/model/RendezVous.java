@@ -90,7 +90,7 @@ public class RendezVous {
     public static List<RendezVous> genererRendezVous(List<Utilisateur> utilisateurs, LocalDateTime debut, LocalDateTime fin) {
         ArrayList<RendezVous> creneaux = new ArrayList<>();
         LocalDateTime heure = LocalDateTime.from(debut);
-        while (!fin.isEqual(heure) || heure.isAfter(fin)) {
+        while (!fin.isEqual(heure) && heure.isBefore(fin)) {
             boolean addable = true;
             for (Utilisateur utilisateur : utilisateurs) {
                 if (!utilisateur.estDisponible(heure)) {
@@ -100,7 +100,7 @@ public class RendezVous {
             }
 
             if (addable)
-                creneaux.add(new RendezVous(heure, utilisateurs));
+                creneaux.add(new RendezVous(LocalDateTime.from(heure), utilisateurs));
 
             heure = heure.plusMinutes(20);
         }
@@ -184,7 +184,7 @@ public class RendezVous {
         for (Utilisateur utilisateur: utilisateurs.keySet()) {
             utilisateursIdsConfirmed.put(utilisateur.getId(), utilisateurs.get(utilisateur));
         }
-        return new RendezVousData(id, horaire, utilisateursIdsConfirmed, description, titre, salle.getData(), etatRendezVous.getData());
+        return new RendezVousData(id, horaire, utilisateursIdsConfirmed, description, titre, salle == null ? null : salle.getData(), etatRendezVous == null ? null : etatRendezVous.getData());
     }
 
     public boolean peutEtreSupprimer() {

@@ -11,11 +11,11 @@ public class RechercheRDVData {
     public LocalDateTime debut;
     public LocalDateTime fin;
 
-    public List<Integer> utilisateursIds;
+    public Integer[] utilisateursIds;
 
     public RechercheRDVData() {}
 
-    public RechercheRDVData(LocalDateTime debut, LocalDateTime fin, List<Integer> utilisateursIds) {
+    public RechercheRDVData(LocalDateTime debut, LocalDateTime fin, Integer[] utilisateursIds) {
         this.debut = debut;
         this.fin = fin;
         this.utilisateursIds = utilisateursIds;

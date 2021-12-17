@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.server.controller;
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
+import eu.telecomnancy.profrdv.server.model.data.RDVList;
 import eu.telecomnancy.profrdv.server.model.data.RechercheRDVData;
 import eu.telecomnancy.profrdv.server.model.data.RendezVousData;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
@@ -57,20 +58,25 @@ public class RendezVousController {
     }
 
     @PostMapping("/genererRendezVous")
-    public List<RendezVous>  genererRendezVous(RequestEntity<RechercheRDVData> monRDV) {
+    public RDVList genererRendezVous(RequestEntity<RechercheRDVData> monRDV) {
         RechercheRDVData data = monRDV.getBody();
 
         List<Utilisateur> utilisateurs = new ArrayList<>();
         for (Integer id : data.utilisateursIds) {
             Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(id);
             if (utilisateurOptional.isEmpty())
-                return new ArrayList<>();
+                return new RDVList(new RendezVousData[0]);
             utilisateurs.add(utilisateurOptional.get());
         }
 
         List<RendezVous> crenaux = RendezVous.genererRendezVous(utilisateurs, data.debut, data.fin);
 
-        return crenaux;
+        List<RendezVousData> rendezVousList = new ArrayList<>(crenaux.size());
+        for (RendezVous rdv : crenaux) {
+            rendezVousList.add(rdv.getData());
+        }
+
+        return new RDVList(rendezVousList.toArray(new RendezVousData[0]));
     }
 
     @PostMapping("/rdv/annuler")

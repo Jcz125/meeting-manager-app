@@ -24,7 +24,7 @@ public class RendezVous {
         for (Utilisateur u: utilisateurs) {
             utilisateursId.add(u.getId());
         }
-        RechercheRDVData data = new RechercheRDVData(debut, fin , utilisateursId);
+        RechercheRDVData data = new RechercheRDVData(debut, fin, utilisateursId.toArray(new Integer[0]));
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<RechercheRDVData> requestUpdate = new HttpEntity<>(data);
@@ -41,6 +41,8 @@ public class RendezVous {
     }
 
     public void fetchData() {
+        if (data.id == null)
+            return;
         RestTemplate restTemplate = new RestTemplate();
         data = restTemplate.getForObject(
                         "http://127.0.0.1:8080/rdv?id=" + data.id,
