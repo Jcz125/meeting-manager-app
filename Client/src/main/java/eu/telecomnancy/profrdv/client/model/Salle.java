@@ -42,6 +42,7 @@ public class Salle {
         restTemplate.put(
                 "http://127.0.0.1:8080/salle?id=" + data.numero,
                 this.data);
+        fetchData();
     }
 
     public void delete() {
@@ -56,14 +57,12 @@ public class Salle {
     }
 
     public void setEtage(int etage) {
-        fetchData();
         SalleData data = new SalleData();
         data.etage = etage;
         updateData(data);
     }
 
     public void setAile(String aile) {
-        fetchData();
         SalleData data = new SalleData();
         data.aile = aile;
         updateData(data);

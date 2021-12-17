@@ -1,8 +1,11 @@
 package eu.telecomnancy.profrdv.server.controller;
 
+import eu.telecomnancy.profrdv.server.Main;
 import eu.telecomnancy.profrdv.server.model.Ecole;
 import eu.telecomnancy.profrdv.server.model.Salle;
 import eu.telecomnancy.profrdv.server.model.data.EcoleData;
+import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
+import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
@@ -42,8 +45,8 @@ public class EcoleController {
             Salle s = new Salle();
             s.setNumero(107);
             monEcole.addSalle(s);
-            a.add(DayOfWeek.MONDAY, LocalTime.MIN, LocalTime.MAX);
-            a.add(DayOfWeek.FRIDAY, LocalTime.MIN, LocalTime.MAX);
+            a.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.MIN, LocalTime.MAX));
+            a.add(new DisponibiliteFixe(DayOfWeek.FRIDAY, LocalTime.MIN, LocalTime.MAX));
             Utilisateur[] l = {a, c};
             ArrayList<Utilisateur> list = new ArrayList<>(Arrays.asList(l));
             a.prendreRDV(list, s, LocalDateTime.of(2021, 12, 13, 12, 00), "Ma réu", "Test");

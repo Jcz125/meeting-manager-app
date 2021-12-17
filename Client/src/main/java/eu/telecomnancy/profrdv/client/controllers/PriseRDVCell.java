@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
@@ -12,7 +13,6 @@ import java.io.IOException;
 public class PriseRDVCell extends ListCell<String>
 {
     @FXML Button creneau;
-    //private ListView<String> listViewLundi;
 
     public PriseRDVCell() {
 //        FXMLLoader fxmlLoader = new FXMLLoader();
@@ -28,12 +28,13 @@ public class PriseRDVCell extends ListCell<String>
 //        }
     }
 
-//    @Override
-//    public void updateItem(String string, boolean empty)
-//    {
-//        super.updateItem(string,empty);
-//        if(string != null)
-//        {
-//        }
-//    }
+    @Override
+    public void updateItem(String string, boolean empty)
+    {
+        super.updateItem(string,empty);
+        if(string != null)
+        {
+            Label l = new Label(string);
+        }
+    }
 }

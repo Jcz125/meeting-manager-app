@@ -51,6 +51,7 @@ public abstract class Utilisateur {
         restTemplate.put(
                 "http://127.0.0.1:8080/utilisateur?id=" + data.id,
                 this.data);
+        fetchData();
     }
 
     public void delete() {
@@ -80,6 +81,8 @@ public abstract class Utilisateur {
                             requestUpdate, BooleanResult.class);
         return response.getBody().success;
     }
+
+    //public ajouterDispo(DisponibiliteFixe dis)
 
 
     //region assesseurs
@@ -131,35 +134,30 @@ public abstract class Utilisateur {
     }
 
     public void setNom(String nom) {
-        fetchData();
         UtilisateurData data = new UtilisateurData();
         data.nom = nom;
         updateData(data);
     }
 
     public void setPrenom(String prenom) {
-        fetchData();
         UtilisateurData data = new UtilisateurData();
         data.prenom = prenom;
         updateData(data);
     }
 
     public void setEmail(String email) {
-        fetchData();
         UtilisateurData data = new UtilisateurData();
         data.email = email;
         updateData(data);
     }
 
     public void setTelephone(String telephone) {
-        fetchData();
         UtilisateurData data = new UtilisateurData();
         data.telephone = telephone;
         updateData(data);
     }
 
     public void setNotification(boolean notification) {
-        fetchData();
         UtilisateurData data = new UtilisateurData();
         data.notification = notification;
         updateData(data);

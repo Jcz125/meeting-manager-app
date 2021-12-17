@@ -1,17 +1,25 @@
 package eu.telecomnancy.profrdv.server.model.utilisateur;
 
+import eu.telecomnancy.profrdv.server.SpringConfiguration;
 import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.Salle;
 import eu.telecomnancy.profrdv.server.model.data.DisponibiliteData;
+import eu.telecomnancy.profrdv.server.model.data.DisponibiliteFixeData;
+import eu.telecomnancy.profrdv.server.model.data.ModificateurDisponibiliteData;
 import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
 import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
+import eu.telecomnancy.profrdv.server.repository.DisponibiliteRepositoryFixe;
+import eu.telecomnancy.profrdv.server.repository.ModificateurDisponibiliteRepository;
+import eu.telecomnancy.profrdv.server.repository.RendezVousRepository;
+import eu.telecomnancy.profrdv.server.repository.SalleRepository;
 import org.springframework.http.RequestEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static javax.persistence.DiscriminatorType.INTEGER;
 import static javax.persistence.InheritanceType.SINGLE_TABLE;
@@ -122,10 +130,24 @@ public abstract class Utilisateur {
         return new UtilisateurData(id, nom, prenom, email, telephone, notification, RDVsIds, false, null, null);
     }
 
-    public void updateData(RequestEntity<UtilisateurData> monUtilisateur) {
-
+    public void updateData(UtilisateurData data) {
+        if (data.nom != null) this.nom = data.nom;
+        if (data.prenom != null) this.prenom = data.prenom;
+        if (data.email != null) this.email = data.email;
+        if (data.telephone != null) this.telephone = data.telephone;
+        if (data.notification != null) this.notification = data.notification;
+        if (data.estProf != null) this.nom = data.nom;
+        if (data.RDVsIds != null) {
+            RDVs = new ArrayList<>(data.RDVsIds.length);
+            RendezVousRepository rendezVousRepository = (RendezVousRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("rendezVousRepository");
+            for (int id: data.RDVsIds) {
+                Optional<RendezVous> rdv = rendezVousRepository.findById(id);
+                if (rdv.isPresent()) {
+                    RDVs.add(rdv.get());
+                }
+            }
+        }
     }
-
 
     //region assesseurs
     public String getNom() {

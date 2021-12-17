@@ -27,6 +27,10 @@ public class DisponibiliteFixe {
         this.fin = fin;
     }
 
+    public DisponibiliteFixe(DisponibiliteFixeData data) {
+        this(data.jour, data.debut, data.fin);
+    }
+
 
     public DayOfWeek getJour() {
         return jour;
@@ -56,5 +60,15 @@ public class DisponibiliteFixe {
 
     public DisponibiliteFixeData getData() {
         return new DisponibiliteFixeData(id, jour, debut, fin);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void updateData(DisponibiliteFixeData data) {
+        if (data.jour != null) this.jour = data.jour;
+        if (data.debut != null) this.debut = data.debut;
+        if (data.fin != null) this.fin = data.fin;
     }
 }
