@@ -2,6 +2,7 @@ package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.Ecole;
 import eu.telecomnancy.profrdv.client.model.ProfRDV;
+import eu.telecomnancy.profrdv.client.model.Professeur;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -137,16 +138,20 @@ public class MenuController implements Observateur {
 
         EspacePersoController espacePersoController = espacePersoLoader.getController();
 
-        FXMLLoader centerPaneLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/ConfigDispo.fxml"));
-        centerPaneLoader.setControllerFactory(iC -> new ConfigDispoController(profRDV.getConnectedUtilisateur()));
 
         FXMLLoader leftPaneLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/RDV-view.fxml"));
         leftPaneLoader.setControllerFactory(iC -> new RDVViewController(profRDV.getConnectedUtilisateur()));
 
 
         try {
-            espacePersoController.setCenter(centerPaneLoader.load());
-            espacePersoController.setLeft(leftPaneLoader.load());
+            if (this.profRDV.getConnectedUtilisateur() instanceof Professeur) {
+                FXMLLoader centerPaneLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/ConfigDispo.fxml"));
+                centerPaneLoader.setControllerFactory(iC -> new ConfigDispoController(profRDV.getConnectedUtilisateur()));
+                espacePersoController.setCenter(centerPaneLoader.load());
+                espacePersoController.setLeft(leftPaneLoader.load());
+            } else {
+                espacePersoController.setCenter(leftPaneLoader.load());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
