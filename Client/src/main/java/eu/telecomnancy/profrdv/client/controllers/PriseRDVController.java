@@ -9,8 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.util.Callback;
 import javafx.util.Pair;
 
 import javax.swing.*;
@@ -59,6 +61,7 @@ public class PriseRDVController implements Observateur{
     private ArrayList<String> RdvlistVendredi = new ArrayList<String>();
     private ArrayList<String> RdvlistSamedi = new ArrayList<String>();
     private ArrayList<String> RdvlistDimanche = new ArrayList<String>();
+    private ArrayList<String> Rdvlist = new ArrayList<String>();
 
     ObservableList observableListLundi = FXCollections.observableArrayList();
     ObservableList observableListMardi = FXCollections.observableArrayList();
@@ -67,9 +70,47 @@ public class PriseRDVController implements Observateur{
     ObservableList observableListVendredi = FXCollections.observableArrayList();
     ObservableList observableListSamedi = FXCollections.observableArrayList();
     ObservableList observableListDimanche = FXCollections.observableArrayList();
+    ObservableList observableListUtil = FXCollections.observableArrayList();
 
     public PriseRDVController(List<Utilisateur> u){
         this.u = u ;
+    }
+
+    @FXML
+    void initialize() throws ParseException {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+        String formattedDay1 = df.format(c.getTime());
+        lundi.setText(formattedDay1);
+        c.add(Calendar.DATE, 1);
+
+        String formattedDay2 = df.format(c.getTime());
+        mardi.setText(formattedDay2);
+        c.add(Calendar.DATE, 1);
+
+        String formattedDay3 = df.format(c.getTime());
+        mercredi.setText(formattedDay3);
+        c.add(Calendar.DATE, 1);
+
+        String formattedDay4 = df.format(c.getTime());
+        jeudi.setText(formattedDay4);
+        c.add(Calendar.DATE, 1);
+
+        String formattedDay5 = df.format(c.getTime());
+        vendredi.setText(formattedDay5);
+        c.add(Calendar.DATE, 1);
+
+        String formattedDay6 = df.format(c.getTime());
+        samedi.setText(formattedDay6);
+        c.add(Calendar.DATE, 1);
+
+        String formattedDay7 = df.format(c.getTime());
+        dimanche.setText(formattedDay7);
+        c.add(Calendar.DATE, 1);
+
+        loadData();
     }
 
     private long DaysBetween(String str1, String str2) throws ParseException {
@@ -85,102 +126,104 @@ public class PriseRDVController implements Observateur{
         return diffrence ;
     }
 
+    private void LoadUtilisateur(String u) {
+        observableListUtil.removeAll(observableListUtil) ;
+        observableListUtil.add(u);
+        listViewProfs.setItems(observableListUtil);
+        listViewProfs.setCellFactory(new Callback<ListView, ListCell>() {
+            @Override
+            public ListCell call(ListView param) {
+                return new PriseRDVCell();
+            }
+        });
+    }
+
     private void loadData() throws ParseException {
 
-//        listViewLundi.getItems().clear();
-//        listViewMardi.getItems().clear();
-//        listViewMercredi.getItems().clear();
-//        listViewJeudi.getItems().clear();
-//        listViewVendredi.getItems().clear();
-//        listViewSamedi.getItems().clear();
-//        listViewDimanche.getItems().clear();
-//
-//        LocalDateTime debut = LocalDateTime.now();
-//        int hour = debut.getHour();
-//        int min = debut.getMinute();
-//
-//        if ( min%20 == 0 ) {
-//            debut = LocalDateTime.of(debut.getYear(), debut.getMonthValue(), debut.getDayOfMonth(), hour, min, 00);
-//        }
-//        else {
-//            debut = debut.plusMinutes(20-(min%20));
-//        }
-//
-//        Calendar c1 = Calendar.getInstance();
-//        c1.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-//        c1.add(Calendar.DATE, 6);
-//        Date finX = c1.getTime();
-//
-//        LocalDateTime fin = LocalDateTime.of(finX.getYear()+1900, finX.getMonth()+1, finX.getDate(), 23, 40, 00);
-//
-////        System.out.println("sund "+fin);
-////        System.out.println("auj "+debut);
-//
-//        dispo = RendezVous.genererRendezVous(u, debut, fin);
-//
-//        for (RendezVous rdv : dispo) {
-//            LocalDateTime horaire = rdv.getHoraire();
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//            String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
-//            String[] words = formattedDateTime.split(" ");
-//            String date = words[0];
-//            DayOfWeek jour = horaire.getDayOfWeek();
-//            int numJour = jour.getValue();
-//            String heur = words[1];
-//
-//            Calendar c = Calendar.getInstance();
-//            c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-//            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//            String formattedDay1 = df.format(c.getTime());
-//
-//            long diff = DaysBetween(date, formattedDay1);
-//
-//            if (count == Integer.parseInt(String.valueOf(diff/7))) {
-//                switch ((int)(diff%7)) {
-//                    case 0 :
-//                        RdvlistLundi.add(heur);
-//                        break;
-//                    case 1 :
-//                        RdvlistMardi.add(heur);
-//                        break;
-//                    case 2 :
-//                        RdvlistMercredi.add(heur);
-//                        break;
-//                    case 3 :
-//                        RdvlistJeudi.add(heur);
-//                        break;
-//                    case 4 :
-//                        RdvlistVendredi.add(heur);
-//                        break;
-//                    case 5 :
-//                        RdvlistSamedi.add(heur);
-//                        break;
-//                    case 6 :
-//                        RdvlistDimanche.add(heur);
-//                        break;
-//                    default:
-//                        break ;
-//                }
-//            }
-//        }
-//
-//        listViewConst(observableListLundi, RdvlistLundi, listViewLundi);
-//        listViewConst(observableListMardi, RdvlistMardi, listViewMardi);
-//        listViewConst(observableListMercredi, RdvlistMercredi, listViewMercredi);
-//        listViewConst(observableListJeudi, RdvlistJeudi, listViewJeudi);
-//        listViewConst(observableListVendredi, RdvlistVendredi, listViewVendredi);
-//        listViewConst(observableListSamedi, RdvlistSamedi, listViewSamedi);
-//        listViewConst(observableListDimanche, RdvlistDimanche, listViewDimanche);
-//
+        listViewLundi.getItems().clear();
+        listViewMardi.getItems().clear();
+        listViewMercredi.getItems().clear();
+        listViewJeudi.getItems().clear();
+        listViewVendredi.getItems().clear();
+        listViewSamedi.getItems().clear();
+        listViewDimanche.getItems().clear();
 
-        //DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        //String formattedDay1 = df.format(c.getTime());
+        LocalDateTime debut = LocalDateTime.now();
+        int hour = debut.getHour();
+        int min = debut.getMinute();
 
-        //this.dispo = RendezVous.genererRendezVous(u,)
+        if ( min%20 == 0 ) {
+            debut = LocalDateTime.of(debut.getYear(), debut.getMonthValue(), debut.getDayOfMonth(), hour, min, 00);
+        }
+        else {
+            debut = debut.plusMinutes(20-(min%20));
+        }
+        System.out.println(" what "+(20-(min%20)));
 
+        Calendar c1 = Calendar.getInstance();
+        c1.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        c1.add(Calendar.DATE, 6);
+        Date finX = c1.getTime();
 
-        //LocalDateTime fin = LocalDateTime();
+        LocalDateTime fin = LocalDateTime.of(finX.getYear()+1900, finX.getMonth()+1, finX.getDate(), 23, 40, 00);
 
+//        System.out.println("sund "+fin);
+//        System.out.println("auj "+debut);
+
+        //dispo = RendezVous.genererRendezVous(u, debut, fin);
+
+        for (RendezVous rdv : dispo) {
+            LocalDateTime horaire = rdv.getHoraire();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
+            String[] words = formattedDateTime.split(" ");
+            String date = words[0];
+            DayOfWeek jour = horaire.getDayOfWeek();
+            int numJour = jour.getValue();
+            String heur = words[1];
+
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDay1 = df.format(c.getTime());
+
+            long diff = DaysBetween(date, formattedDay1);
+
+            if (count == Integer.parseInt(String.valueOf(diff/7))) {
+                switch ((int)(diff%7)) {
+                    case 0 :
+                        RdvlistLundi.add(heur);
+                        break;
+                    case 1 :
+                        RdvlistMardi.add(heur);
+                        break;
+                    case 2 :
+                        RdvlistMercredi.add(heur);
+                        break;
+                    case 3 :
+                        RdvlistJeudi.add(heur);
+                        break;
+                    case 4 :
+                        RdvlistVendredi.add(heur);
+                        break;
+                    case 5 :
+                        RdvlistSamedi.add(heur);
+                        break;
+                    case 6 :
+                        RdvlistDimanche.add(heur);
+                        break;
+                    default:
+                        break ;
+                }
+            }
+        }
+        listViewConst(observableListLundi, RdvlistLundi, listViewLundi);
+        listViewConst(observableListMardi, RdvlistMardi, listViewMardi);
+        listViewConst(observableListMercredi, RdvlistMercredi, listViewMercredi);
+        listViewConst(observableListJeudi, RdvlistJeudi, listViewJeudi);
+        listViewConst(observableListVendredi, RdvlistVendredi, listViewVendredi);
+        listViewConst(observableListSamedi, RdvlistSamedi, listViewSamedi);
+        listViewConst(observableListDimanche, RdvlistDimanche, listViewDimanche);
     }
 
     public void setCalender(int param){
@@ -265,14 +308,13 @@ public class PriseRDVController implements Observateur{
 //        });
 //    }
 
+
     @FXML
-    void initialize() throws ParseException {
+    private void handleResearchButton() throws ParseException {
+        String prof = this.researchBar.getText() ;
+        LoadUtilisateur(prof);
+        // chercher l'utilisateur correspondant
         loadData();
-    }
-
-    @FXML
-    private void handleResearchButton(){
-
     }
 
 
