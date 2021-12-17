@@ -2,6 +2,8 @@ package eu.telecomnancy.profrdv.server;
 
 import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.Salle;
+import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
+import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
@@ -50,8 +52,8 @@ public class RendezVousTest {
         Professeur professeur1 = new Professeur("a", "b", "c");
         Professeur professeur2 = new Professeur("a", "b", "c");
 
-        professeur1.add(DayOfWeek.MONDAY, LocalTime.of(8, 0), LocalTime.of(12, 0));
-        professeur2.add(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(14, 0));
+        professeur1.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.of(8, 0), LocalTime.of(12, 0)));
+        professeur2.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(14, 0)));
 
         LocalDateTime debut = LocalDateTime.of(2021, 12, 13, 0, 0);
         LocalDateTime fin = LocalDateTime.of(2021, 12, 20, 0, 0);
@@ -63,7 +65,7 @@ public class RendezVousTest {
         utilisateurs.add(professeur2);
         List<RendezVous> creneaux = RendezVous.genererRendezVous(utilisateurs, debut, fin);
 
-        assertEquals(creneaux.size(), 6);
+        assertEquals(6, creneaux.size());
         Salle salle = new Salle(2, 2, "nord");
         assertTrue(eleve1.prendreRDV(utilisateurs, salle, creneaux.get(0).getHoraire(), null, null));
 
