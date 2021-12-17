@@ -1,5 +1,6 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
+import eu.telecomnancy.profrdv.client.model.ProfRDV;
 import eu.telecomnancy.profrdv.client.model.Professeur;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import javafx.collections.FXCollections;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IdentificationController implements Observateur {
+
+    private ProfRDV profRDV;
 
     ObservableList<String> jeSuisList = FXCollections.observableArrayList("Etudant.e", "Professeu.e");
     private List<Utilisateur> utilis = new ArrayList<Utilisateur>();
@@ -41,9 +44,11 @@ public class IdentificationController implements Observateur {
             if (u.getEmail().equals(mail)) {
                 if (u instanceof Professeur) {
                     this.menuController.chargerProfMenu();
+                    this.profRDV.setConnectedUtilisateur(u);
                     break;
                 } else {
                     this.menuController.chargerEleveMenu();
+                    this.profRDV.setConnectedUtilisateur(u);
                     break;
                 }
             }
@@ -59,5 +64,10 @@ public class IdentificationController implements Observateur {
 
     public void setMenuController(MenuController menuController) {
         this.menuController = menuController;
+    }
+
+
+    public void setProfRDV(ProfRDV profRDV) {
+        this.profRDV = profRDV;
     }
 }

@@ -17,6 +17,7 @@ public class MenuController implements Observateur {
     private MenuController mc;
     private Utilisateur utilisateur;
     private String idToConnect;
+    private Ecole ecole;
 
     private BorderPane panneau;
     private Parent creation;
@@ -44,6 +45,7 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handlePersonalButton(ActionEvent actionEvent) {
+        this.setEspacePersoNode();
         panneau.setCenter(espacePerso);
     }
 
@@ -56,19 +58,13 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handleIdButton(ActionEvent actionEvent) {
-//        String id = (String) JOptionPane.showInputDialog(new Component() {
-//                                                         },
-//                "Identifiant",
-//                "Identifiez-Vous",
-//                JOptionPane.PLAIN_MESSAGE,
-//                null,
-//                null,
-//                null);
-//
-//        if (id != null) {
-//            this.idToConnect = id;
-//        }
         panneau.setCenter(identification);
+    }
+
+
+    @FXML
+    private void handleDecoButton(ActionEvent actionEvent) {
+//        panneau.setCenter(identification);
     }
 
 
@@ -88,9 +84,10 @@ public class MenuController implements Observateur {
         this.setCreationNode();
         this.setPlanningNode(utilisateurs);
         this.setPriseRDV(utilisateurs);
-        this.setEspacePersoNode(ecole);
         this.setMenuProf();
         this.setMenuEleve();
+
+        this.ecole = ecole;
     }
 
 
@@ -123,12 +120,13 @@ public class MenuController implements Observateur {
     }
 
 
-    private void setEspacePersoNode(Ecole ecole) {
+    private void setEspacePersoNode() {
 
         FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/EspacePerso.fxml"));
-        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController(ecole.getUtilisateurs().get(0)));
+        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController(profRDV));
         try {
             this.espacePerso = espacePersoLoader.load();
+            EspacePersoController controller = espacePersoLoader.getController();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,6 +156,7 @@ public class MenuController implements Observateur {
         try {
             this.identification = identificationLoader.load();
             IdentificationController controller = identificationLoader.getController();
+            controller.setProfRDV(this.profRDV);
             controller.setMenuController(this);
         } catch (IOException e) {
             e.printStackTrace();

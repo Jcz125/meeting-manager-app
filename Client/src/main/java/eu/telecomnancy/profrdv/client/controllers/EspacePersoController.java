@@ -1,6 +1,6 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
-import eu.telecomnancy.profrdv.client.model.Utilisateur;
+import eu.telecomnancy.profrdv.client.model.ProfRDV;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -21,28 +21,33 @@ public class EspacePersoController implements Observateur {
     @FXML
     private TextField telephone;
 
-    private Utilisateur u;
 
-    public EspacePersoController(Utilisateur u) {
-        this.u = u;
+    private ProfRDV profRDV;
+
+
+    public EspacePersoController(ProfRDV profRDV) {
+        this.profRDV = profRDV;
     }
+
 
     @FXML
     public void handleConfirmButton() {
-        u.setNom(this.nom.getText());
-        u.setPrenom(this.prenom.getText());
-        u.setEmail(this.email.getText());
-        u.setTelephone((this.telephone.getText()));
+        profRDV.getConnectedUtilisateur().setNom(this.nom.getText());
+        profRDV.getConnectedUtilisateur().setPrenom(this.prenom.getText());
+        profRDV.getConnectedUtilisateur().setEmail(this.email.getText());
+        profRDV.getConnectedUtilisateur().setTelephone((this.telephone.getText()));
         JOptionPane.showMessageDialog(null, "Modifié avec succés", "InfoBox: " + "Modification", JOptionPane.INFORMATION_MESSAGE);
     }
 
+
     @FXML
     public void initialize() {
-        this.nom.setText(u.getNom());
-        this.prenom.setText(u.getPrenom());
-        this.email.setText(u.getEmail());
-        this.telephone.setText(u.getTelephone());
+        this.nom.setText(profRDV.getConnectedUtilisateur().getNom());
+        this.prenom.setText(profRDV.getConnectedUtilisateur().getPrenom());
+        this.email.setText(profRDV.getConnectedUtilisateur().getEmail());
+        this.telephone.setText(profRDV.getConnectedUtilisateur().getTelephone());
     }
+
 
     @Override
     public void update() {
@@ -59,4 +64,9 @@ public class EspacePersoController implements Observateur {
         this.rightPane.getChildren().add(left);
         left.setMaxHeight(300);
     }
+
+
+//    public void setProfRDV(ProfRDV profRDV) {
+//        this.profRDV = profRDV;
+//    }
 }

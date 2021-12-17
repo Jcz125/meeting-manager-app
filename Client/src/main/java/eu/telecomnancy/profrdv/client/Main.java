@@ -46,6 +46,7 @@ public class Main extends Application {
         menuLoader.setControllerFactory(iC -> new MenuController());
         panneau.setTop(menuLoader.load());
         MenuController menuController = menuLoader.getController();
+        menuController.setProfRDV(profRDV);
         menuController.init(utilisateurs, ecole);
         menuController.setPanneau(panneau);
         menuController.setProfRDV(profRDV);
