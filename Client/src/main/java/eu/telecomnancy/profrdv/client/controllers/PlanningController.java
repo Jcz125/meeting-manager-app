@@ -200,8 +200,8 @@ public class PlanningController implements Observateur{
 
             long diff = DaysBetween(date, formattedDay1);
 
-            System.out.println("diff"+diff);
-            System.out.println("count"+count);
+//            System.out.println("diff"+diff);
+//            System.out.println("count"+count);
 
             if (count == Integer.parseInt(String.valueOf(diff/7))) {
                 switch ((int)(diff%7)) {

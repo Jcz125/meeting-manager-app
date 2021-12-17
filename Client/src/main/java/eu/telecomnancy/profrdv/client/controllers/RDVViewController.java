@@ -26,7 +26,6 @@ public class RDVViewController implements Observateur, Initializable {
     public RDVViewController(Utilisateur user) {
         this.user = user;
         rdvObservableList = FXCollections.observableArrayList();
-//        RendezVous rdv1 = user.getRDVs().get(0);
         rdvObservableList.addAll(user.getRDVs());
     }
 

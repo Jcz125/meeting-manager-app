@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+
 public class DisponibiliteFixe {
     private DisponibiliteFixeData data;
 
@@ -41,7 +42,6 @@ public class DisponibiliteFixe {
     public void setFin(LocalTime time) {
         this.data.fin = time;
     }
-
 
     public boolean estDedans(LocalDateTime horaire) {
         if (data.jour != horaire.getDayOfWeek())

@@ -1,24 +1,31 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
+import eu.telecomnancy.profrdv.client.model.Professeur;
+import eu.telecomnancy.profrdv.client.model.Utilisateur;
+import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
+import java.time.DayOfWeek;
+
 public class ConfigDispoController implements Observateur {
+    private Utilisateur user;
     @FXML
-    private ListView<CreneauCell> lundiDispo;
+    private ListView<DisponibiliteFixe> lundiDispo;
     @FXML
-    private ListView<CreneauCell> mardiDispo;
+    private ListView<DisponibiliteFixe> mardiDispo;
     @FXML
-    private ListView<CreneauCell> mercrediDispo;
+    private ListView<DisponibiliteFixe> mercrediDispo;
     @FXML
-    private ListView<CreneauCell> jeudiDispo;
+    private ListView<DisponibiliteFixe> jeudiDispo;
     @FXML
-    private ListView<CreneauCell> vendrediDispo;
+    private ListView<DisponibiliteFixe> vendrediDispo;
     @FXML
-    private ListView<CreneauCell> samediDispo;
+    private ListView<DisponibiliteFixe> samediDispo;
     @FXML
-    private ListView<CreneauCell> dimancheDispo;
+    private ListView<DisponibiliteFixe> dimancheDispo;
     @FXML
     private Button lundiAdd;
     @FXML
@@ -33,6 +40,17 @@ public class ConfigDispoController implements Observateur {
     private Button samediAdd;
     @FXML
     private Button dimancheAdd;
+
+    public ConfigDispoController(Utilisateur user) {
+        this.user = user;
+        new DispoViewController(((Professeur) user).getDispoJour(DayOfWeek.MONDAY), this.lundiDispo);
+//        this.lundiDispo = (new DispoViewController(((Professeur) user).getDispoJour(DayOfWeek.MONDAY))).getDispoList();
+        System.out.println("#######dispolundi: "+((Professeur) user).getDispoJour(DayOfWeek.MONDAY).get(0).getDebut());
+    }
+
+//    public void initialize() {
+//
+//    }
 
     public void update() {
 
