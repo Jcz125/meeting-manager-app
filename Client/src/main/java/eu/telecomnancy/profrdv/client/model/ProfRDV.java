@@ -1,17 +1,31 @@
 package eu.telecomnancy.profrdv.client.model;
 
+import eu.telecomnancy.profrdv.client.controllers.Observateur;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class ProfRDV {
     private Stage stage;
     private Ecole ecole;
+    private ArrayList<Observateur> listObservateur=new ArrayList<Observateur>();
 
 
     public ProfRDV(Stage stage) {
         this.ecole = new Ecole();
         this.stage = stage;
     }
+
+    public void ajouterObservateur(Observateur ob){
+        listObservateur.add(ob);
+    }
+
+
+    public void notifierObservateur(){
+        for (Observateur o : this.listObservateur) o.update() ;
+    }
+
 
 
     public static void notificationProfilIncomplet() {

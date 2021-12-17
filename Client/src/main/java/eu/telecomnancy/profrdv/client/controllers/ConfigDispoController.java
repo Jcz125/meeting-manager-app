@@ -27,6 +27,8 @@ public class ConfigDispoController implements Observateur {
     @FXML
     private ListView<DisponibiliteFixe> dimancheDispo;
     @FXML
+    private ListView<DisponibiliteFixe> exceptionsDispo;
+    @FXML
     private Button lundiAdd;
     @FXML
     private Button mardiAdd;
@@ -43,8 +45,6 @@ public class ConfigDispoController implements Observateur {
 
     public ConfigDispoController(Utilisateur user) {
         this.user = user;
-//        this.lundiDispo = (new DispoViewController(((Professeur) user).getDispoJour(DayOfWeek.MONDAY))).getDispoList();
-        System.out.println("#######dispolundi: "+((Professeur) user).getDispoJour(DayOfWeek.MONDAY).get(0).getDebut());
     }
 
     @FXML

@@ -54,7 +54,7 @@ public class RendezVous {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.put(
                 "http://127.0.0.1:8080/rdv?id=" + data.id,
-                this.data);
+                data);
         fetchData();
     }
 
