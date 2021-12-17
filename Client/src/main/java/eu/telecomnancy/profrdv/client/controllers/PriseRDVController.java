@@ -176,48 +176,57 @@ public class PriseRDVController implements Observateur{
 
         for (RendezVous rdv : dispo) {
             LocalDateTime horaire = rdv.getHoraire();
+            //System.out.println("RDV "+ horaire);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
+
+            System.out.println("RDV "+ formattedDateTime);
+
             String[] words = formattedDateTime.split(" ");
             String date = words[0];
             DayOfWeek jour = horaire.getDayOfWeek();
             int numJour = jour.getValue();
             String heur = words[1];
 
-            Calendar c = Calendar.getInstance();
-            c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDay1 = df.format(c.getTime());
+            System.out.println("hour "+ heur);
 
-            long diff = DaysBetween(date, formattedDay1);
+//            Calendar c = Calendar.getInstance();
+//            c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//            String formattedDay1 = df.format(c.getTime());
 
-            if (count == Integer.parseInt(String.valueOf(diff/7))) {
-                switch ((int)(diff%7)) {
-                    case 0 :
+            //long diff = DaysBetween(date, formattedDay1);
+
+            //System.out.println("diff  "+ diff);
+
+            //if (count == Integer.parseInt(String.valueOf(diff/7))) {
+                //switch ((int)(diff%7)) {
+                switch (numJour) {
+                    case 1 :
                         RdvlistLundi.add(heur);
                         break;
-                    case 1 :
+                    case 2 :
                         RdvlistMardi.add(heur);
                         break;
-                    case 2 :
+                    case 3 :
                         RdvlistMercredi.add(heur);
                         break;
-                    case 3 :
+                    case 4 :
                         RdvlistJeudi.add(heur);
                         break;
-                    case 4 :
+                    case 5 :
                         RdvlistVendredi.add(heur);
                         break;
-                    case 5 :
+                    case 6 :
                         RdvlistSamedi.add(heur);
                         break;
-                    case 6 :
+                    case 7 :
                         RdvlistDimanche.add(heur);
                         break;
                     default:
                         break ;
                 }
-            }
+
         }
         listViewConst(observableListLundi, RdvlistLundi, listViewLundi);
         listViewConst(observableListMardi, RdvlistMardi, listViewMardi);
