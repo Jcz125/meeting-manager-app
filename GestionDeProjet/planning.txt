@@ -23,3 +23,6 @@ Vendredi :
 	Boire du café - fait
 	Mise en place de la prise de rendez-vous : fait
 	on a mangé des chips
+
+Pour la répartition des taches: 
+	Nous avons fait en sorte que deux personnes travaillent sur le FRONT alors que les deux autres travaillent sur le BackEnd
