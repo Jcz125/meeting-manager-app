@@ -43,7 +43,7 @@ public class Main extends Application {
 
         BorderPane panneau = new BorderPane();
 
-        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("MenuIdentification.fxml"));
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("MenuProf.fxml"));
         menuLoader.setControllerFactory(iC -> new MenuController());
         panneau.setTop(menuLoader.load());
 
@@ -73,7 +73,7 @@ public class Main extends Application {
 
 
         FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("EspacePerso.fxml"));
-        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController());
+        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController(ecole.getUtilisateurs().get(0)));
 
         Parent espacePersoParent = espacePersoLoader.load();
 

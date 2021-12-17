@@ -63,7 +63,7 @@
                         <TextField fx:id="prenom" GridPane.rowIndex="3" />
                         <TextField fx:id="email" GridPane.rowIndex="5" />
                         <TextField fx:id="telephone" GridPane.rowIndex="7" />
-                      <Button fx:id="confirmerButton" contentDisplay="CENTER" mnemonicParsing="false" text="Modifier" GridPane.rowIndex="8" />
+                      <Button fx:id="confirmerButton" onAction="#handleConfirmButton" contentDisplay="CENTER" mnemonicParsing="false" text="Modifier" GridPane.rowIndex="8" />
                     </children>
                 </GridPane>
             </children>
