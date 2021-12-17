@@ -172,7 +172,7 @@ public class PriseRDVController implements Observateur{
 //        System.out.println("sund "+fin);
 //        System.out.println("auj "+debut);
 
-        dispo = RendezVous.genererRendezVous(u, debut, fin);
+//        dispo = RendezVous.genererRendezVous(u, debut, fin);
 
         for (RendezVous rdv : dispo) {
             LocalDateTime horaire = rdv.getHoraire();
