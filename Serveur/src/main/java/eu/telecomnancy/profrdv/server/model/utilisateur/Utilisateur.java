@@ -104,8 +104,8 @@ public abstract class Utilisateur {
                 return false;
         }
 
-        if (!salle.estDisponible(date))
-            return false;
+        /*if (!salle.estDisponible(date))
+            return false;*/
 
 
         RendezVous rendezVous = new RendezVous(date, utilisateurs, salle, titre, description);

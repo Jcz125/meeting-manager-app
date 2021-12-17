@@ -28,6 +28,7 @@ public class MenuController implements Observateur {
 
     private Parent menuProf;
     private Parent menuEleve;
+    private Parent menuIdentification;
 
     private ProfRDV profRDV;
 
@@ -65,7 +66,9 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handleDecoButton(ActionEvent actionEvent) {
-//        panneau.setCenter(identification);
+        this.profRDV.setConnectedUtilisateur(null);
+        this.panneau.setTop(menuIdentification);
+        this.panneau.setCenter(identification);
     }
 
 
@@ -220,12 +223,17 @@ public class MenuController implements Observateur {
 
     public void chargerProfMenu() {
         this.panneau.setTop(menuProf);
-        this.panneau.setCenter(planning);
+        this.panneau.setCenter(priseRDV);
     }
 
 
     public void chargerEleveMenu() {
         this.panneau.setTop(menuEleve);
         this.panneau.setCenter(priseRDV);
+    }
+
+
+    public void setMenuIdentification(Parent menuIdentification) {
+        this.menuIdentification = menuIdentification;
     }
 }

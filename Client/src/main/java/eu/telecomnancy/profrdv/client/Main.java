@@ -5,6 +5,7 @@ import eu.telecomnancy.profrdv.client.model.*;
 import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -44,12 +45,14 @@ public class Main extends Application {
 
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("MenuIdentification.fxml"));
         menuLoader.setControllerFactory(iC -> new MenuController());
-        panneau.setTop(menuLoader.load());
+        Parent menuIdentification = menuLoader.load();
+        panneau.setTop(menuIdentification);
         MenuController menuController = menuLoader.getController();
         menuController.setProfRDV(profRDV);
         menuController.init(utilisateurs, ecole);
         menuController.setPanneau(panneau);
         menuController.setProfRDV(profRDV);
+        menuController.setMenuIdentification(menuIdentification);
 
 
         panneau.setCenter(menuController.getIdentification());
