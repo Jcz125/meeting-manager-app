@@ -3,10 +3,16 @@
 ## Instructions
 Dans `./Server` puis `./Client` lancer `gradle run`.
 
-
 Si gradle n'est pas installé sur votre ordinateur, remplacez `gradle` par :
 - `./gradlew` si vous êtes sur environement UNIX (Linux, BSD, MacOS, wsl...)
 - `./gradlew.bat` si vous êtes sur Windows
+
+Pour se connecter par défaut il y a 3 comptes :
+- Prof 1 : littlegirl@gmail.com
+- Prof 2 : littleboy@gmail.com
+- Eleve : jeff.bezos@amazon.com
+
+
 
 ### Détails
 Commandes courantes :
