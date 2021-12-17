@@ -10,9 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class DispoViewController implements Observateur {
 
@@ -26,7 +24,7 @@ public class DispoViewController implements Observateur {
         this.disponibiliteFixeObservableList.addAll(dispos);
 
         this.disponibiliteFixeListView.setItems(disponibiliteFixeObservableList);
-        this.disponibiliteFixeListView.setCellFactory(listRDVView -> new DispoCellController());
+        this.disponibiliteFixeListView.setCellFactory(disponibiliteFixeListView -> new DispoCellController());
 
     }
 

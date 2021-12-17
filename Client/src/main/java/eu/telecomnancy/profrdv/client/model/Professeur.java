@@ -13,6 +13,7 @@ import java.util.List;
 
 import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import eu.telecomnancy.profrdv.client.model.disponibilite.ModificateurDisponibilite;
+import org.springframework.web.method.annotation.ModelFactory;
 
 public class Professeur extends Utilisateur {
 
@@ -31,6 +32,10 @@ public class Professeur extends Utilisateur {
                 dispoJour.add(dispo);
         }
         return dispoJour;
+    }
+
+    public List<ModificateurDisponibilite> getDispoExcept(Professeur prof) {
+        return this.getModificateurDisponibilite();
     }
 
     public void addDispoFixe(DisponibiliteFixe dispo) {
