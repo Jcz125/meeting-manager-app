@@ -46,6 +46,7 @@ public class EcoleController {
             s.setNumero(107);
             monEcole.addSalle(s);
             a.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.MIN, LocalTime.MAX));
+            a.add(new ModificateurDisponibilite(true, LocalDateTime.of(2021, 12, 17, 12, 00), LocalDateTime.of(2021, 12, 17, 16, 00)));
             a.add(new DisponibiliteFixe(DayOfWeek.SUNDAY, LocalTime.MIN, LocalTime.MAX));
             b.add(new DisponibiliteFixe(DayOfWeek.SUNDAY, LocalTime.MIN, LocalTime.MAX));
             a.add(new DisponibiliteFixe(DayOfWeek.FRIDAY, LocalTime.MIN, LocalTime.MAX));

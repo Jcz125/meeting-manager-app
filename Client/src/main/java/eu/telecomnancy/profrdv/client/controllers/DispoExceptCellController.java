@@ -37,7 +37,7 @@ public class DispoExceptCellController extends ListCell<ModificateurDisponibilit
     private FXMLLoader fxmlLoader;
 
     public DispoExceptCellController() {
-        System.out.println("#############Step1#############");
+
     }
 
     public void updateItem(ModificateurDisponibilite dispo, boolean empty) {
@@ -45,7 +45,6 @@ public class DispoExceptCellController extends ListCell<ModificateurDisponibilit
         if (empty || dispo == null) {
             setText(null);
             setGraphic(null);
-            System.out.println("#############Step2#############");
         } else {
             if (fxmlLoader == null) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/DispoExceptCell.fxml"));
@@ -60,9 +59,8 @@ public class DispoExceptCellController extends ListCell<ModificateurDisponibilit
             this.debut_heure.setText(""+dispo.getDebut().getHour());
             this.debut_minute.setText(""+dispo.getDebut().getMinute());
             this.fin_heure.setText(""+dispo.getFin().getHour());
-            System.out.println("##############debut:"+this.debut_heure+" fin:"+this.fin_heure);
             this.fin_minute.setText(""+((dispo.getFin().getMinute() >= 10) ? dispo.getFin().getMinute() : ""+0+dispo.getFin().getMinute()));
-            this.label_date.setText(""+dispo.getDebut().getDayOfYear());
+            this.label_date.setText(""+dispo.getDebut().getDayOfMonth()+"/"+dispo.getDebut().getMonthValue()+"/"+dispo.getDebut().getYear());
             setText(null);
             setGraphic(gridPaneDispoCell);
         }
