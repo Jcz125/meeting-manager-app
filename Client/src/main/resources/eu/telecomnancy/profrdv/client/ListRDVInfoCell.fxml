@@ -63,7 +63,7 @@
                           <buttons>
                             <Button fx:id="b_confirmer" mnemonicParsing="false" onAction="#confirmer" text="Confirmer" />
                               <Button fx:id="b_modifier" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
-                              <Button fx:id="b_annuler" layoutX="114.0" layoutY="18.0" mnemonicParsing="false" text="Annuler" />
+                              <Button fx:id="b_annuler" layoutX="114.0" layoutY="18.0" mnemonicParsing="false" onAction="#annuler" text="Annuler" />
                           </buttons>
                         </ButtonBar>
                      </children></HBox>
