@@ -68,7 +68,7 @@ public class Main extends Application {
 
 
         FXMLLoader identificationLoader = new FXMLLoader(getClass().getResource("Identification.fxml"));
-        identificationLoader.setControllerFactory(iC -> new IdentificationController());
+        identificationLoader.setControllerFactory(iC -> new IdentificationController(ecole.getUtilisateurs()));
         Parent identificationParent = identificationLoader.load();
 
 
@@ -100,7 +100,7 @@ public class Main extends Application {
 
         menuController.setPanneau(panneau);
 
-        panneau.setCenter(planningParent);
+        panneau.setCenter(identificationParent);
 
 
         Scene scene = new Scene(panneau, 1400, 750);
