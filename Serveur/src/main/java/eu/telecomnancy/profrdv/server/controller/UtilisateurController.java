@@ -66,7 +66,7 @@ public class UtilisateurController {
     }
 
     @PostMapping("/utilisateur/prendreRDV")
-    public BooleanResult prendreRDV(@RequestParam(value = "userid") Integer userid, RequestEntity<RendezVousData> rendezVousEntity) {
+    public BooleanResult prendreRDV(@RequestParam(value = "id") Integer userid, RequestEntity<RendezVousData> rendezVousEntity) {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(userid);
         if (utilisateur.isEmpty())
             return new BooleanResult(false);

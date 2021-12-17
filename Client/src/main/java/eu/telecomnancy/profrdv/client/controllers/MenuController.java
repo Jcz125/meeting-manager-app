@@ -2,6 +2,7 @@ package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.Ecole;
 import eu.telecomnancy.profrdv.client.model.ProfRDV;
+import eu.telecomnancy.profrdv.client.model.Professeur;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ public class MenuController implements Observateur {
     private MenuController mc;
     private Utilisateur utilisateur;
     private String idToConnect;
+    private Ecole ecole;
 
     private BorderPane panneau;
     private Parent creation;
@@ -27,8 +29,10 @@ public class MenuController implements Observateur {
 
     private Parent menuProf;
     private Parent menuEleve;
+    private Parent menuIdentification;
 
     private ProfRDV profRDV;
+    private List<Utilisateur> utilisateurs;
 
 
     public MenuController() {
@@ -56,24 +60,7 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handleIdButton(ActionEvent actionEvent) {
-//        String id = (String) JOptionPane.showInputDialog(new Component() {
-//                                                         },
-//                "Identifiant",
-//                "Identifiez-Vous",
-//                JOptionPane.PLAIN_MESSAGE,
-//                null,
-//                null,
-//                null);
-//
-//        if (id != null) {
-//            this.idToConnect = id;
-//        }
         panneau.setCenter(identification);
-    }
-
-
-    public String getIdToConnect() {
-        return this.idToConnect;
     }
 
 
@@ -83,14 +70,29 @@ public class MenuController implements Observateur {
     }
 
 
+    @FXML
+    private void handleDecoButton(ActionEvent actionEvent) {
+        this.profRDV.setConnectedUtilisateur(null);
+        this.panneau.setTop(menuIdentification);
+        this.panneau.setCenter(identification);
+    }
+
+
     public void init(List<Utilisateur> utilisateurs, Ecole ecole) {
-        this.setIdentificationNode(ecole);
+        this.ecole = ecole;
+        this.utilisateurs = utilisateurs;
+
+        this.setIdentificationNode();
         this.setCreationNode();
-        this.setPlanningNode(utilisateurs);
-        this.setPriseRDV(utilisateurs);
-        this.setEspacePersoNode(ecole);
         this.setMenuProf();
         this.setMenuEleve();
+    }
+
+
+    public void initConnection() {
+        this.setPlanningNode();
+        this.setEspacePersoNode();
+        this.setPriseRDV();
     }
 
 
@@ -110,10 +112,10 @@ public class MenuController implements Observateur {
     }
 
 
-    private void setPlanningNode(List<Utilisateur> utilisateurs) {
+    private void setPlanningNode() {
 
         FXMLLoader planningLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/Planning.fxml"));
-        planningLoader.setControllerFactory(iC -> new PlanningController(utilisateurs.get(0)));
+        planningLoader.setControllerFactory(iC -> new PlanningController(this.profRDV.getConnectedUtilisateur()));
         try {
             this.planning = planningLoader.load();
         } catch (IOException e) {
@@ -123,41 +125,47 @@ public class MenuController implements Observateur {
     }
 
 
-    private void setEspacePersoNode(Ecole ecole) {
+    private void setEspacePersoNode() {
 
         FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/EspacePerso.fxml"));
-        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController(ecole.getUtilisateurs().get(0)));
+        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController(profRDV));
         try {
             this.espacePerso = espacePersoLoader.load();
+            EspacePersoController controller = espacePersoLoader.getController();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         EspacePersoController espacePersoController = espacePersoLoader.getController();
 
-        FXMLLoader centerPaneLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/ConfigDispo.fxml"));
-        centerPaneLoader.setControllerFactory(iC -> new ConfigDispoController(ecole.getUtilisateurs().get(0)));
 
         FXMLLoader leftPaneLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/RDV-view.fxml"));
-        leftPaneLoader.setControllerFactory(iC -> new RDVViewController(ecole.getUtilisateurs().get(0)));
+        leftPaneLoader.setControllerFactory(iC -> new RDVViewController(profRDV.getConnectedUtilisateur()));
 
 
         try {
-            espacePersoController.setCenter(centerPaneLoader.load());
-            espacePersoController.setLeft(leftPaneLoader.load());
+            if (this.profRDV.getConnectedUtilisateur() instanceof Professeur) {
+                FXMLLoader centerPaneLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/ConfigDispo.fxml"));
+                centerPaneLoader.setControllerFactory(iC -> new ConfigDispoController(profRDV.getConnectedUtilisateur()));
+                espacePersoController.setCenter(centerPaneLoader.load());
+                espacePersoController.setLeft(leftPaneLoader.load());
+            } else {
+                espacePersoController.setCenter(leftPaneLoader.load());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    private void setIdentificationNode(Ecole ecole) {
+    private void setIdentificationNode() {
         FXMLLoader identificationLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/Identification.fxml"));
-        identificationLoader.setControllerFactory(iC -> new IdentificationController(ecole.getUtilisateurs()));
+        identificationLoader.setControllerFactory(iC -> new IdentificationController(this.ecole.getUtilisateurs()));
 
         try {
             this.identification = identificationLoader.load();
             IdentificationController controller = identificationLoader.getController();
+            controller.setProfRDV(this.profRDV);
             controller.setMenuController(this);
         } catch (IOException e) {
             e.printStackTrace();
@@ -165,9 +173,9 @@ public class MenuController implements Observateur {
     }
 
 
-    private void setPriseRDV(List<Utilisateur> utilisateurs) {
+    private void setPriseRDV() {
         FXMLLoader priseRDVLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/PriseRDV.fxml"));
-        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs, utilisateurs.get(0)));
+        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs, this.profRDV.getConnectedUtilisateur()));
         try {
             this.priseRDV = priseRDVLoader.load();
         } catch (IOException e) {
@@ -220,13 +228,20 @@ public class MenuController implements Observateur {
 
 
     public void chargerProfMenu() {
+        initConnection();
         this.panneau.setTop(menuProf);
-        this.panneau.setCenter(planning);
+        this.panneau.setCenter(priseRDV);
     }
 
 
     public void chargerEleveMenu() {
+        initConnection();
         this.panneau.setTop(menuEleve);
         this.panneau.setCenter(priseRDV);
+    }
+
+
+    public void setMenuIdentification(Parent menuIdentification) {
+        this.menuIdentification = menuIdentification;
     }
 }

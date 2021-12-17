@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.Ecole;
+import eu.telecomnancy.profrdv.client.model.Professeur;
 import eu.telecomnancy.profrdv.client.model.RendezVous;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import javafx.beans.value.ChangeListener;
@@ -49,6 +50,7 @@ public class PriseRDVController implements Observateur{
     private String heurRDV ;
     private LocalDateTime horaireRDV ;
     private List<Utilisateur> listUtilisateur;
+    private List<String> listString;
     private int count = 0;
     private Utilisateur util ;
 
@@ -157,7 +159,6 @@ public class PriseRDVController implements Observateur{
         else {
             debut = debut.plusMinutes(20-(min%20));
         }
-        System.out.println(" what "+(20-(min%20)));
 
         Calendar c1 = Calendar.getInstance();
         c1.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -177,7 +178,6 @@ public class PriseRDVController implements Observateur{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
 
-            System.out.println("RDV "+ formattedDateTime);
 
             String[] words = formattedDateTime.split(" ");
             String date = words[0];
@@ -185,7 +185,6 @@ public class PriseRDVController implements Observateur{
             int numJour = jour.getValue();
             String heur = words[1];
 
-            System.out.println("hour "+ heur);
 
 //            Calendar c = Calendar.getInstance();
 //            c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -323,7 +322,6 @@ public class PriseRDVController implements Observateur{
                 int mois = Integer.parseInt(jourMoisAn[1]);
                 int an = Integer.parseInt(jourMoisAn[2]);
                 horaireRDV = LocalDateTime.of(an, mois, jour, heur, min, 00);
-                System.out.println("maked "+horaireRDV);
             }
         });
         list.clear();
@@ -378,8 +376,16 @@ public class PriseRDVController implements Observateur{
 
         //Create RDV ;
         Ecole ecole = new Ecole();
+        listUtilisateur = new ArrayList<>();
+        listString = listViewProfs.getItems();
+        for (String mail  : listString){
+            for (Utilisateur u : ecole.getUtilisateurs()) {
+                if (u.getEmail().equals(mail)){
+                    listUtilisateur.add(u);
+                }
+            }
+        }
         util.prendreRDV(listUtilisateur, horaireRDV, titre, description, ecole.getSalles().get(0));
-
     }
 
 

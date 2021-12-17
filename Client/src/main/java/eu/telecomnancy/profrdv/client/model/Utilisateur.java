@@ -72,12 +72,14 @@ public abstract class Utilisateur {
         for (Utilisateur u: utilisateurs) {
             utilisateursIdsConfirmed.put(u.getId(), false);
         }
+        RendezVous rdv = new RendezVous(data);
+        data = rdv.getData();
         data.utilisateursIdsConfirmed = utilisateursIdsConfirmed;
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<RendezVousData> requestUpdate = new HttpEntity<>(data);
         ResponseEntity<BooleanResult> response =
                     restTemplate.exchange(
-                            "http://127.0.0.1:8080/utilisateur/prendreRDV?id=" + data.id,
+                            "http://127.0.0.1:8080/utilisateur/prendreRDV?id=" + this.getId(),
                             HttpMethod.POST,
                             requestUpdate, BooleanResult.class);
         return response.getBody().success;
@@ -86,7 +88,7 @@ public abstract class Utilisateur {
     public void confirmerRDV(RendezVous rdv) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(
-                "http://127.0.0.1:8080//rdv/confirme?userid=" + data.id + "&rdvid=" + rdv.getId(),
+                "http://127.0.0.1:8080/rdv/confirmer?userid=" + data.id + "&rdvid=" + rdv.getId(),
                 null, Void.class);
         fetchData();
     }

@@ -50,13 +50,14 @@ public class EcoleController {
             a.add(new DisponibiliteFixe(DayOfWeek.SUNDAY, LocalTime.MIN, LocalTime.MAX));
             b.add(new DisponibiliteFixe(DayOfWeek.SUNDAY, LocalTime.MIN, LocalTime.MAX));
             a.add(new DisponibiliteFixe(DayOfWeek.FRIDAY, LocalTime.MIN, LocalTime.MAX));
+            ecoleRepository.save(monEcole);
             Utilisateur[] l = {a, c};
             ArrayList<Utilisateur> list = new ArrayList<>(Arrays.asList(l));
             a.prendreRDV(list, s, LocalDateTime.of(2021, 12, 13, 12, 00), "Ma réu", "Test");
-            a.prendreRDV(list, s, LocalDateTime.of(2021, 12, 13, 14, 00), "Ma réu plus tard", "Test");
-            a.prendreRDV(list, s, LocalDateTime.of(2021, 12, 06, 12, 00), "Un autre lundi", "Test");
-            a.prendreRDV(list, s, LocalDateTime.of(2021, 12, 10, 12, 00), "Un autre jour", "Test");
-            ecoleRepository.save(monEcole);
+            //a.prendreRDV(list, s, LocalDateTime.of(2021, 12, 13, 14, 00), "Ma réu plus tard", "Test");
+            //a.prendreRDV(list, s, LocalDateTime.of(2021, 12, 06, 12, 00), "Un autre lundi", "Test");
+            //a.prendreRDV(list, s, LocalDateTime.of(2021, 12, 10, 12, 00), "Un autre jour", "Test");
+            utilisateurRepository.save(a);
             System.out.println(monEcole.getId());
         }
         Optional<Ecole> monEcole = ecoleRepository.findById(1);
