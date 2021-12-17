@@ -1,5 +1,6 @@
 package eu.telecomnancy.profrdv.server.model.disponibilite;
 
+import eu.telecomnancy.profrdv.server.model.data.DisponibiliteFixeData;
 import eu.telecomnancy.profrdv.server.model.data.ModificateurDisponibiliteData;
 
 import javax.persistence.Entity;
@@ -24,6 +25,10 @@ public class ModificateurDisponibilite {
         this.inclut = inclusion;
         this.debut = debut;
         this.fin = fin;
+    }
+
+    public ModificateurDisponibilite(ModificateurDisponibiliteData data) {
+        this(data.inclut, data.debut, data.fin);
     }
 
 
@@ -58,5 +63,15 @@ public class ModificateurDisponibilite {
 
     public ModificateurDisponibiliteData getData() {
         return new ModificateurDisponibiliteData(id, inclut, debut, fin);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void updateData(ModificateurDisponibiliteData data) {
+        if (data.inclut != null) this.inclut = data.inclut;
+        if (data.debut != null) this.debut = data.debut;
+        if (data.fin != null) this.fin = data.fin;
     }
 }

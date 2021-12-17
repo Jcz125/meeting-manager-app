@@ -53,6 +53,7 @@ public class RendezVous {
         restTemplate.put(
                 "http://127.0.0.1:8080/rdv?id=" + data.id,
                 this.data);
+        fetchData();
     }
 
     public void delete() {
@@ -102,35 +103,30 @@ public class RendezVous {
 
 
     public void setTitre(String titre) {
-        fetchData();
         RendezVousData data = new RendezVousData();
         data.titre = titre;
         updateData(data);
     }
 
     public void setDescription(String description) {
-        fetchData();
         RendezVousData data = new RendezVousData();
         data.description = description;
         updateData(data);
     }
 
     public void setEtatRendezVous(EtatRendezVousData etatRendezVous) {
-        fetchData();
         RendezVousData data = new RendezVousData();
         data.etatRendezVous = etatRendezVous;
         updateData(data);
     }
 
     public void setHoraire(LocalDateTime horaire) {
-        fetchData();
         RendezVousData data = new RendezVousData();
         data.horaire = horaire;
         updateData(data);
     }
 
     public void setSalle(SalleData salle) {
-        fetchData();
         RendezVousData data = new RendezVousData();
         data.salle = salle;
         updateData(data);

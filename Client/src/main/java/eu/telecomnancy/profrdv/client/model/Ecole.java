@@ -101,7 +101,6 @@ public class Ecole {
     }
 
     public void setNom(String nom) {
-        fetchData();
         EcoleData data = new EcoleData();
         data.nom = nom;
         updateData(data);

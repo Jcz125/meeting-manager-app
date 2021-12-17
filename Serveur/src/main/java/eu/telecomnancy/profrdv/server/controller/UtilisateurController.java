@@ -1,12 +1,14 @@
 package eu.telecomnancy.profrdv.server.controller;
 
 import eu.telecomnancy.profrdv.server.model.Salle;
-import eu.telecomnancy.profrdv.server.model.data.BooleanResult;
-import eu.telecomnancy.profrdv.server.model.data.RendezVousData;
-import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
+import eu.telecomnancy.profrdv.server.model.data.*;
+import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
+import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Eleve;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Professeur;
 import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
+import eu.telecomnancy.profrdv.server.repository.DisponibiliteRepositoryFixe;
+import eu.telecomnancy.profrdv.server.repository.ModificateurDisponibiliteRepository;
 import eu.telecomnancy.profrdv.server.repository.SalleRepository;
 import eu.telecomnancy.profrdv.server.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,7 @@ public class UtilisateurController {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(data.id);
         if (utilisateur.isEmpty())
             return;
-        utilisateur.get().updateData(monUtilisateur);
+        utilisateur.get().updateData(monUtilisateur.getBody());
         utilisateurRepository.save(utilisateur.get());
     }
 

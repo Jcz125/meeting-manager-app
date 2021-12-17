@@ -3,6 +3,8 @@ package eu.telecomnancy.profrdv.server.model.utilisateur;
 import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 import eu.telecomnancy.profrdv.server.model.disponibilite.Disponibilite;
+import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
+import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,16 +26,13 @@ public class Professeur extends Utilisateur {
         disponibilites = new Disponibilite();
     }
 
-
-    public void add(DayOfWeek jour, LocalTime debut, LocalTime fin) {
-        disponibilites.add(jour, debut, fin);
+    public void add(DisponibiliteFixe dispo) {
+        disponibilites.add(dispo);
     }
 
-
-    public void add(boolean inclut, LocalDateTime debut, LocalDateTime fin) {
-        disponibilites.add(inclut, debut, fin);
+    public void add(ModificateurDisponibilite dispo) {
+        disponibilites.add(dispo);
     }
-
 
     public boolean estDisponible(LocalDateTime horaire) {
         for (RendezVous rdv : RDVs)
