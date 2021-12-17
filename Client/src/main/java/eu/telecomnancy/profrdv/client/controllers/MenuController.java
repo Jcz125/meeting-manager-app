@@ -52,6 +52,7 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handlePlanningButton(ActionEvent actionEvent) {
+        this.setPlanningNode();
         panneau.setCenter(planning);
     }
 
@@ -82,7 +83,6 @@ public class MenuController implements Observateur {
     public void init(List<Utilisateur> utilisateurs, Ecole ecole) {
         this.setIdentificationNode(ecole);
         this.setCreationNode();
-        this.setPlanningNode(utilisateurs);
         this.setPriseRDV(utilisateurs);
         this.setMenuProf();
         this.setMenuEleve();
@@ -107,10 +107,10 @@ public class MenuController implements Observateur {
     }
 
 
-    private void setPlanningNode(List<Utilisateur> utilisateurs) {
+    private void setPlanningNode() {
 
         FXMLLoader planningLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/Planning.fxml"));
-        planningLoader.setControllerFactory(iC -> new PlanningController(utilisateurs.get(0)));
+        planningLoader.setControllerFactory(iC -> new PlanningController(this.profRDV.getConnectedUtilisateur()));
         try {
             this.planning = planningLoader.load();
         } catch (IOException e) {
