@@ -1,20 +1,15 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.RendezVous;
-import eu.telecomnancy.profrdv.client.model.Salle;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
-import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.util.Callback;
-import javafx.util.Pair;
 
 import javax.swing.*;
 import java.awt.*;
