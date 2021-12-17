@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DispoViewController implements Observateur, Initializable {
+public class DispoViewController implements Observateur {
 
     private ListView<DisponibiliteFixe> disponibiliteFixeListView;
 
@@ -22,14 +22,22 @@ public class DispoViewController implements Observateur, Initializable {
 
     public DispoViewController(List<DisponibiliteFixe> dispos, ListView<DisponibiliteFixe> dispoListView) {
         this.disponibiliteFixeListView = dispoListView;
-        disponibiliteFixeObservableList = FXCollections.observableArrayList();
-        disponibiliteFixeObservableList.addAll(dispos);
+        this.disponibiliteFixeObservableList = FXCollections.observableArrayList();
+        this.disponibiliteFixeObservableList.addAll(dispos);
+
+        this.disponibiliteFixeListView.setItems(disponibiliteFixeObservableList);
+        this.disponibiliteFixeListView.setCellFactory(listRDVView -> new DispoCellController());
+
     }
 
+    /*
+    @FXML
     public void initialize(URL location, ResourceBundle resources) {
         this.disponibiliteFixeListView.setItems(disponibiliteFixeObservableList);
         this.disponibiliteFixeListView.setCellFactory(listRDVView -> new DispoCellController());
     }
+    */
+
 
     public ListView<DisponibiliteFixe> getDispoList() {
         return this.disponibiliteFixeListView;
@@ -38,4 +46,6 @@ public class DispoViewController implements Observateur, Initializable {
     public void update() {
 
     }
+
+
 }
