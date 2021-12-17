@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.RendezVous;
+import eu.telecomnancy.profrdv.client.model.Salle;
 import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
 import javafx.beans.value.ChangeListener;
@@ -44,7 +45,6 @@ public class PriseRDVController implements Observateur{
     @FXML private ListView listViewSamedi ;
     @FXML private ListView listViewDimanche ;
     @FXML private ListView listViewProfs ;
-    private RendezVous RDV ;
     private List<Utilisateur> u ;
     private List<RendezVous> dispo = new ArrayList<>() ;
     private ArrayList<String> dispoList = new ArrayList<String>();
@@ -53,6 +53,7 @@ public class PriseRDVController implements Observateur{
     private String heurRDV ;
     private List<Utilisateur> listUtilisateur;
     private int count = 0;
+    private Utilisateur util ;
 
     private ArrayList<String> RdvlistLundi = new ArrayList<String>();
     private ArrayList<String> RdvlistMardi = new ArrayList<String>();
@@ -72,8 +73,9 @@ public class PriseRDVController implements Observateur{
     ObservableList observableListDimanche = FXCollections.observableArrayList();
     ObservableList observableListUtil = FXCollections.observableArrayList();
 
-    public PriseRDVController(List<Utilisateur> u){
+    public PriseRDVController(List<Utilisateur> u, Utilisateur util){
         this.u = u ;
+        this.util = util ;
     }
 
     @FXML
@@ -127,15 +129,15 @@ public class PriseRDVController implements Observateur{
     }
 
     private void LoadUtilisateur(String u) {
-        observableListUtil.removeAll(observableListUtil) ;
+        //observableListUtil.removeAll(observableListUtil) ;
         observableListUtil.add(u);
         listViewProfs.setItems(observableListUtil);
-        listViewProfs.setCellFactory(new Callback<ListView, ListCell>() {
-            @Override
-            public ListCell call(ListView param) {
-                return new PriseRDVCell();
-            }
-        });
+//        listViewProfs.setCellFactory(new Callback<ListView, ListCell>() {
+//            @Override
+//            public ListCell call(ListView param) {
+//                return new PriseRDVCell();
+//            }
+//        });
     }
 
     private void loadData() throws ParseException {
@@ -170,7 +172,7 @@ public class PriseRDVController implements Observateur{
 //        System.out.println("sund "+fin);
 //        System.out.println("auj "+debut);
 
-//        dispo = RendezVous.genererRendezVous(u, debut, fin);
+        dispo = RendezVous.genererRendezVous(u, debut, fin);
 
         for (RendezVous rdv : dispo) {
             LocalDateTime horaire = rdv.getHoraire();
@@ -279,14 +281,12 @@ public class PriseRDVController implements Observateur{
         o.setAll(list);
         listView.getItems().addAll(o);
 
-//        listViewLundi.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-//                heurRDV = (String)newValue;
-//                //System.out.println(heurRDV);
-//                //u.prendreRDV(listUtilisateur, heurRDV);
-//            }
-//        });
+        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                heurRDV = (String)newValue;
+            }
+        });
         list.clear();
     }
 
@@ -336,15 +336,9 @@ public class PriseRDVController implements Observateur{
                 null,
                 null);
 
-        if (titre != null) {
-            this.RDV.setTitre(titre);
-        }
-
-        if (description != null) {
-            this.RDV.setDescription(description);
-        }
 
         //Create RDV ;
+        //util.prendreRDV(listUtilisateur, heurRDV, titre, description, );
 
     }
 

@@ -4,8 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
+<?import javafx.scene.control.Label?>
 <AnchorPane prefHeight="25.0" prefWidth="52.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.profrdv.client.controllers.PriseRDVCell">
    <children>
-      <Button fx:id="creneau" layoutY="1.0" mnemonicParsing="false" text="creneau" />
+      <Label text="" fx:id ="prof" />
    </children>
 </AnchorPane>

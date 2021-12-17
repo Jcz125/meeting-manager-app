@@ -12,7 +12,8 @@ import java.io.IOException;
 
 public class PriseRDVCell extends ListCell<String>
 {
-    @FXML Button creneau;
+    @FXML Label prof;
+    private FXMLLoader mLLoader;
 
     public PriseRDVCell() {
 //        FXMLLoader fxmlLoader = new FXMLLoader();
@@ -32,9 +33,28 @@ public class PriseRDVCell extends ListCell<String>
     public void updateItem(String string, boolean empty)
     {
         super.updateItem(string,empty);
-        if(string != null)
-        {
-            Label l = new Label(string);
+        if(empty || string == null) {
+
+            setText(null);
+            setGraphic(null);
+
+        } else {
+            if (mLLoader == null) {
+                mLLoader = new FXMLLoader(getClass().getResource("PriseRDVCell.fxml"));
+                mLLoader.setController(this);
+
+                try {
+                    mLLoader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            prof.setText(string);
+
+            setText(null);
+            //setGraphic(gridPane);
         }
     }
 }

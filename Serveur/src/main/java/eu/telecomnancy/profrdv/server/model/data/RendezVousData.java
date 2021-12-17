@@ -21,7 +21,7 @@ public class RendezVousData {
 
     public RendezVousData() {}
 
-    public RendezVousData(int id, LocalDateTime horaire, Map<Integer, Boolean> utilisateursIdsConfirmed, String description, String titre, SalleData salle, EtatRendezVousData etatRendezVous) {
+    public RendezVousData(Integer id, LocalDateTime horaire, Map<Integer, Boolean> utilisateursIdsConfirmed, String description, String titre, SalleData salle, EtatRendezVousData etatRendezVous) {
         this.description = description;
         this.horaire = horaire;
         this.id = id;

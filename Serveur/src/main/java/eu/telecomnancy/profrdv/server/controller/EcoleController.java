@@ -46,6 +46,8 @@ public class EcoleController {
             s.setNumero(107);
             monEcole.addSalle(s);
             a.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.MIN, LocalTime.MAX));
+            a.add(new DisponibiliteFixe(DayOfWeek.SUNDAY, LocalTime.MIN, LocalTime.MAX));
+            b.add(new DisponibiliteFixe(DayOfWeek.SUNDAY, LocalTime.MIN, LocalTime.MAX));
             a.add(new DisponibiliteFixe(DayOfWeek.FRIDAY, LocalTime.MIN, LocalTime.MAX));
             Utilisateur[] l = {a, c};
             ArrayList<Utilisateur> list = new ArrayList<>(Arrays.asList(l));

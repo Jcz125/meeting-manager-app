@@ -49,7 +49,7 @@ public class Main extends Application {
 
 
         FXMLLoader priseRDVLoader = new FXMLLoader(getClass().getResource("PriseRDV.fxml"));
-        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs));
+        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs, utilisateurs.get(0)));
         Parent priseRDVParent = priseRDVLoader.load();
 
 
@@ -68,12 +68,12 @@ public class Main extends Application {
 
 
         FXMLLoader identificationLoader = new FXMLLoader(getClass().getResource("Identification.fxml"));
-        identificationLoader.setControllerFactory(iC -> new IdentificationController());
+        identificationLoader.setControllerFactory(iC -> new IdentificationController(ecole.getUtilisateurs()));
         Parent identificationParent = identificationLoader.load();
 
 
         FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("EspacePerso.fxml"));
-        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController());
+        espacePersoLoader.setControllerFactory(iC -> new EspacePersoController(ecole.getUtilisateurs().get(0)));
 
         Parent espacePersoParent = espacePersoLoader.load();
 
@@ -100,7 +100,7 @@ public class Main extends Application {
 
         menuController.setPanneau(panneau);
 
-        panneau.setCenter(planningParent);
+        panneau.setCenter(identificationParent);
 
 
         Scene scene = new Scene(panneau, 1400, 750);
