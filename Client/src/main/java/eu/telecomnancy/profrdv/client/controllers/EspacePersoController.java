@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import javax.swing.*;
+
 public class EspacePersoController implements Observateur {
     @FXML
     private AnchorPane centerPane;
@@ -26,9 +28,13 @@ public class EspacePersoController implements Observateur {
         this.u = u ;
     }
 
-
+    @FXML
     public void handleConfirmButton() {
-
+        u.setNom(this.nom.getText());
+        u.setPrenom(this.prenom.getText());
+        u.setEmail(this.email.getText());
+        u.setTelephone((this.telephone.getText()));
+        JOptionPane.showMessageDialog(null, "Modifié avec succés", "InfoBox: " + "Modification", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @FXML
