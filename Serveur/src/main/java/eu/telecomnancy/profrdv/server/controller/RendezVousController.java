@@ -57,6 +57,17 @@ public class RendezVousController {
             rendezVousRepository.delete(rendezVous.get());
     }
 
+    @PostMapping("/rdv/confirmer")
+    public void confirmerdv(@RequestParam(value = "userid") Integer userid, @RequestParam(value = "rdvid") Integer rdvid) {
+        Optional<Utilisateur> utilisateur = utilisateurRepository.findById(userid);
+        if (utilisateur.isEmpty())
+            return;
+        Optional<RendezVous> rdv = rendezVousRepository.findById(userid);
+        if (rdv.isEmpty())
+            return;
+        rdv.get().confirme(utilisateur.get());
+    }
+
     @PostMapping("/genererRendezVous")
     public RDVList genererRendezVous(RequestEntity<RechercheRDVData> monRDV) {
         RechercheRDVData data = monRDV.getBody();

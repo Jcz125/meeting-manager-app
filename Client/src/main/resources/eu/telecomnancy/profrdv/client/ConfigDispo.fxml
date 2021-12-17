@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -29,16 +28,12 @@
                             <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ScrollPane prefHeight="200.0" prefWidth="441.0">
-                                 <content>
-                                    <ListView fx:id="lundiDispo" prefHeight="200.0" prefWidth="395.0" />
-                                 </content>
-                              </ScrollPane>
                               <Button fx:id="lundiAdd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Button>
+                              <ListView fx:id="lundiDispo" prefHeight="200.0" prefWidth="395.0" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
@@ -58,16 +53,12 @@
                               <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ScrollPane prefHeight="200.0" prefWidth="441.0">
-                                 <content>
-                                    <ListView fx:id="mardiDispo" prefHeight="200.0" prefWidth="395.0" />
-                                 </content>
-                              </ScrollPane>
                               <Button fx:id="mardiAdd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Button>
+                              <ListView fx:id="mardiDispo" prefHeight="200.0" prefWidth="395.0" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
@@ -87,16 +78,12 @@
                               <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ScrollPane prefHeight="200.0" prefWidth="441.0">
-                                 <content>
-                                    <ListView fx:id="mercrediDispo" prefHeight="200.0" prefWidth="395.0" />
-                                 </content>
-                              </ScrollPane>
                               <Button fx:id="mardiApp" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Button>
+                              <ListView fx:id="mercrediDispo" prefHeight="200.0" prefWidth="395.0" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
@@ -116,16 +103,12 @@
                               <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ScrollPane prefHeight="200.0" prefWidth="441.0">
-                                 <content>
-                                    <ListView fx:id="jeudiDispo" prefHeight="200.0" prefWidth="395.0" />
-                                 </content>
-                              </ScrollPane>
                               <Button fx:id="jeudiApp" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Button>
+                              <ListView fx:id="jeudiDispo" prefHeight="200.0" prefWidth="395.0" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
@@ -145,11 +128,7 @@
                               <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ScrollPane prefHeight="200.0" prefWidth="441.0">
-                                 <content>
-                                    <ListView fx:id="vendrediDispo" prefHeight="200.0" prefWidth="395.0" />
-                                 </content>
-                              </ScrollPane>
+                              <ListView fx:id="vendrediDispo" prefHeight="200.0" prefWidth="395.0" />
                               <Button fx:id="vendrediAdd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -174,11 +153,7 @@
                               <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ScrollPane prefHeight="200.0" prefWidth="441.0">
-                                 <content>
-                                    <ListView fx:id="samediDispo" prefHeight="200.0" prefWidth="395.0" />
-                                 </content>
-                              </ScrollPane>
+                              <ListView fx:id="samediDispo" prefHeight="200.0" prefWidth="395.0" />
                               <Button fx:id="samediAdd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -203,16 +178,12 @@
                               <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ScrollPane prefHeight="200.0" prefWidth="441.0">
-                                 <content>
-                                    <ListView fx:id="dimancheDispo" prefHeight="200.0" prefWidth="395.0" />
-                                 </content>
-                              </ScrollPane>
                               <Button fx:id="dimancheAdd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Button>
+                              <ListView fx:id="dimancheDispo" prefHeight="200.0" prefWidth="395.0" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
@@ -232,16 +203,12 @@
                               <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ScrollPane prefHeight="200.0" prefWidth="441.0">
-                                 <content>
-                                    <ListView fx:id="exceptionsDispo" prefHeight="200.0" prefWidth="395.0" />
-                                 </content>
-                              </ScrollPane>
                               <Button fx:id="exceptionAdd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Button>
+                              <ListView fx:id="exceptionsDispo" prefHeight="200.0" prefWidth="395.0" />
                            </children>
                         </GridPane>
                      </children>

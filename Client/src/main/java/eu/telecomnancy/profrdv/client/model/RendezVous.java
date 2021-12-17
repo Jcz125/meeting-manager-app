@@ -54,7 +54,7 @@ public class RendezVous {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.put(
                 "http://127.0.0.1:8080/rdv?id=" + data.id,
-                this.data);
+                data);
         fetchData();
     }
 
@@ -69,7 +69,6 @@ public class RendezVous {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(
                 "http://127.0.0.1:8080/rdv/annuler?id=" + data.id,
-                HttpMethod.POST,
                 null, Void.class);
         fetchData();
     }
@@ -199,6 +198,10 @@ public class RendezVous {
         for (Utilisateur user : users)
             eleveString.add(user.getPrenom() + " " + user.getNom());
         return eleveString;
+    }
+
+    public Integer getId() {
+        return data.id;
     }
     //endregion
 }

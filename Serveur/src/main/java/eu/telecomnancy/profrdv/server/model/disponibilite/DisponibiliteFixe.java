@@ -48,7 +48,7 @@ public class DisponibiliteFixe {
 
 
     public boolean estDedans(LocalDateTime horaire) {
-        if (jour.equals(horaire.getDayOfWeek()))
+        if (!jour.equals(horaire.getDayOfWeek()))
             return false;
 
         if (horaire.toLocalTime().isBefore(debut) || horaire.toLocalTime().isAfter(fin))

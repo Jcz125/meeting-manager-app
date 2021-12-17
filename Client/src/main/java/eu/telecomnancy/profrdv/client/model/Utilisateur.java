@@ -50,7 +50,7 @@ public abstract class Utilisateur {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.put(
                 "http://127.0.0.1:8080/utilisateur?id=" + data.id,
-                this.data);
+                data);
         fetchData();
     }
 
@@ -82,8 +82,13 @@ public abstract class Utilisateur {
         return response.getBody().success;
     }
 
-    //public ajouterDispo(DisponibiliteFixe dis)
-
+    public void confirmerRDV(RendezVous rdv) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForObject(
+                "http://127.0.0.1:8080//rdv/confirme?userid=" + data.id + "&rdvid=" + rdv.getId(),
+                null, Void.class);
+        fetchData();
+    }
 
     //region assesseurs
     public List<RendezVous> getRDVs() {

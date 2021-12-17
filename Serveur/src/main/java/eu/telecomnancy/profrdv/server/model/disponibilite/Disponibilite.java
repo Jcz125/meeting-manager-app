@@ -3,12 +3,9 @@ package eu.telecomnancy.profrdv.server.model.disponibilite;
 import eu.telecomnancy.profrdv.server.model.data.DisponibiliteData;
 import eu.telecomnancy.profrdv.server.model.data.DisponibiliteFixeData;
 import eu.telecomnancy.profrdv.server.model.data.ModificateurDisponibiliteData;
-import eu.telecomnancy.profrdv.server.model.utilisateur.Utilisateur;
 
 import javax.persistence.*;
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
