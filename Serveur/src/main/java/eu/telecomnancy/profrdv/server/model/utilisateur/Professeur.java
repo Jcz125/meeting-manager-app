@@ -1,10 +1,15 @@
 package eu.telecomnancy.profrdv.server.model.utilisateur;
 
+import eu.telecomnancy.profrdv.server.SpringConfiguration;
 import eu.telecomnancy.profrdv.server.model.RendezVous;
+import eu.telecomnancy.profrdv.server.model.data.DisponibiliteFixeData;
+import eu.telecomnancy.profrdv.server.model.data.ModificateurDisponibiliteData;
 import eu.telecomnancy.profrdv.server.model.data.UtilisateurData;
 import eu.telecomnancy.profrdv.server.model.disponibilite.Disponibilite;
 import eu.telecomnancy.profrdv.server.model.disponibilite.DisponibiliteFixe;
 import eu.telecomnancy.profrdv.server.model.disponibilite.ModificateurDisponibilite;
+import eu.telecomnancy.profrdv.server.repository.DisponibiliteRepositoryFixe;
+import eu.telecomnancy.profrdv.server.repository.ModificateurDisponibiliteRepository;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +17,8 @@ import javax.persistence.OneToOne;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Entity
 public class Professeur extends Utilisateur {
@@ -43,5 +50,30 @@ public class Professeur extends Utilisateur {
 
     public Disponibilite getDisponibilites() {
         return disponibilites;
+    }
+
+    @Override
+    public void updateData(UtilisateurData data) {
+        super.updateData(data);
+        if (data.disponibiliteFixes != null) {
+            RDVs = new ArrayList<>(data.disponibiliteFixes.length);
+            DisponibiliteRepositoryFixe disponibiliteRepositoryFixe = (DisponibiliteRepositoryFixe) SpringConfiguration.contextProvider().getApplicationContext().getBean("disponibiliteRepositoryFixe");
+            for (DisponibiliteFixeData dispoData: data.disponibiliteFixes) {
+                Optional<DisponibiliteFixe> dispo = disponibiliteRepositoryFixe.findById(dispoData.id);
+                if (dispo.isPresent()) {
+                    disponibilites.dispoFixe.add(dispo.get());
+                }
+            }
+        }
+        if (data.modificateurDisponibilites != null) {
+            RDVs = new ArrayList<>(data.modificateurDisponibilites.length);
+            ModificateurDisponibiliteRepository modificateurDisponibiliteRepository = (ModificateurDisponibiliteRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("modificateurDisponibiliteRepository");
+            for (ModificateurDisponibiliteData dispoData: data.modificateurDisponibilites) {
+                Optional<ModificateurDisponibilite> dispo = modificateurDisponibiliteRepository.findById(dispoData.id);
+                if (dispo.isPresent()) {
+                    disponibilites.modifsDispo.add(dispo.get());
+                }
+            }
+        }
     }
 }
