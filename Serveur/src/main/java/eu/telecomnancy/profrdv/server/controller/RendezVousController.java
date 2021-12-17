@@ -62,10 +62,11 @@ public class RendezVousController {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(userid);
         if (utilisateur.isEmpty())
             return;
-        Optional<RendezVous> rdv = rendezVousRepository.findById(userid);
+        Optional<RendezVous> rdv = rendezVousRepository.findById(rdvid);
         if (rdv.isEmpty())
             return;
         rdv.get().confirme(utilisateur.get());
+        rendezVousRepository.save(rdv.get());
     }
 
     @PostMapping("/genererRendezVous")
@@ -97,5 +98,6 @@ public class RendezVousController {
             return;
         RendezVous rdv = rendezVous.get();
         rdv.annuler();
+        rendezVousRepository.save(rdv);
     }
 }

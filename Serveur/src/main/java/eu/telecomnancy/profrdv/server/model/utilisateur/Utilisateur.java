@@ -99,15 +99,18 @@ public abstract class Utilisateur {
         utilisateurs.remove(this);
         utilisateurs.add(this);
 
-        RendezVous rendezVous = new RendezVous(date, salle, titre, description);
-
         for (Utilisateur utilisateur : utilisateurs) {
-            if (!utilisateur.estDisponible(rendezVous.getHoraire()))
+            if (!utilisateur.estDisponible(date))
                 return false;
         }
 
         if (!salle.estDisponible(date))
             return false;
+
+
+        RendezVous rendezVous = new RendezVous(date, utilisateurs, salle, titre, description);
+        RendezVousRepository rendezVousRepository = (RendezVousRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("rendezVousRepository");
+        rendezVousRepository.save(rendezVous);
 
         for (Utilisateur utilisateur : utilisateurs)
             utilisateur.ajouterRDV(rendezVous);

@@ -1,6 +1,7 @@
 package eu.telecomnancy.profrdv.client.controllers;
 
 import eu.telecomnancy.profrdv.client.model.RendezVous;
+import eu.telecomnancy.profrdv.client.model.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -17,6 +18,7 @@ import java.util.List;
 public class RDVInfoCellController extends ListCell<RendezVous> implements Observateur {
 
     private RendezVous rdv;
+    private Utilisateur u;
     @FXML
     private Label titreRDV;
     @FXML
@@ -45,8 +47,8 @@ public class RDVInfoCellController extends ListCell<RendezVous> implements Obser
     private FXMLLoader fxmlLoader;
 
 
-    public RDVInfoCellController() {
-
+    public RDVInfoCellController(Utilisateur u) {
+        this.u = u;
     }
 
 
@@ -69,6 +71,10 @@ public class RDVInfoCellController extends ListCell<RendezVous> implements Obser
         }
     }
 
+
+    public void confirmer() {
+        u.confirmerRDV(rdv);
+    }
 
     public void modifier() {
         // faire pop une fenetre sur l'interface avec plusieurs champs à modifier

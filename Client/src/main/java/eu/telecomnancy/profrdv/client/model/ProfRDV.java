@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class ProfRDV {
-    private Stage stage;
+    private Stage stage ;
     private Ecole ecole;
     private ArrayList<Observateur> listObservateur=new ArrayList<Observateur>();
 

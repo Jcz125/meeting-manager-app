@@ -40,6 +40,18 @@ public class RendezVous {
         return rendezVous;
     }
 
+    public void create() {
+        HttpEntity<RendezVousData> dataRequest = new HttpEntity<>(data);
+        RestTemplate restTemplate = new RestTemplate();
+        data.id = restTemplate.exchange(
+                "http://127.0.0.1:8080/rdv",
+                HttpMethod.POST,
+                dataRequest,
+                Integer.class
+        ).getBody();
+        fetchData();
+    }
+
     public void fetchData() {
         if (data.id == null)
             return;
@@ -201,6 +213,8 @@ public class RendezVous {
     }
 
     public Integer getId() {
+        if (data.id == null)
+            create();
         return data.id;
     }
     //endregion

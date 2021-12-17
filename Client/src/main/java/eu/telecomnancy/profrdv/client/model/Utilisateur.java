@@ -86,7 +86,7 @@ public abstract class Utilisateur {
     public void confirmerRDV(RendezVous rdv) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(
-                "http://127.0.0.1:8080//rdv/confirme?userid=" + data.id + "&rdvid=" + rdv.getId(),
+                "http://127.0.0.1:8080/rdv/confirmer?userid=" + data.id + "&rdvid=" + rdv.getId(),
                 null, Void.class);
         fetchData();
     }

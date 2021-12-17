@@ -18,9 +18,10 @@ public class RendezVous {
 
     @Column(nullable = false)
     private LocalDateTime horaire;
-    @ManyToMany(targetEntity = Utilisateur.class, cascade = CascadeType.ALL)
-    private Map<Utilisateur, Boolean> utilisateurs; // on donne une paire pour attribuer une confirmation à tout le monde
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToMany(targetEntity=BooleanConfirmation.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "fk_confirmation")
+    private List<BooleanConfirmation> utilisateurs; // on donne une paire pour attribuer une confirmation à tout le monde
+    @ManyToOne(cascade=CascadeType.ALL)
     private Salle salle;
     private String description;
     @Column(nullable = false)
@@ -32,13 +33,17 @@ public class RendezVous {
     }
 
 
-    public RendezVous(LocalDateTime horaire, Salle salle, String titre, String description) {
+    public RendezVous(LocalDateTime horaire, List<Utilisateur> utilisateurs, Salle salle, String titre, String description) {
         this.horaire = horaire;
-        this.utilisateurs = new HashMap<>();
         this.description = description;
         this.titre = titre;
         this.salle = salle;
         this.etatRendezVous = EtatRendezVousEnum.DEMANDE;
+        this.utilisateurs = new ArrayList<>();
+
+        for (Utilisateur utilisateur : utilisateurs) {
+            this.utilisateurs.add(new BooleanConfirmation(utilisateur));
+        }
     }
 
 
@@ -46,7 +51,7 @@ public class RendezVous {
         SalleRepository salleRepository = (SalleRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("salleRepository");
         Optional<Salle> salle = salleRepository.findById(data.salle.numero);
         this.horaire = data.horaire;
-        this.utilisateurs = new HashMap<>();
+        this.utilisateurs = new ArrayList<>();
         this.description = data.description;
         this.titre = data.titre;
         this.salle = salle.isEmpty() ? null : salle.get();
@@ -56,10 +61,10 @@ public class RendezVous {
 
     public RendezVous(LocalDateTime horaire, List<Utilisateur> utilisateurs) {
         this.horaire = horaire;
-        this.utilisateurs = new HashMap<>();
+        this.utilisateurs = new ArrayList<>();
 
         for (Utilisateur utilisateur : utilisateurs) {
-            this.utilisateurs.put(utilisateur, false);
+            this.utilisateurs.add(new BooleanConfirmation(utilisateur));
         }
 
         this.salle = null;
@@ -79,17 +84,11 @@ public class RendezVous {
     public void notifier() {
         // on notifie tous les utilisateurs d'un changement d'état sauf quand il a été réalisé
         if (!(etatRendezVous == EtatRendezVousEnum.REALISE)) {
-            for (Utilisateur utilisateur : utilisateurs.keySet()) {
-                utilisateur.notifier(this);
+            for (BooleanConfirmation confirmation : utilisateurs) {
+                confirmation.getUtilisateur().notifier(this);
             }
         }
     }
-
-
-    public void ajoutConfirmation(Utilisateur CurrentUtilisateur) {
-        utilisateurs.put(CurrentUtilisateur, true);
-    }
-
 
     public static List<RendezVous> genererRendezVous(List<Utilisateur> utilisateurs, LocalDateTime debut, LocalDateTime fin) {
         ArrayList<RendezVous> creneaux = new ArrayList<>();
@@ -109,6 +108,14 @@ public class RendezVous {
             heure = heure.plusMinutes(20);
         }
         return creneaux;
+    }
+
+    public List<Utilisateur> getUtilisateurs() {
+        List<Utilisateur> list = new ArrayList<>();
+        for (BooleanConfirmation confirmation : utilisateurs) {
+            list.add(confirmation.getUtilisateur());
+        }
+        return list;
     }
 
 
@@ -140,11 +147,6 @@ public class RendezVous {
 
 
     //region assesseurs
-    public Set<Utilisateur> getUtilisateurs() {
-        return this.utilisateurs.keySet();
-    }
-
-
     public EtatRendezVousEnum getEtatRendezVous() {
         return this.etatRendezVous;
     }
@@ -187,20 +189,29 @@ public class RendezVous {
 
     public RendezVousData getData() {
         Map<Integer, Boolean> utilisateursIdsConfirmed = new HashMap<>();
-        for (Utilisateur utilisateur : utilisateurs.keySet()) {
-            utilisateursIdsConfirmed.put(utilisateur.getId(), utilisateurs.get(utilisateur));
+        for (BooleanConfirmation confirmation: utilisateurs) {
+            utilisateursIdsConfirmed.put(confirmation.getUtilisateur().getId(), confirmation.getConfirme());
         }
         return new RendezVousData(id, horaire, utilisateursIdsConfirmed, description, titre, salle == null ? null : salle.getData(), etatRendezVous == null ? null : etatRendezVous.getData());
     }
 
 
     public boolean peutEtreSupprimer() {
-        return !utilisateurs.containsValue(true);
+        for (BooleanConfirmation confirmation: utilisateurs) {
+            if (confirmation.getConfirme())
+                return false;
+        }
+        return true;
     }
 
     public void confirme(Utilisateur utilisateur) {
-        utilisateurs.replace(utilisateur, true);
+        Integer id = utilisateur.getId();
+        for (BooleanConfirmation confirmation: utilisateurs) {
+            if (confirmation.getUtilisateur().getId() == id) {
+                confirmation.setConfirme(true);
+                return;
+            }
+        }
     }
-
     //endregion
 }
