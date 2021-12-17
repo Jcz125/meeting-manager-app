@@ -1,21 +1,24 @@
 Lundi : 
 	Boire un peu café - fait
 	Conception des classes - fait
+	mettre en place gradle - fait 
 Mardi : 
 	Boire plus de café - fait
-	Mise en place du serveur et du client - pas Fait (décallé à mercredi)
+	Mise en place du serveur et du client - Fait en partie (continuer mercredi)
 	Développement des classes conçues la veille - Fait en partie
-	Démarrage du développement des FXML - Fait en partie
+	Démarrage du développement des FXML - Fait en partie (la plupart des interfaces ont été réalisées)
 
 Mercredi :
 	Boire du café - fait
 	Continuer le développement du serveur - Fait en partie
 	Ecriture de tests sur les classes développées - Fait
-	Continuer le développement des classes - Fait 
+	Continuer le développement des classes (les fonctionnalités en BackEnd) - Fait 
 	Fin du développement des FXML - Fait en partie
 Jeudi :
 	Se rendre compte qu'on est en retard et boire encore plus de café - fait
 	Développement du serveur : quasi fini
+	Fin du développement du FRONT 
+	la plupart des fonctionnalité devrait fonctionner
 Vendredi :
 	Boire du café - fait
 	Mise en place de la prise de rendez-vous : fait
