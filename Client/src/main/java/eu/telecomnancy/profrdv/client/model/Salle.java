@@ -13,7 +13,7 @@ public class Salle {
         this.data = salleREST;
     }
 
-    public Salle (int numero, int etage, String aile) {
+    public Salle(int numero, int etage, String aile) {
         data.numero = numero;
         data.etage =  etage;
         data.aile = aile;

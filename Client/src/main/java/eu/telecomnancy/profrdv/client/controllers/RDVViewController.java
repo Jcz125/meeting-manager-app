@@ -31,7 +31,7 @@ public class RDVViewController implements Observateur, Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         this.listRDVView.setItems(rdvObservableList);
-        this.listRDVView.setCellFactory(listRDVView -> new RDVInfoCellController());
+        this.listRDVView.setCellFactory(listRDVView -> new RDVInfoCellController(user));
     }
 
     public void update() {

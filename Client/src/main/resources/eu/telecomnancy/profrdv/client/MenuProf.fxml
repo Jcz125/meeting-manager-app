@@ -33,14 +33,9 @@
                <Insets right="80.0" top="30.0" />
             </HBox.margin>
          </Button>
-         <Button fx:id="idButton" mnemonicParsing="false" onAction="#handleIdButton" text="Identification">
+         <Button fx:id="decoButton" mnemonicParsing="false" onAction="#handleDecoButton" text="Déconnexion">
             <HBox.margin>
                <Insets right="80.0" top="30.0" />
-            </HBox.margin>
-         </Button>
-         <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreateButton" text="Creation de compte">
-            <HBox.margin>
-               <Insets top="30.0" />
             </HBox.margin>
          </Button>
       </children>

@@ -2,6 +2,7 @@ package eu.telecomnancy.profrdv.client.model;
 
 import eu.telecomnancy.profrdv.client.model.data.*;
 import eu.telecomnancy.profrdv.client.model.disponibilite.DisponibiliteFixe;
+import eu.telecomnancy.profrdv.client.model.disponibilite.ModificateurDisponibilite;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -85,7 +86,7 @@ public abstract class Utilisateur {
     public void confirmerRDV(RendezVous rdv) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(
-                "http://127.0.0.1:8080//rdv/confirme?userid=" + data.id + "&rdvid=" + rdv.getId(),
+                "http://127.0.0.1:8080/rdv/confirmer?userid=" + data.id + "&rdvid=" + rdv.getId(),
                 null, Void.class);
         fetchData();
     }
@@ -112,6 +113,15 @@ public abstract class Utilisateur {
             disponibiliteFixes.add(new DisponibiliteFixe(dispo));
         }
         return disponibiliteFixes;
+    }
+
+    public List<ModificateurDisponibilite> getModificateurDisponibilite() {
+        fetchData();
+        List<ModificateurDisponibilite> disponibiliteExcept = new ArrayList<>();
+        for(ModificateurDisponibiliteData dispo : data.modificateurDisponibilites) {
+            disponibiliteExcept.add(new ModificateurDisponibilite(dispo));
+        }
+        return disponibiliteExcept;
     }
 
     public Integer getId() {
