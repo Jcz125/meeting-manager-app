@@ -76,6 +76,7 @@ public class RDVInfoCellController extends ListCell<RendezVous> implements Obser
         u.confirmerRDV(rdv);
     }
 
+
     public void modifier() {
         // faire pop une fenetre sur l'interface avec plusieurs champs à modifier
         String titre = (String) JOptionPane.showInputDialog(new Component() {

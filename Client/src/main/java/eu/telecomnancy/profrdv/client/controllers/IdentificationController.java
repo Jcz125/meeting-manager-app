@@ -43,12 +43,12 @@ public class IdentificationController implements Observateur {
         for (Utilisateur u : utilis) {
             if ((u.getEmail().equals(mail))){
                 if (u instanceof Professeur) {
-                    this.menuController.chargerProfMenu();
                     this.profRDV.setConnectedUtilisateur(u);
+                    this.menuController.chargerProfMenu();
                     break;
                 } else {
-                    this.menuController.chargerEleveMenu();
                     this.profRDV.setConnectedUtilisateur(u);
+                    this.menuController.chargerEleveMenu();
                     break;
                 }
             }

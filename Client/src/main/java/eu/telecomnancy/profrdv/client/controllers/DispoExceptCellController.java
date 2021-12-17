@@ -60,7 +60,6 @@ public class DispoExceptCellController extends ListCell<ModificateurDisponibilit
             this.debut_heure.setText(""+dispo.getDebut().getHour());
             this.debut_minute.setText(""+dispo.getDebut().getMinute());
             this.fin_heure.setText(""+dispo.getFin().getHour());
-            System.out.println("##############debut:"+this.debut_heure+" fin:"+this.fin_heure);
             this.fin_minute.setText(""+((dispo.getFin().getMinute() >= 10) ? dispo.getFin().getMinute() : ""+0+dispo.getFin().getMinute()));
             this.label_date.setText(""+dispo.getDebut().getDayOfYear());
             setText(null);

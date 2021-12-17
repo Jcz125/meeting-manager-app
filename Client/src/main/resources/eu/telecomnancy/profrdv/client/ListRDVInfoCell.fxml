@@ -23,7 +23,7 @@
          <right>
             <ScrollPane prefHeight="61.0" prefWidth="180.0" BorderPane.alignment="TOP_RIGHT">
                <content>
-                  <VBox prefHeight="198.0" prefWidth="165.0" />
+                  <VBox fx:id="listEleve" prefHeight="198.0" prefWidth="165.0" />
                </content>
             </ScrollPane>
          </right>
@@ -72,7 +72,7 @@
          <left>
             <ScrollPane prefHeight="61.0" prefWidth="180.0" BorderPane.alignment="CENTER">
                <content>
-                  <VBox prefHeight="199.0" prefWidth="166.0" />
+                  <VBox fx:id="listProf" prefHeight="199.0" prefWidth="166.0" />
                </content>
             </ScrollPane>
          </left>

@@ -159,7 +159,6 @@ public class PriseRDVController implements Observateur{
         else {
             debut = debut.plusMinutes(20-(min%20));
         }
-        System.out.println(" what "+(20-(min%20)));
 
         Calendar c1 = Calendar.getInstance();
         c1.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -179,7 +178,6 @@ public class PriseRDVController implements Observateur{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String formattedDateTime = horaire.format(formatter); // "1986-04-08 12:30"
 
-            System.out.println("RDV "+ formattedDateTime);
 
             String[] words = formattedDateTime.split(" ");
             String date = words[0];
@@ -187,7 +185,6 @@ public class PriseRDVController implements Observateur{
             int numJour = jour.getValue();
             String heur = words[1];
 
-            System.out.println("hour "+ heur);
 
 //            Calendar c = Calendar.getInstance();
 //            c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
