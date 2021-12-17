@@ -14,9 +14,7 @@ import eu.telecomnancy.profrdv.server.repository.ModificateurDisponibiliteReposi
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
 

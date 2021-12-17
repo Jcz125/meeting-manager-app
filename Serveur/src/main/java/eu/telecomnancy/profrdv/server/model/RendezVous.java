@@ -198,5 +198,9 @@ public class RendezVous {
         return !utilisateurs.containsValue(true);
     }
 
+    public void confirme(Utilisateur utilisateur) {
+        utilisateurs.replace(utilisateur, true);
+    }
+
     //endregion
 }
