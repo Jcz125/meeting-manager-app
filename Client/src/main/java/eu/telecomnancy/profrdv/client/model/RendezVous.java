@@ -85,6 +85,12 @@ public class RendezVous {
         fetchData();
     }
 
+    public RendezVousData getData() {
+        if (data.id == null)
+            create();
+        return data;
+    }
+
     //region assesseurs
     public EtatRendezVousData getEtatRendezVous() {
         fetchData();

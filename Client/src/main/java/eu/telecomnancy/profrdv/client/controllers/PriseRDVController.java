@@ -379,6 +379,7 @@ public class PriseRDVController implements Observateur{
 
         //Create RDV ;
         Ecole ecole = new Ecole();
+        listUtilisateur = new ArrayList<>();
         listString = listViewProfs.getItems();
         for (String mail  : listString){
             for (Utilisateur u : ecole.getUtilisateurs()) {

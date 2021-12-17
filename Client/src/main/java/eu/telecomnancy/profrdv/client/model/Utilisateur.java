@@ -72,12 +72,14 @@ public abstract class Utilisateur {
         for (Utilisateur u: utilisateurs) {
             utilisateursIdsConfirmed.put(u.getId(), false);
         }
+        RendezVous rdv = new RendezVous(data);
+        data = rdv.getData();
         data.utilisateursIdsConfirmed = utilisateursIdsConfirmed;
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<RendezVousData> requestUpdate = new HttpEntity<>(data);
         ResponseEntity<BooleanResult> response =
                     restTemplate.exchange(
-                            "http://127.0.0.1:8080/utilisateur/prendreRDV?id=" + data.id,
+                            "http://127.0.0.1:8080/utilisateur/prendreRDV?id=" + this.getId(),
                             HttpMethod.POST,
                             requestUpdate, BooleanResult.class);
         return response.getBody().success;
