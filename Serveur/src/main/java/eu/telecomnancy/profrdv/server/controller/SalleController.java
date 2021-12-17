@@ -39,4 +39,12 @@ public class SalleController {
         salle.get().updateData(data);
         salleRepository.save(salle.get());
     }
+
+    @DeleteMapping("/salle")
+    public void deleteSalle(@RequestParam(value = "id") Integer id) {
+        Optional<Salle> salle = salleRepository.findById(id);
+        if (salle.isEmpty())
+            return;
+        salleRepository.delete(salle.get());
+    }
 }

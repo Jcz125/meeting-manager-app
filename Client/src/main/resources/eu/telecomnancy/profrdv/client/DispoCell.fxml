@@ -33,8 +33,8 @@
             <TextField fx:id="fin_minute" prefHeight="25.0" prefWidth="28.0" text="00" GridPane.columnIndex="6" />
             <TextField fx:id="debut_heure" prefHeight="25.0" prefWidth="45.0" text="00" />
             <Label text="  :" GridPane.columnIndex="5" />
-            <Button fx:id="b_supprimer" mnemonicParsing="false" text="Supprimer" GridPane.columnIndex="7" GridPane.halignment="RIGHT" />
-            <Button fx:id="b_supprimer" mnemonicParsing="false" text="Modifier" GridPane.columnIndex="7" GridPane.halignment="LEFT" />
+            <Button fx:id="b_supprimer" mnemonicParsing="false" onAction="#handle_supprimer" text="Supprimer" GridPane.columnIndex="7" GridPane.halignment="RIGHT" />
+            <Button fx:id="b_supprimer" mnemonicParsing="false" onAction="#handle_modifier" text="Modifier" GridPane.columnIndex="7" GridPane.halignment="LEFT" />
          </children>
       </GridPane>
    </children>

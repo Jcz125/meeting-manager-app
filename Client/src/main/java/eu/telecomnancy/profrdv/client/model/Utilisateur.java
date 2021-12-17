@@ -53,6 +53,13 @@ public abstract class Utilisateur {
                 this.data);
     }
 
+    public void delete() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(
+                "http://127.0.0.1:8080/utilisateur?id=" + data.id);
+        data = null;
+    }
+
     public boolean prendreRDV(List<Utilisateur> utilisateurs, LocalDateTime horaire, String titre, String description, Salle salle) {
         RendezVousData data = new RendezVousData();
         data.horaire = horaire;

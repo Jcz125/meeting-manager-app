@@ -97,7 +97,7 @@ public class RDVInfoCellController extends ListCell<RendezVous> implements Obser
             this.etatRDV.setText(rdv.getEtatRendezVoustoString());
             this.descriptionRDV.setText(rdv.getDescription());
             this.dateRDV.setText("" + rdv.getHoraire().getDayOfMonth() + "/" + rdv.getHoraire().getMonthValue() + "/" + rdv.getHoraire().getYear());
-            this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + ((rdv.getHoraire().getMinute() >= 10) ? rdv.getHoraire().getMinute() : ""+rdv.getHoraire().getMinute()+0));
+            this.heureRDV.setText("" + rdv.getHoraire().getHour() + ":" + ((rdv.getHoraire().getMinute() >= 10) ? rdv.getHoraire().getMinute() : ""+0+rdv.getHoraire().getMinute()));
             this.lieuRDV.setText("etg:" + rdv.getSalle().getEtage() + " aile:" + rdv.getSalle().getAile() + " salle:" + rdv.getSalle().getNumero());
             List<String> profs = rdv.getProfstoString();
             List<String> eleves = rdv.getElevestoString();

@@ -187,5 +187,9 @@ public class RendezVous {
         return new RendezVousData(id, horaire, utilisateursIdsConfirmed, description, titre, salle.getData(), etatRendezVous.getData());
     }
 
+    public boolean peutEtreSupprimer() {
+        return !utilisateurs.containsValue(true);
+    }
+
     //endregion
 }

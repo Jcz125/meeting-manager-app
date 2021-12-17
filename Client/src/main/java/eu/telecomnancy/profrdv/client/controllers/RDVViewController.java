@@ -26,42 +26,14 @@ public class RDVViewController implements Observateur, Initializable {
     public RDVViewController(Utilisateur user) {
         this.user = user;
         rdvObservableList = FXCollections.observableArrayList();
-        RendezVous rdv1 = user.getRDVs().get(0);
-        rdvObservableList.addAll(rdv1);
+//        RendezVous rdv1 = user.getRDVs().get(0);
+        rdvObservableList.addAll(user.getRDVs());
     }
 
     public void initialize(URL location, ResourceBundle resources) {
         this.listRDVView.setItems(rdvObservableList);
         this.listRDVView.setCellFactory(listRDVView -> new RDVInfoCellController());
-//        for (RendezVous rdv : user.getRDVs()) {
-//            RDVInfoCellController rdvInfo = new RDVInfoCellController(rdv);
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListRDVInfoCell.fxml"));
-//            fxmlLoader.setController(this);
-//            rdvInfo.setInfo(rdv);
-//            try {
-//                new Scene(fxmlLoader.load());
-//            }
-//            catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            rdvInfo.setInfo(rdv);
-//            listRDVView.getItems().add(rdvInfo);
-//        }
     }
-
-//    public void add(RendezVous rdv) {
-//        RDVInfoCellController rdvInfo = new RDVInfoCellController();
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListRDVInfoCell.fxml"));
-//        fxmlLoader.setController(this);
-//        rdvInfo.setInfo(rdv);
-//        try {
-//            fxmlLoader.load();
-//        }
-//        catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        rdvInfo.setInfo(rdv);
-//    }
 
     public void update() {
 
