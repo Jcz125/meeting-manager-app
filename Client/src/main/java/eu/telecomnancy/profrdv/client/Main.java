@@ -49,7 +49,7 @@ public class Main extends Application {
 
 
         FXMLLoader priseRDVLoader = new FXMLLoader(getClass().getResource("PriseRDV.fxml"));
-        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs));
+        priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs, utilisateurs.get(0)));
         Parent priseRDVParent = priseRDVLoader.load();
 
 
