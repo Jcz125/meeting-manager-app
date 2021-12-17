@@ -80,7 +80,7 @@ public class Main extends Application {
         EspacePersoController espacePersoController = espacePersoLoader.getController();
 
         FXMLLoader centerPaneLoader = new FXMLLoader(getClass().getResource("ConfigDispo.fxml"));
-        centerPaneLoader.setControllerFactory(iC -> new ConfigDispoController());
+        centerPaneLoader.setControllerFactory(iC -> new ConfigDispoController(ecole.getUtilisateurs().get(0)));
 
         FXMLLoader leftPaneLoader = new FXMLLoader(getClass().getResource("RDV-view.fxml"));
         leftPaneLoader.setControllerFactory(iC -> new RDVViewController(ecole.getUtilisateurs().get(0)));

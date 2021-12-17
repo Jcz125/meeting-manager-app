@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class DispoCellController extends ListCell<DisponibiliteFixe> implements Observateur{
@@ -32,6 +31,10 @@ public class DispoCellController extends ListCell<DisponibiliteFixe> implements 
 
     private FXMLLoader fxmlLoader;
 
+    public DispoCellController() {
+
+    }
+
     public void updateItem(DisponibiliteFixe dispo, boolean empty) {
         super.updateItem(dispo, empty);
         if (empty || dispo == null) {
@@ -51,6 +54,7 @@ public class DispoCellController extends ListCell<DisponibiliteFixe> implements 
             this.debut_heure.setText(""+dispo.getDebut().getHour());
             this.debut_minute.setText(""+dispo.getDebut().getMinute());
             this.fin_heure.setText(""+dispo.getFin().getHour());
+            System.out.println("##############debut:"+this.debut_heure+" fin:"+this.fin_heure);
             this.fin_minute.setText(""+((dispo.getFin().getMinute() >= 10) ? dispo.getFin().getMinute() : ""+0+dispo.getFin().getMinute()));
             setText(null);
             setGraphic(anchorPaneDispoCell);

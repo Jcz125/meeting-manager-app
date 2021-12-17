@@ -11,25 +11,28 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DispoViewController implements Observateur, Initializable {
-    private Utilisateur user;
 
-    @FXML
     private ListView<DisponibiliteFixe> disponibiliteFixeListView;
 
     private ObservableList<DisponibiliteFixe> disponibiliteFixeObservableList;
 
-    public DispoViewController(Utilisateur user) {
-        this.user = user;
+    public DispoViewController(List<DisponibiliteFixe> dispos, ListView<DisponibiliteFixe> dispoListView) {
+        this.disponibiliteFixeListView = dispoListView;
         disponibiliteFixeObservableList = FXCollections.observableArrayList();
-        disponibiliteFixeObservableList.addAll(user.getDisponibiliteFixe());
+        disponibiliteFixeObservableList.addAll(dispos);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
         this.disponibiliteFixeListView.setItems(disponibiliteFixeObservableList);
         this.disponibiliteFixeListView.setCellFactory(listRDVView -> new DispoCellController());
+    }
+
+    public ListView<DisponibiliteFixe> getDispoList() {
+        return this.disponibiliteFixeListView;
     }
 
     public void update() {
