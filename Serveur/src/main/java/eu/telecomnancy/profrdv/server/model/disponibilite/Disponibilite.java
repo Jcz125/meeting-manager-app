@@ -18,28 +18,15 @@ public class Disponibilite {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     @OneToMany(targetEntity= DisponibiliteFixe.class, cascade=CascadeType.ALL)
-    private List<DisponibiliteFixe> dispoFixe = null;
+    public List<DisponibiliteFixe> dispoFixe = null;
     @OneToMany(targetEntity=ModificateurDisponibilite.class, cascade=CascadeType.ALL)
-    private List<ModificateurDisponibilite> modifsDispo = null;
+    public List<ModificateurDisponibilite> modifsDispo = null;
 
 
     public Disponibilite() {
         this.dispoFixe = new ArrayList<>();
         this.modifsDispo = new ArrayList<>();
     }
-
-
-    public void add(DayOfWeek jour, LocalTime debut, LocalTime fin) {
-        DisponibiliteFixe nouveauDisponibiliteFixe = new DisponibiliteFixe(jour, debut, fin);
-        dispoFixe.add(nouveauDisponibiliteFixe);
-    }
-
-
-    public void add(boolean inclut, LocalDateTime debut, LocalDateTime fin) {
-        ModificateurDisponibilite nouveauModificateurDisponibilite = new ModificateurDisponibilite(inclut, debut, fin);
-        modifsDispo.add(nouveauModificateurDisponibilite);
-    }
-
 
     public boolean estDisponible(LocalDateTime horaire) {
         for (DisponibiliteFixe disponibiliteFixe : dispoFixe) {
@@ -74,5 +61,13 @@ public class Disponibilite {
             modificateurDisponibiliteData[i] = modifsDispo.get(i).getData();
         }
         return new DisponibiliteData(disponibiliteFixeData, modificateurDisponibiliteData);
+    }
+
+    public void add(DisponibiliteFixe dispo) {
+        dispoFixe.add(dispo);
+    }
+
+    public void add(ModificateurDisponibilite dispo) {
+        modifsDispo.add(dispo);
     }
 }
