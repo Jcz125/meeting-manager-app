@@ -85,7 +85,9 @@ public class UtilisateurController {
             utilisateurs.add(user.get());
         }
 
-        return new BooleanResult(monUtilisateur.prendreRDV(utilisateurs, salle.get(), data.horaire, data.titre, data.description));
+        boolean result = monUtilisateur.prendreRDV(utilisateurs, salle.get(), data.horaire, data.titre, data.description);
+        utilisateurRepository.save(monUtilisateur);
+        return new BooleanResult(result);
     }
 }
 

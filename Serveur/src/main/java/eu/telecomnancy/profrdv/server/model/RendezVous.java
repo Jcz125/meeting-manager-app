@@ -94,7 +94,7 @@ public class RendezVous {
     public static List<RendezVous> genererRendezVous(List<Utilisateur> utilisateurs, LocalDateTime debut, LocalDateTime fin) {
         ArrayList<RendezVous> creneaux = new ArrayList<>();
         LocalDateTime heure = LocalDateTime.from(debut);
-        while (!fin.isEqual(heure) || fin.isBefore(heure)) {
+        while (!fin.isEqual(heure) && fin.isBefore(heure)) {
             boolean addable = true;
             for (Utilisateur utilisateur : utilisateurs) {
                 if (!utilisateur.estDisponible(heure)) {
