@@ -12,6 +12,12 @@ Pour se connecter par défaut il y a 3 comptes :
 - Prof 2 : littleboy@gmail.com
 - Eleve : jeff.bezos@amazon.com
 
+Pour prendre un RDV :
+- Se connecter avec une des adresses email
+- Aller dans le menu "Prendre un rendez-vous"
+- Mettre la barre de recherche les adresses email des personnes concernées. Puis pour chaque pppyuer sur le bouton rechercher pour les ajouter.
+- Selectionner un horraire
+- Cliquer sur "Prendre RDV"
 
 
 ### Détails
