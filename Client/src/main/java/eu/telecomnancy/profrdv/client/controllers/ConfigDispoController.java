@@ -63,8 +63,6 @@ public class ConfigDispoController implements Observateur {
 //        ModificateurDisponibilite mod = new ModificateurDisponibilite(true, LocalDateTime.of(LocalDate.of(1999, 2, 7), LocalTime.of(13,0,0)), LocalDateTime.of(LocalDate.of(1999, 2, 7), LocalTime.of(14,0,0)));
 //        ((Professeur) user).getDispoExcept((Professeur) user).add(0, mod);
         DispoExceptViewController dpExceptions = new DispoExceptViewController(((Professeur) user).getDispoExcept((Professeur) user), this.exceptionsDispo);
-        System.out.println("dpExcept size=" + (((Professeur) user).getDispoExcept((Professeur) user)).size());
-        System.out.println("dpExcept:" + dpExceptions);
     }
 
     public void update() {
