@@ -388,7 +388,6 @@ public class PriseRDVController implements Observateur{
             }
         }
         util.prendreRDV(listUtilisateur, horaireRDV, titre, description, ecole.getSalles().get(0));
-
     }
 
 
