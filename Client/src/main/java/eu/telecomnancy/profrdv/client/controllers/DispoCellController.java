@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -27,7 +27,7 @@ public class DispoCellController extends ListCell<DisponibiliteFixe> implements 
     @FXML
     private Button b_supprimer;
     @FXML
-    private AnchorPane anchorPaneDispoCell;
+    private GridPane gridPaneDispoCell;
 
     private FXMLLoader fxmlLoader;
 
@@ -57,7 +57,7 @@ public class DispoCellController extends ListCell<DisponibiliteFixe> implements 
             System.out.println("##############debut:"+this.debut_heure+" fin:"+this.fin_heure);
             this.fin_minute.setText(""+((dispo.getFin().getMinute() >= 10) ? dispo.getFin().getMinute() : ""+0+dispo.getFin().getMinute()));
             setText(null);
-            setGraphic(anchorPaneDispoCell);
+            setGraphic(gridPaneDispoCell);
         }
     }
 
