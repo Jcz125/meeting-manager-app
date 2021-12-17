@@ -23,7 +23,10 @@ public class MenuController implements Observateur {
     private Parent planning;
     private Parent espacePerso;
     private Parent identification;
-    private Parent accueil;
+    private Parent priseRDV;
+
+    private Parent menuProf;
+    private Parent menuEleve;
 
     private ProfRDV profRDV;
 
@@ -35,7 +38,7 @@ public class MenuController implements Observateur {
 
     @FXML
     private void handleAccueilButton(ActionEvent actionEvent) {
-        panneau.setCenter(accueil);
+        panneau.setCenter(priseRDV);
     }
 
 
@@ -86,10 +89,12 @@ public class MenuController implements Observateur {
         this.setPlanningNode(utilisateurs);
         this.setPriseRDV(utilisateurs);
         this.setEspacePersoNode(ecole);
+        this.setMenuProf();
+        this.setMenuEleve();
     }
 
 
-    public void setCreationNode() {
+    private void setCreationNode() {
 
         FXMLLoader creationLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/Creation.fxml"));
         creationLoader.setControllerFactory(iC -> new CreationController());
@@ -105,7 +110,7 @@ public class MenuController implements Observateur {
     }
 
 
-    public void setPlanningNode(List<Utilisateur> utilisateurs) {
+    private void setPlanningNode(List<Utilisateur> utilisateurs) {
 
         FXMLLoader planningLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/Planning.fxml"));
         planningLoader.setControllerFactory(iC -> new PlanningController(utilisateurs.get(0)));
@@ -118,7 +123,7 @@ public class MenuController implements Observateur {
     }
 
 
-    public void setEspacePersoNode(Ecole ecole) {
+    private void setEspacePersoNode(Ecole ecole) {
 
         FXMLLoader espacePersoLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/EspacePerso.fxml"));
         espacePersoLoader.setControllerFactory(iC -> new EspacePersoController(ecole.getUtilisateurs().get(0)));
@@ -146,22 +151,47 @@ public class MenuController implements Observateur {
     }
 
 
-    public void setIdentificationNode(Ecole ecole) {
+    private void setIdentificationNode(Ecole ecole) {
         FXMLLoader identificationLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/Identification.fxml"));
         identificationLoader.setControllerFactory(iC -> new IdentificationController(ecole.getUtilisateurs()));
+
         try {
             this.identification = identificationLoader.load();
+            IdentificationController controller = identificationLoader.getController();
+            controller.setMenuController(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public void setPriseRDV(List<Utilisateur> utilisateurs) {
+    private void setPriseRDV(List<Utilisateur> utilisateurs) {
         FXMLLoader priseRDVLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/PriseRDV.fxml"));
         priseRDVLoader.setControllerFactory(iC -> new PriseRDVController(utilisateurs, utilisateurs.get(0)));
         try {
-            this.accueil = priseRDVLoader.load();
+            this.priseRDV = priseRDVLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void setMenuProf() {
+        FXMLLoader profLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/MenuProf.fxml"));
+        profLoader.setControllerFactory(iC -> this);
+        try {
+            this.menuProf = profLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void setMenuEleve() {
+        FXMLLoader eleveLoader = new FXMLLoader(getClass().getResource("/eu/telecomnancy/profrdv/client/MenuEleve.fxml"));
+        eleveLoader.setControllerFactory(iC -> this);
+        try {
+            this.menuEleve = eleveLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -186,5 +216,17 @@ public class MenuController implements Observateur {
 
     public void setProfRDV(ProfRDV profRDV) {
         this.profRDV = profRDV;
+    }
+
+
+    public void chargerProfMenu() {
+        this.panneau.setTop(menuProf);
+        this.panneau.setCenter(planning);
+    }
+
+
+    public void chargerEleveMenu() {
+        this.panneau.setTop(menuEleve);
+        this.panneau.setCenter(priseRDV);
     }
 }

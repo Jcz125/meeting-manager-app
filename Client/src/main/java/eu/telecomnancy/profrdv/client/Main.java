@@ -42,7 +42,7 @@ public class Main extends Application {
 
         BorderPane panneau = new BorderPane();
 
-        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("MenuProf.fxml"));
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("MenuIdentification.fxml"));
         menuLoader.setControllerFactory(iC -> new MenuController());
         panneau.setTop(menuLoader.load());
         MenuController menuController = menuLoader.getController();
