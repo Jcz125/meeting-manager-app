@@ -5,6 +5,7 @@ import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.states.Annule;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
@@ -23,7 +24,7 @@ public class AnnuleTest {
 
     @Test
     public void testAnnulation() {
-        RendezVous rdv = new RendezVous(null, null, null, null);
+        RendezVous rdv = new RendezVous(LocalDateTime.now(), new ArrayList<>(), null, "", "");
         rdv.annuler();
         rdv.annuler();
         assertEquals(rdv.getEtatRendezVous().name(), "ANNULE");
@@ -32,7 +33,7 @@ public class AnnuleTest {
 
     @Test
     public void testConfirmation() {
-        RendezVous rdv = new RendezVous(null, null, null, null);
+        RendezVous rdv = new RendezVous(LocalDateTime.now(), new ArrayList<>(), null, "", "");
         rdv.annuler();
         rdv.confirmer();
         assertEquals(rdv.getEtatRendezVous().name(), "ANNULE");
@@ -41,7 +42,7 @@ public class AnnuleTest {
 
     @Test
     public void testDemande() {
-        RendezVous rdv = new RendezVous(null, null, null, null);
+        RendezVous rdv = new RendezVous(LocalDateTime.now(), new ArrayList<>(), null, "", "");
         rdv.annuler();
         rdv.demande();
         assertEquals(rdv.getEtatRendezVous().name(), "ANNULE");
@@ -50,7 +51,7 @@ public class AnnuleTest {
 
     @Test
     public void testRealise() {
-        RendezVous rdv = new RendezVous(null, null, null, null);
+        RendezVous rdv = new RendezVous(LocalDateTime.now(), new ArrayList<>(), null, "", "");
         rdv.annuler();
         rdv.realiser();
         assertEquals(rdv.getEtatRendezVous().name(), "ANNULE");

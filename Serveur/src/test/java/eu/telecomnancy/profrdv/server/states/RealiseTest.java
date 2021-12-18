@@ -5,6 +5,7 @@ import eu.telecomnancy.profrdv.server.model.RendezVous;
 import eu.telecomnancy.profrdv.server.model.states.Realise;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static eu.telecomnancy.junit.ReflectionAssertions.assertInstanceOf;
@@ -21,7 +22,7 @@ public class RealiseTest {
 
     @Test
     public void testAnnulation() {
-        RendezVous rdv = new RendezVous(null, null, null, null);
+        RendezVous rdv = new RendezVous(LocalDateTime.now(), new ArrayList<>(), null, "", "");
         rdv.confirmer();
         rdv.realiser();
         rdv.annuler();
@@ -31,7 +32,7 @@ public class RealiseTest {
 
     @Test
     public void testConfirmation() {
-        RendezVous rdv = new RendezVous(null, null, null, null);
+        RendezVous rdv = new RendezVous(LocalDateTime.now(), new ArrayList<>(), null, "", "");
         rdv.confirmer();
         rdv.realiser();
         rdv.realiser();
@@ -41,7 +42,7 @@ public class RealiseTest {
 
     @Test
     public void testDemande() {
-        RendezVous rdv = new RendezVous(null, null, null, null);
+        RendezVous rdv = new RendezVous(LocalDateTime.now(), new ArrayList<>(), null, "", "");
         rdv.confirmer();
         rdv.realiser();
         rdv.demande();
@@ -51,7 +52,7 @@ public class RealiseTest {
 
     @Test
     public void testRealise() {
-        RendezVous rdv = new RendezVous(null, null, null, null);
+        RendezVous rdv = new RendezVous(LocalDateTime.now(), new ArrayList<>(), null, "", "");
         rdv.confirmer();
         rdv.realiser();
         rdv.realiser();

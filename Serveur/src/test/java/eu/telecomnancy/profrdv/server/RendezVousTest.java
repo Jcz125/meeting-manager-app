@@ -47,10 +47,10 @@ public class RendezVousTest {
 
     @Test
     public void testGenererRendezVous() {
-        Eleve eleve1 = new Eleve("a", "b", "c");
-        Eleve eleve2 = new Eleve("a", "b", "c");
-        Professeur professeur1 = new Professeur("a", "b", "c");
-        Professeur professeur2 = new Professeur("a", "b", "c");
+        Eleve eleve1 = new Eleve("a", "b", "ac");
+        Eleve eleve2 = new Eleve("a", "b", "xc");
+        Professeur professeur1 = new Professeur("a", "b", "cdd");
+        Professeur professeur2 = new Professeur("a", "b", "czaa");
 
         professeur1.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.of(8, 0), LocalTime.of(11, 59)));
         professeur2.add(new DisponibiliteFixe(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(14, 0)));
@@ -67,7 +67,7 @@ public class RendezVousTest {
 
         assertEquals(6, creneaux.size());
         Salle salle = new Salle(2, 2, "nord");
-        assertTrue(eleve1.prendreRDV(utilisateurs, salle, creneaux.get(0).getHoraire(), null, null));
+        assertTrue(eleve1.prendreRDV(utilisateurs, salle, creneaux.get(0).getHoraire(), "", ""));
 
 
         creneaux = RendezVous.genererRendezVous(utilisateurs, debut, fin);

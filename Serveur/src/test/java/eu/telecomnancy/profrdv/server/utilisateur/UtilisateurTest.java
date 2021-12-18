@@ -30,7 +30,7 @@ public class UtilisateurTest {
     public void testAnnulerRDV() {
         Eleve eleve = new Eleve("Dupont", "Jean", "jean.dupont@telecomnancy.net");
         LocalDateTime date = LocalDateTime.of(2021, 12, 15, 15, 5);
-        RendezVous rendezVous = new RendezVous(date, null, null, null);
+        RendezVous rendezVous = new RendezVous(date, new ArrayList<>(), null, "", "");
         assertFalse(eleve.annulerRDV(rendezVous));
 
         eleve.ajouterRDV(rendezVous);
@@ -56,7 +56,7 @@ public class UtilisateurTest {
         utilisateurs.add(gerald);
         utilisateurs.add(george);
 
-        Salle salle = new Salle(2, 1, "ouest");
+        Salle salle = new Salle(200, 1, "ouest");
         LocalDateTime date1 = LocalDateTime.of(2021, 12, 15, 14, 20);
         assertFalse(jean.prendreRDV(utilisateurs, salle, date1, "RDV", "Test"));
 

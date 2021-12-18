@@ -1,7 +1,7 @@
 # Coding Week 2021
 
 ## Instructions
-Dans `./Server` puis `./Client` lancer `gradle run`.
+Dans `./Server` lancer `gradle bootRun` puis dans `./Client` lancer `gradle run`.
 
 Si gradle n'est pas installé sur votre ordinateur, remplacez `gradle` par :
 - `./gradlew` si vous êtes sur environement UNIX (Linux, BSD, MacOS, wsl...)
@@ -28,3 +28,7 @@ Commandes courantes :
 - `gradle jar` pour build un jar dans build/libs
 - `gradle shadow` pour build un jar dans build/libs ne nécessitant pas de libs supplémentaires
 - `gradle clean` Pour supprimer les données build
+
+
+Lien vers la vidéo https://tspdrits.xyz/codingweek.m4v
+
