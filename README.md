@@ -1,4 +1,4 @@
-# Coding Week 2021
+# Coding Week 2021 - Appointment Manager App
 
 ## Instructions
 Dans `./Server` lancer `gradle bootRun` puis dans `./Client` lancer `gradle run`.
